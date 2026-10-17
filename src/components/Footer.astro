@@ -1,0 +1,21 @@
+---
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+const { street, postalCode, city } = site.address;
+---
+
+<footer class="text-muted border-t border-black/10 text-sm">
+  <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8">
+    <p>
+      <strong class="text-ink">{site.name}</strong>
+      {street && ` · ${street}`} · {postalCode}
+      {city}
+    </p>
+    <p>
+      © {year}
+      {site.legalName || site.name}
+      {site.vatNumber && ` · P.IVA ${site.vatNumber}`}
+    </p>
+  </div>
+</footer>

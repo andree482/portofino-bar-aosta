@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/*
+ * Design token del sito. Valori provvisori: verranno sostituiti
+ * con colori, font e spaziature del design Figma.
+ */
+@theme {
+  --color-surface: #ffffff;
+  --color-ink: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-accent: #0f4c5c;
+
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-display: ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

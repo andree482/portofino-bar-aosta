@@ -1,0 +1,63 @@
+---
+import { site } from "../../data/site";
+
+const dayNames: Record<string, string> = {
+  Monday: "Lunedì",
+  Tuesday: "Martedì",
+  Wednesday: "Mercoledì",
+  Thursday: "Giovedì",
+  Friday: "Venerdì",
+  Saturday: "Sabato",
+  Sunday: "Domenica",
+};
+
+const { phone, email } = site.contact;
+const { street, postalCode, city } = site.address;
+---
+
+<section
+  id="orari"
+  class="mx-auto grid max-w-6xl scroll-mt-20 gap-12 px-4 py-16 md:grid-cols-2"
+>
+  <div>
+    <h2 class="font-display text-3xl">Orari</h2>
+    {site.openingHours.length > 0 ? (
+      <ul class="mt-4 space-y-1">
+        {site.openingHours.map((h) => (
+          <li>
+            {h.days.map((d) => dayNames[d]).join(", ")}: {h.opens}–{h.closes}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-muted mt-4">Orari in arrivo.</p>
+    )}
+  </div>
+  <div>
+    <h2 class="font-display text-3xl">Contatti</h2>
+    <address class="mt-4 space-y-1 not-italic">
+      <p>
+        {street && `${street}, `}
+        {postalCode}
+        {city}
+      </p>
+      {phone && (
+        <p>
+          <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>
+        </p>
+      )}
+      {email && (
+        <p>
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      )}
+      {site.mapsUrl && (
+        <p>
+          <a href={site.mapsUrl} rel="noopener">
+            Indicazioni su Google Maps
+          </a>
+        </p>
+      )}
+    </address>
+  </div>
+</section>
