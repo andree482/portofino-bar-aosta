@@ -1,0 +1,102 @@
+---
+// Modello delle pagine legali (Privacy e Cookie): titolo grande, indice "In questa pagina"
+// e sezioni numerate. I testi arrivano da src/data/legal.ts.
+import Arrow from "../ui/Arrow.astro";
+import type { LegalPage } from "../../data/legal";
+
+interface Props {
+  page: LegalPage;
+}
+
+const { page } = Astro.props;
+
+// Numerazione come nel design: 0.1, 0.2, ...
+const number = (index: number) => `0.${index + 1}`;
+
+const preferencesButtonClass =
+  "h-[54px] w-full rounded-full bg-navy text-[25px] tracking-tightest text-cream transition-opacity hover:opacity-85 lg:h-[68px] lg:max-w-[498px] lg:text-[37px]";
+---
+
+<article class="container-site pt-[32px] pb-[56px] text-navy lg:pt-[70px] lg:pb-[225px]">
+  <a
+    href="/"
+    class="inline-flex items-center gap-[9px] text-[20px] tracking-tightest underline underline-offset-4 lg:gap-3 lg:text-[30px]"
+  >
+    <Arrow direction="left" length={21} class="lg:h-auto lg:w-[34px]" />
+    Torna al sito
+  </a>
+
+  <!-- Intestazione -->
+  <header class="border-b border-navy pb-[34px] lg:border-b-[3px] lg:pb-[55px]">
+    <p class="mt-[33px] text-[16px] tracking-tightest lg:mt-[62px] lg:text-[37px] lg:tracking-normal lg:opacity-65">
+      INFORMAZIONI
+    </p>
+    <h1 class="font-serif text-[70px] leading-[1] tracking-tightest lg:text-[200px]">
+      {page.title}
+    </h1>
+    <p class="mt-[6px] text-[16px] tracking-tightest lg:mt-[26px] lg:text-[37px]">
+      Aggiornata il {page.updatedAt}
+    </p>
+  </header>
+
+  <div class="lg:mt-[255px] lg:grid lg:grid-cols-[498fr_755fr] lg:items-start">
+    <!-- Indice "In questa pagina" -->
+    <nav
+      aria-labelledby="indice"
+      class="border-b border-navy py-[38px] lg:border-b-0 lg:py-0"
+    >
+      <h2
+        id="indice"
+        class="text-[27px] font-bold tracking-tightest lg:text-[min(60px,4.2vw)]"
+      >
+        In questa pagina
+      </h2>
+      <ol class="mt-[20px] text-[16px] leading-[1.683] tracking-tightest lg:mt-[54px] lg:text-[37px] lg:leading-[1.4]">
+        {page.sections.map((section) => (
+          <li>
+            <a href={`#${section.id}`} class="underline underline-offset-4">
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+      <!-- Desktop: pulsante sotto l'indice -->
+      <button
+        type="button"
+        class:list={[preferencesButtonClass, "mt-[82px] hidden lg:block"]}
+        data-cookie-preferences
+      >
+        Preferenze e Cookie
+      </button>
+    </nav>
+
+    <!-- Sezioni numerate; su desktop separate dall'indice da una linea verticale -->
+    <div class="lg:-mt-[27px] lg:ml-[67px] lg:space-y-[30px] lg:border-l-[3px] lg:border-navy lg:pl-[40px]">
+      {page.sections.map((section, index) => (
+        <section
+          id={section.id}
+          class="scroll-mt-6 border-b border-navy py-[31px] lg:border-b-0 lg:py-0"
+        >
+          <h2 class="flex items-baseline gap-[20px] text-[27px] tracking-tightest lg:gap-[24px] lg:text-[min(50px,3.3vw)] lg:tracking-normal">
+            <span class="font-bold lg:font-normal">{number(index)}</span>
+            <span class="font-serif lg:tracking-tightest">{section.title}</span>
+          </h2>
+          <div class="mt-[4px] text-[16px] leading-[1.683] lg:mt-[4px] lg:text-[37px] lg:leading-[1.4]">
+            {section.body.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mobile: pulsante in fondo alla pagina -->
+  <button
+    type="button"
+    class:list={[preferencesButtonClass, "mt-[34px] lg:hidden"]}
+    data-cookie-preferences
+  >
+    Preferenze e Cookie
+  </button>
+</article>

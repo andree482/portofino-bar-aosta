@@ -1,0 +1,179 @@
+---
+// Finestra "Preferenze Cookie".
+// - Si apre da sola alla prima visita, finché il visitatore non sceglie.
+// - Si riapre con qualsiasi elemento che ha l'attributo data-cookie-preferences
+//   (es. il pulsante "Preferenze e Cookie" nelle pagine legali).
+// - La scelta resta salvata nel browser (localStorage, chiave "portofino-cookie-consent").
+// - Quando il visitatore sceglie, il sito lancia l'evento "cookie-consent": servirà per
+//   attivare eventuali statistiche solo se i cookie facoltativi sono accettati.
+import { legalNav } from "../../../data/navigation";
+
+const buttonClass =
+  "h-[35px] rounded-full bg-navy px-[23px] whitespace-nowrap text-[20px] tracking-tightest text-white transition-opacity hover:opacity-85 lg:h-[39px] lg:rounded-[10px]";
+---
+
+<dialog
+  id="cookie-banner"
+  aria-labelledby="cookie-banner-title"
+  class="m-auto w-full max-w-none rounded-t-[20px] bg-cream px-5 pt-[18px] pb-4 text-navy backdrop:bg-navy/20 max-lg:mb-0 lg:w-[752px] lg:max-w-[calc(100%-40px)] lg:rounded-[25px] lg:pt-[50px] lg:pb-[38px]"
+>
+  <div class="mx-auto max-w-[498px]">
+    <h2
+      id="cookie-banner-title"
+      class="font-serif text-[25px] tracking-tightest lg:text-center lg:text-[55px] lg:leading-tight"
+    >
+      Preferenze Cookie
+    </h2>
+    <p class="text-[15px] tracking-tightest lg:mt-1 lg:text-center lg:text-[20px]">
+      Scegli quali categorie di cookie consentire
+    </p>
+
+    <ul class="mt-4 divide-y divide-navy/70 border-y border-navy/70 lg:mt-[30px] lg:divide-y-2 lg:border-y-2 lg:divide-navy lg:border-navy">
+      <li class="flex items-center justify-between py-[9px] lg:py-[12px]">
+        <span class="font-serif text-[25px] tracking-tightest lg:text-[33px]">
+          Necessari
+        </span>
+        <span class="text-[15px] tracking-tightest opacity-70 lg:text-[20px]">
+          Sempre attivi
+        </span>
+      </li>
+      <li class="flex items-center justify-between py-[9px] lg:py-[12px]">
+        <label
+          for="cookie-optional"
+          class="font-serif text-[25px] tracking-tightest lg:text-[33px]"
+        >
+          Facoltativi
+        </label>
+        <span
+          class="text-[15px] tracking-tightest opacity-70 lg:text-[20px]"
+          data-cookie-status
+        >
+          Da configurare
+        </span>
+        <!-- Interruttore: compare solo dopo "Personalizza" -->
+        <span
+          class="relative inline-flex items-center"
+          data-cookie-switch
+          hidden
+        >
+          <input id="cookie-optional" type="checkbox" class="peer sr-only" />
+          <span class="h-6 w-11 rounded-full bg-navy/30 transition-colors peer-checked:bg-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"></span>
+          <span class="pointer-events-none absolute left-1 size-4 rounded-full bg-cream transition-transform peer-checked:translate-x-5"></span>
+        </span>
+      </li>
+    </ul>
+
+    <div
+      class="mt-5 flex flex-col gap-[11px] lg:mt-[37px] lg:flex-row lg:justify-between"
+      data-cookie-actions
+    >
+      <button type="button" class={buttonClass} data-cookie-accept>
+        Accetta tutti
+      </button>
+      <button type="button" class={buttonClass} data-cookie-reject>
+        Rifiuta Facoltativi
+      </button>
+      <button type="button" class={buttonClass} data-cookie-customize>
+        Personalizza
+      </button>
+    </div>
+    <div
+      class="mt-5 flex lg:mt-[37px] lg:justify-center"
+      data-cookie-save-row
+      hidden
+    >
+      <button
+        type="button"
+        class:list={[buttonClass, "w-full lg:w-auto"]}
+        data-cookie-save
+      >
+        Salva le scelte
+      </button>
+    </div>
+
+    <p class="mt-[11px] flex items-center justify-center gap-[6px] text-[14px] tracking-tightest lg:mt-[45px] lg:text-[20px]">
+      <a href={legalNav[0].href} class="hover:underline">
+        {legalNav[0].label}
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href={legalNav[1].href} class="hover:underline">
+        {legalNav[1].label}
+      </a>
+    </p>
+  </div>
+</dialog>
+
+<script>
+  const STORAGE_KEY = "portofino-cookie-consent";
+
+  type Consent = { optional: boolean; savedAt: string };
+
+  const dialog = document.getElementById(
+    "cookie-banner",
+  ) as HTMLDialogElement | null;
+  const optionalInput = document.getElementById(
+    "cookie-optional",
+  ) as HTMLInputElement | null;
+  const q = (selector: string) => dialog?.querySelector<HTMLElement>(selector);
+
+  function readConsent(): Consent | null {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
+    } catch {
+      return null;
+    }
+  }
+
+  // Mostra l'interruttore "Facoltativi" (true) oppure i tre pulsanti iniziali (false).
+  function showCustomize(on: boolean) {
+    q("[data-cookie-status]")!.hidden = on;
+    q("[data-cookie-switch]")!.hidden = !on;
+    q("[data-cookie-actions]")!.hidden = on;
+    q("[data-cookie-save-row]")!.hidden = !on;
+  }
+
+  function saveConsent(optional: boolean) {
+    const consent: Consent = { optional, savedAt: new Date().toISOString() };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    } catch {
+      // Browser senza localStorage (es. navigazione privata): la scelta vale solo per questa pagina.
+    }
+    window.dispatchEvent(
+      new CustomEvent("cookie-consent", { detail: consent }),
+    );
+    dialog?.close();
+    showCustomize(false);
+  }
+
+  function openBanner() {
+    if (!dialog || dialog.open) return;
+    if (optionalInput) optionalInput.checked = readConsent()?.optional ?? false;
+    dialog.showModal();
+  }
+
+  q("[data-cookie-accept]")?.addEventListener("click", () => saveConsent(true));
+  q("[data-cookie-reject]")?.addEventListener("click", () =>
+    saveConsent(false),
+  );
+  q("[data-cookie-customize]")?.addEventListener("click", () =>
+    showCustomize(true),
+  );
+  q("[data-cookie-save]")?.addEventListener("click", () =>
+    saveConsent(!!optionalInput?.checked),
+  );
+
+  // Chiudere con Esc senza scegliere equivale a rifiutare i facoltativi (linee guida del Garante).
+  dialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    saveConsent(false);
+  });
+
+  // Riapre la finestra da qualsiasi pulsante con data-cookie-preferences.
+  document.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("[data-cookie-preferences]"))
+      openBanner();
+  });
+
+  if (!readConsent()) openBanner();
+</script>

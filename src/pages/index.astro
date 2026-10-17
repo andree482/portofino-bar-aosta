@@ -1,14 +1,19 @@
 ---
+// Home: le sezioni nell'ordine in cui compaiono. Ogni sezione ha la sua cartella in src/sections.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/sections/Hero.astro";
-import About from "../components/sections/About.astro";
-import Menu from "../components/sections/Menu.astro";
-import HoursContacts from "../components/sections/HoursContacts.astro";
+import Hero from "../sections/hero/Hero.astro";
+import ChiSiamo from "../sections/chi-siamo/ChiSiamo.astro";
+import CosaTrovi from "../sections/cosa-trovi/CosaTrovi.astro";
+import Menu from "../sections/menu/Menu.astro";
+import OrariPosizione from "../sections/orari-posizione/OrariPosizione.astro";
+import Contatti from "../sections/contatti/Contatti.astro";
 ---
 
-<BaseLayout>
+<BaseLayout background="navy" headerOverlay footerTone="light">
   <Hero />
-  <About />
+  <ChiSiamo />
+  <CosaTrovi />
   <Menu />
-  <HoursContacts />
+  <OrariPosizione />
+  <Contatti />
 </BaseLayout>

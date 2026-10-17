@@ -16,8 +16,8 @@ const {
 } = Astro.props;
 
 const fullTitle = title
-  ? `${title} | ${site.name} – ${site.tagline}`
-  : `${site.name} – ${site.tagline}`;
+  ? `${title} | ${site.fullName} – ${site.tagline}`
+  : `${site.fullName} – ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
 ---
@@ -28,7 +28,7 @@ const imageUrl = new URL(image, Astro.site);
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content={site.name} />
+<meta property="og:site_name" content={site.fullName} />
 <meta property="og:locale" content={site.locale} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />

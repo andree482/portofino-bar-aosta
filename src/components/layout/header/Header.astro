@@ -1,0 +1,136 @@
+---
+// Barra di navigazione in cima a ogni pagina.
+// - Desktop: logo e voci di menu in linea.
+// - Mobile: logo e pulsante "hamburger" che apre il menu a tendina.
+import Logo from "../../ui/Logo.astro";
+import Arrow from "../../ui/Arrow.astro";
+import Button from "../../ui/Button.astro";
+import { mainNav } from "../../../data/navigation";
+import { bookingUrl } from "../../../data/site";
+
+interface Props {
+  /** true = la barra sta sopra la foto della home, con sfondo sfumato su desktop. */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+---
+
+<header
+  class:list={[
+    "z-40 h-[84px] w-full lg:h-[144px]",
+    overlay ? "absolute inset-x-0 top-0" : "relative",
+  ]}
+>
+  <!-- Il riquadro blu è "absolute": aprendo il menu mobile si allunga sopra la pagina -->
+  <div
+    class:list={[
+      "absolute inset-x-0 top-0 rounded-b-[20px] bg-navy text-cream lg:rounded-b-[42px]",
+      overlay &&
+        "lg:bg-transparent lg:bg-linear-to-b lg:from-navy lg:to-[rgb(80_121_178/0.26)]",
+    ]}
+  >
+    <div class="container-site flex h-[84px] items-center lg:h-[144px]">
+      <a href="/" class="shrink-0" aria-label="Portofino, torna alla home">
+        <Logo class="w-[124px] lg:w-[200px] xl:w-[247px]" />
+      </a>
+
+      <!-- Menu desktop -->
+      <nav
+        class="ml-12 hidden lg:block xl:ml-[83px]"
+        aria-label="Menu principale"
+      >
+        <ul class="flex gap-8 text-[20px] tracking-tightest xl:gap-[84px] xl:text-[24px]">
+          {mainNav.map((link) => (
+            <li>
+              <a href={link.href} class="underline-offset-4 hover:underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Pulsante menu mobile: due linee che diventano una X quando il menu è aperto -->
+      <button
+        type="button"
+        class="group relative ml-auto size-10 -mr-2 lg:hidden"
+        aria-controls="menu-mobile"
+        aria-expanded="false"
+        aria-label="Apri il menu"
+        data-menu-toggle
+      >
+        <span class="absolute top-1/2 left-1/2 h-[2px] w-[25px] -translate-x-1/2 -translate-y-[3px] rounded-full bg-cream transition-transform group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[130deg]"></span>
+        <span class="absolute top-1/2 left-1/2 h-[2px] w-[25px] -translate-x-1/2 translate-y-[1px] rounded-full bg-cream transition-transform group-aria-expanded:translate-y-0 group-aria-expanded:-rotate-[130deg]"></span>
+      </button>
+    </div>
+
+    <!-- Menu mobile (nascosto finché non si preme il pulsante) -->
+    <nav
+      id="menu-mobile"
+      class="container-site pb-[20px] lg:hidden"
+      aria-label="Menu"
+      hidden
+    >
+      <ul class="divide-y divide-cream/60 border-t border-cream/60 pt-[36px]">
+        {mainNav.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="flex items-center justify-between py-[11px] font-serif text-[25px] tracking-tightest"
+            >
+              {link.mobileLabel}
+              <Arrow direction="up-right" length={22} class="mr-1" />
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-[22px] flex flex-col items-center gap-[10px] leading-[1.2]">
+        <Button
+          href="/#menu"
+          arrow="right"
+          arrowLength={29}
+          class="h-[31px] px-4 text-[21px]"
+        >
+          Scopri il menù di oggi
+        </Button>
+        <a
+          href={bookingUrl}
+          class="text-[21px] tracking-tightest underline underline-offset-4"
+        >
+          Prenota un tavolo
+        </a>
+        <p class="text-[12px] tracking-tightest">
+          Bar - Cucina - Abbigliamento
+        </p>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Apre e chiude il menu mobile.
+  const toggle =
+    document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.getElementById("menu-mobile");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Chiudi il menu" : "Apri il menu");
+    menu.hidden = !open;
+  }
+
+  toggle?.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  // Chiude il menu quando si sceglie una voce o si preme Esc.
+  menu?.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("a")) setOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+</script>

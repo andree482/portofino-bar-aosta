@@ -1,0 +1,94 @@
+---
+// Sezione "Restiamo in contatto": telefono, email e Instagram, con il logo grande.
+// I contatti si modificano in src/data/site.ts.
+import Arrow from "../../components/ui/Arrow.astro";
+import Logo from "../../components/ui/Logo.astro";
+import { site } from "../../data/site";
+
+const { phone, email } = site.contact;
+const { instagram, instagramHandle } = site.social;
+
+// Ogni riga: etichetta, valore mostrato, link. Se il valore manca si vede il segnaposto e
+// la riga non è cliccabile.
+const contacts = [
+  {
+    label: "Numero",
+    value: phone || "[Numero]",
+    href: phone ? `tel:${phone.replace(/\s/g, "")}` : undefined,
+  },
+  {
+    label: "Email",
+    value: email || "[Email]",
+    href: email ? `mailto:${email}` : undefined,
+  },
+  {
+    label: "Instagram",
+    value: instagramHandle || "[@Profilo]",
+    href: instagram || undefined,
+  },
+];
+
+const rowClass =
+  "grid grid-cols-[167px_1fr_auto] items-center py-[19px] lg:grid-cols-[249px_1fr_auto] lg:py-[27px]";
+---
+
+<section id="contatti" class="bg-navy text-white">
+  <div class="container-site grid pt-[22px] pb-[54px] lg:grid-cols-[629fr_498fr] lg:items-center lg:gap-x-[133px] lg:pt-[119px] lg:pb-[117px]">
+    <div class="lg:col-start-2 lg:row-start-1">
+      <p class="text-[22px] font-medium tracking-label lg:text-[23px]">
+        info e contatti
+      </p>
+      <h2 class="mt-[2px] max-w-[291px] font-serif text-[60px] leading-[1.05] tracking-tightest text-cream lg:mt-[1px] lg:max-w-[457px] lg:text-[min(100px,6.95vw)] lg:leading-[1.1]">
+        Restiamo in contatto
+      </h2>
+      <p class="mt-[18px] max-w-[280px] text-[13px] leading-[1.2] lg:leading-normal font-medium tracking-label lg:mt-[30px] lg:max-w-[466px] lg:text-[23px]">
+        Per un tavolo, un'informazione o un saluto
+      </p>
+
+      <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest lg:mt-[25px] lg:text-[min(30px,2.09vw)] lg:tracking-label">
+        {contacts.map((contact) => (
+          <li>
+            {contact.href ? (
+              <a
+                href={contact.href}
+                class:list={[rowClass, "hover:opacity-80"]}
+                {...(contact.label === "Instagram" && {
+                  target: "_blank",
+                  rel: "noopener",
+                })}
+              >
+                <span>{contact.label}</span>
+                <span class="truncate">{contact.value}</span>
+                <Arrow
+                  direction="up-right"
+                  length={25}
+                  class="w-[18px] h-auto"
+                />
+              </a>
+            ) : (
+              <div class={rowClass}>
+                <span>{contact.label}</span>
+                <span>{contact.value}</span>
+                <Arrow
+                  direction="up-right"
+                  length={25}
+                  class="w-[18px] h-auto opacity-40"
+                />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Logo grande: sotto i contatti su mobile, a sinistra su desktop -->
+    <div class="mt-[25px] lg:col-start-1 lg:row-start-1 lg:mt-0">
+      <Logo
+        class="w-full max-w-[355px] lg:max-w-[629px]"
+        widths={[360, 720, 1260]}
+        sizes="(min-width: 1024px) 629px, 355px"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>

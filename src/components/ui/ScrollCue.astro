@@ -1,0 +1,55 @@
+---
+// Indicatore "scorri giù" del design: testo sottolineato con una lunga freccia verso il basso.
+// Usato per "scopri chi siamo", "Cosa trovi da noi" e "Scopri il menù".
+//
+// Esempio:
+//   <ScrollCue href="#chi-siamo" label="scopri chi siamo" />
+
+interface Props {
+  href: string;
+  label: string;
+  /** Lato su cui scende la freccia: alla fine (destra) o all'inizio (sinistra) della linea. */
+  align?: "end" | "start";
+  class?: string;
+}
+
+const { href, label, align = "end", class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "inline-flex flex-col text-[12px] font-bold tracking-tightest lg:text-[24px]",
+    align === "end" ? "items-end" : "items-start",
+    className,
+  ]}
+>
+  <span class="w-full border-b-2 border-current pb-[3px] lg:pb-[6px]">
+    {label}
+  </span>
+  <!-- Freccia verticale: si allunga su desktop -->
+  <span
+    class:list={[
+      "relative h-10 w-[15px] lg:h-[147px]",
+      align === "end" ? "-mr-[7px]" : "-ml-[7px]",
+    ]}
+  >
+    <span class="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-current"></span>
+    <svg
+      class="absolute bottom-0 left-0"
+      width="15"
+      height="9"
+      viewBox="0 0 15 9"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M1 1.5l6.5 6.5L14 1.5"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </span>
+</a>

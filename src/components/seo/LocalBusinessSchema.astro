@@ -5,13 +5,14 @@ import { site } from "../../data/site";
 
 const siteUrl = Astro.site?.toString() ?? "";
 
-const sameAs = Object.values(site.social).filter(Boolean);
+const { instagram, facebook, tripadvisor } = site.social;
+const sameAs = [instagram, facebook, tripadvisor].filter(Boolean);
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "BarOrPub",
   "@id": `${siteUrl}#bar`,
-  name: site.name,
+  name: site.fullName,
   description: site.description,
   url: siteUrl,
   image: new URL(site.ogImage, siteUrl).toString(),
@@ -33,12 +34,15 @@ const schema = {
     longitude: site.geo.longitude,
   },
   hasMap: site.mapsUrl || undefined,
-  openingHoursSpecification: site.openingHours.map((h) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: h.days,
-    opens: h.opens,
-    closes: h.closes,
-  })),
+  // I giorni di chiusura (senza orari) non si indicano: Google li considera chiusi.
+  openingHoursSpecification: site.openingHours
+    .filter((h) => h.opens && h.closes)
+    .map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.days,
+      opens: h.opens,
+      closes: h.closes,
+    })),
   sameAs: sameAs.length ? sameAs : undefined,
 };
 ---

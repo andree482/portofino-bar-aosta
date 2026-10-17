@@ -1,19 +1,35 @@
 ---
+// Struttura comune a tutte le pagine: <head> con SEO, header, contenuto, footer e banner cookie.
+import "@fontsource-variable/inclusive-sans";
+import "@fontsource/dm-serif-display/400.css";
 import "../styles/global.css";
 import Seo from "../components/seo/Seo.astro";
 import LocalBusinessSchema from "../components/seo/LocalBusinessSchema.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "../components/layout/header/Header.astro";
+import Footer from "../components/layout/footer/Footer.astro";
+import CookieBanner from "../components/layout/cookie-banner/CookieBanner.astro";
 import { site } from "../data/site";
 
 interface Props {
+  /** Titolo della pagina per Google (senza nome del locale, viene aggiunto da solo). */
   title?: string;
   description?: string;
   image?: string;
   noindex?: boolean;
+  /** Colore di sfondo della pagina: si vede anche dietro gli angoli arrotondati del footer. */
+  background?: "navy" | "cream";
+  /** true = header sopra la foto iniziale (home). */
+  headerOverlay?: boolean;
+  /** Colori del footer: light (crema) o dark (blu). */
+  footerTone?: "light" | "dark";
 }
 
-const props = Astro.props;
+const {
+  background = "navy",
+  headerOverlay = false,
+  footerTone = "light",
+  ...seo
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -21,25 +37,32 @@ const props = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <meta name="theme-color" content="#072768" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
-    <Seo {...props} />
+    <Seo {...seo} />
     <LocalBusinessSchema />
   </head>
-  <body class="bg-surface text-ink min-h-dvh font-sans antialiased">
+  <body
+    class:list={[
+      "min-h-dvh antialiased",
+      background === "cream" ? "bg-cream" : "bg-navy",
+    ]}
+  >
     <a
       href="#contenuto"
-      class="bg-ink text-surface sr-only rounded px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+      class="sr-only rounded bg-cream px-4 py-2 text-navy focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
     >
       Vai al contenuto
     </a>
-    <Header />
+    <Header overlay={headerOverlay} />
     <main id="contenuto">
       <slot />
     </main>
-    <Footer />
+    <Footer tone={footerTone} />
+    <CookieBanner />
   </body>
 </html>

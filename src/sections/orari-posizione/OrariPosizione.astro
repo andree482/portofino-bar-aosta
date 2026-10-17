@@ -1,0 +1,105 @@
+---
+// Sezione "Orari e posizione": orari di apertura, indirizzo e mappa.
+// Orari e indirizzo si modificano in src/data/site.ts.
+import { Image } from "astro:assets";
+import Button from "../../components/ui/Button.astro";
+import { site, fullAddress, directionsUrl } from "../../data/site";
+import photoDesktop from "../../assets/images/orari-aperitivo.jpg";
+import photoMobile from "../../assets/images/orari-caffe.jpg";
+import mapImage from "../../assets/images/mappa-segnaposto.jpg";
+---
+
+<section id="orari" class="bg-cream text-navy">
+  <div class="container-site pt-[26px] pb-[23px] lg:pt-[90px] lg:pb-[89px]">
+    <!-- Intestazione: a sinistra su mobile, centrata su desktop -->
+    <div class="lg:text-center">
+      <p class="text-[18px] font-medium text-brown lg:text-[30px]">
+        Orari e posizione
+      </p>
+      <h2 class="max-w-[259px] font-serif text-[50px] leading-[0.95] tracking-tightest lg:-mt-[16px] lg:max-w-none lg:text-[80px] lg:leading-[1.375]">
+        Ci vediamo al Portofino
+      </h2>
+      <p class="mt-[8px] max-w-[295px] text-[18px] leading-[1.2] lg:leading-normal tracking-tightest lg:mt-0 lg:max-w-none lg:text-[24px]">
+        Per un pranzo, un caffè o un aperitivo: ecco dove trovarci.
+      </p>
+    </div>
+
+    <div class="mt-[26px] grid gap-y-[20px] lg:mt-[39px] lg:grid-cols-[604fr_585fr] lg:gap-x-[51px]">
+      <!-- Quando passare -->
+      <div>
+        <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
+          Quando passare
+        </h3>
+        <dl class="mt-[18px] divide-y divide-navy border-y border-navy text-[18px] tracking-tightest lg:mt-[16px] lg:text-[40px]">
+          {site.openingHours.map((row) => (
+            <div class="flex justify-between gap-4 py-[18px] lg:py-[19px]">
+              <dt>{row.label}</dt>
+              <dd class="text-right">
+                {row.opens && row.closes
+                  ? `${row.opens} - ${row.closes}`
+                  : "Chiuso"}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-[19px] text-[18px] leading-[1.2] lg:leading-normal tracking-tightest lg:mt-[26px] lg:text-[24px]">
+          Gli orari potranno variare
+        </p>
+        <!-- Foto diversa su mobile (solo caffè) e su desktop (caffè e aperitivo), come nel design -->
+        <Image
+          src={photoMobile}
+          alt="Un caffè espresso sul bancone del Portofino"
+          widths={[400, 800]}
+          sizes="100vw"
+          class="mt-[10px] h-[109px] w-full object-cover object-bottom lg:hidden"
+        />
+        <Image
+          src={photoDesktop}
+          alt="Un caffè e uno spritz sul bancone del Portofino"
+          widths={[600, 1150]}
+          sizes="572px"
+          class="mt-[8px] hidden aspect-[572/256] w-full max-w-[572px] object-cover object-[100%_50%] lg:block"
+        />
+      </div>
+
+      <!-- Dove siamo -->
+      <div>
+        <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
+          Dove siamo
+        </h3>
+        <address class="mt-[12px] text-[18px] tracking-tightest not-italic lg:mt-0 lg:text-[40px]">
+          {site.address.street
+            ? fullAddress
+            : `[Via e numero civico], ${fullAddress}`}
+        </address>
+        <a
+          href={directionsUrl}
+          target="_blank"
+          rel="noopener"
+          class="mt-[14px] block lg:mt-[8px]"
+        >
+          <Image
+            src={mapImage}
+            alt={`Mappa: come raggiungere ${site.fullName}`}
+            widths={[400, 800, 1200]}
+            sizes="(min-width: 1024px) 585px, 100vw"
+            class="aspect-[350/144] w-full object-cover lg:aspect-[585/395] lg:object-left"
+          />
+        </a>
+        <div class="mt-[25px] flex justify-center lg:mt-[24px] lg:justify-start">
+          <Button
+            href={directionsUrl}
+            variant="navy"
+            arrow="up-right"
+            arrowLength={13}
+            arrowClass="lg:h-auto lg:w-[17px]"
+            external
+            class="h-[26px] w-[199px] text-[18px] lg:h-[53px] lg:w-[283px] lg:text-[24px]"
+          >
+            Ottieni indicazioni
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

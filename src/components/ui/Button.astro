@@ -1,0 +1,49 @@
+---
+// Pulsante "a pillola" del design: un link con sfondo pieno e, se serve, una freccia.
+// Dimensioni e grandezza del testo si passano con `class`.
+//
+// Esempio:
+//   <Button href="#menu" variant="cream" arrow="right" class="h-12 px-4 text-[24px]">
+//     Scopri il menù di oggi
+//   </Button>
+import Arrow from "./Arrow.astro";
+
+interface Props {
+  href: string;
+  /** cream = sfondo crema e testo blu; navy = sfondo blu e testo crema. */
+  variant?: "cream" | "navy";
+  arrow?: "right" | "up-right";
+  /** Lunghezza della freccia in px. */
+  arrowLength?: number;
+  /** Classi per la freccia, es. "lg:w-[44px] lg:h-auto" per allungarla su desktop. */
+  arrowClass?: string;
+  /** Apre il link in una nuova scheda (per siti esterni, es. Google Maps). */
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "cream",
+  arrow,
+  arrowLength = 25,
+  arrowClass,
+  external = false,
+  class: className,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "inline-flex items-center justify-center gap-[0.4em] rounded-full tracking-tightest whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4",
+    variant === "cream"
+      ? "bg-cream text-navy focus-visible:outline-cream"
+      : "bg-navy text-cream",
+    className,
+  ]}
+  {...(external && { target: "_blank", rel: "noopener" })}
+>
+  <slot />
+  {arrow && <Arrow direction={arrow} length={arrowLength} class={arrowClass} />}
+</a>

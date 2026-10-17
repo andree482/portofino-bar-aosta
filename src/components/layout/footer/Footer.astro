@@ -1,0 +1,71 @@
+---
+// Piè di pagina: nome, partita IVA e link alle sezioni e alle pagine legali.
+import Arrow from "../../ui/Arrow.astro";
+import { site } from "../../../data/site";
+import { footerNav, legalNav } from "../../../data/navigation";
+
+interface Props {
+  /** light = sfondo crema e testo blu (home); dark = sfondo blu e testo crema (pagine legali). */
+  tone?: "light" | "dark";
+}
+
+const { tone = "light" } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer
+  class:list={[
+    "rounded-t-[20px] text-[10px] font-medium tracking-label lg:rounded-t-[42px] lg:text-[20px]",
+    tone === "light"
+      ? "bg-linear-to-b from-[#dad6da] to-cream text-navy"
+      : "bg-navy text-cream",
+  ]}
+>
+  <div class="container-site flex flex-col gap-[30px] py-[21px] lg:h-[142px] lg:flex-row lg:items-center lg:justify-between lg:py-0">
+    <div class="flex flex-col gap-[3px] lg:gap-[19px]">
+      <p class="text-[12px] lg:text-[20px]">
+        © {year} {site.legalName || site.name}
+      </p>
+      <p class="text-[15px] lg:text-[20px]">
+        P.IVA {site.vatNumber || "[Partita IVA]"}
+      </p>
+    </div>
+
+    <nav aria-label="Link del piè di pagina">
+      <!-- Desktop: tutti i link su una riga -->
+      <ul class="hidden gap-16 lg:flex">
+        {[...footerNav, ...legalNav].map((link) => (
+          <li>
+            <a href={link.href} class="hover:underline">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile: sezioni sopra, link legali e "Torna su" sotto una linea -->
+      <div class="lg:hidden">
+        <ul class="flex justify-between border-b border-current pb-[14px]">
+          {footerNav.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+        <ul class="flex gap-[44px] pt-[14px]">
+          {legalNav.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+          <li class="ml-auto">
+            <a href="#" class="flex items-center gap-[6px]">
+              Torna su
+              <Arrow direction="up" length={9} head={3.2} strokeWidth={1} />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,31 @@
+---
+// Logo "Portofino Boutique Café" color crema (per sfondi blu).
+// La larghezza si decide con `class`, es. class="w-[124px] lg:w-[247px]".
+import { Image } from "astro:assets";
+import logo from "../../assets/images/logo-portofino.png";
+import { site } from "../../data/site";
+
+interface Props {
+  class?: string;
+  /** Larghezze generate per gli schermi ad alta densità. */
+  widths?: number[];
+  sizes?: string;
+  loading?: "eager" | "lazy";
+}
+
+const {
+  class: className,
+  widths = [250, 500],
+  sizes = "250px",
+  loading = "eager",
+} = Astro.props;
+---
+
+<Image
+  src={logo}
+  alt={site.fullName}
+  widths={widths}
+  sizes={sizes}
+  loading={loading}
+  class:list={["h-auto", className]}
+/>

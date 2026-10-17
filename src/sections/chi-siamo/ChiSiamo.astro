@@ -1,0 +1,69 @@
+---
+// Sezione "Chi siamo": foto ad arco e presentazione del locale.
+import { Image } from "astro:assets";
+import ScrollCue from "../../components/ui/ScrollCue.astro";
+import photo from "../../assets/images/chi-siamo-caffe.jpg";
+---
+
+<section id="chi-siamo" class="overflow-hidden bg-cream text-navy">
+  <div class="relative mx-auto max-w-[1440px] px-5 pt-[50px] pb-0 lg:pt-[145px] lg:pr-[30px] lg:pb-0 lg:pl-[90px]">
+    <!-- Solo desktop: cornice decorativa larga, dal bordo della foto fino al lato destro -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute top-[99px] right-0 -bottom-12 left-[55px] hidden rounded-t-[min(347px,24vw)] border-[3px] border-b-0 border-navy lg:block"
+    ></div>
+
+    <div class="grid lg:grid-cols-[625fr_614fr] lg:grid-rows-[auto_1fr] lg:gap-x-[65px]">
+      <!-- Titolo (su mobile sta sopra la foto) -->
+      <div class="lg:col-start-2 lg:row-start-1 lg:pt-[90px]">
+        <p class="text-[12px] font-medium tracking-tightest lg:text-[24px]">
+          IL MONDO PORTOFINO
+        </p>
+        <h2 class="font-serif text-[35px] leading-[1.108] tracking-tightest lg:text-[min(65px,4.52vw)]">
+          Un posto, <br />
+          tante cose da vivere.
+        </h2>
+      </div>
+
+      <!-- Foto ad arco, con la cornice ad arco attorno su desktop -->
+      <div class="relative mt-[11px] max-w-[480px] lg:max-w-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:mt-0">
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute -top-[45px] -right-[34px] -bottom-12 -left-[35px] hidden rounded-t-full border-[3px] border-b-0 border-navy lg:block"
+        ></div>
+        <Image
+          src={photo}
+          alt="Un caffè espresso servito su un tavolo in legno del Portofino"
+          widths={[400, 700, 1000, 1300]}
+          sizes="(min-width: 1024px) 44vw, 100vw"
+          class="aspect-[350/437] w-full rounded-t-full object-cover object-[70%_center] lg:aspect-[625/879] lg:object-[51%_center]"
+        />
+      </div>
+
+      <!-- Testo -->
+      <div class="lg:col-start-2 lg:row-start-2">
+        <p class="mt-[13px] text-[20px] tracking-tightest lg:mt-3 lg:text-[min(40px,2.78vw)] leading-[1.2] lg:font-medium">
+          Un caffè per iniziare la giornata, una pausa pranzo, un capo che
+          cattura lo sguardo. Portofino Bar unisce bar, cucina e shopping in uno
+          spazio dal carattere urbano, da vivere seguendo il proprio ritmo.
+        </p>
+        <div class="mt-[18px] flex items-start justify-between">
+          <div>
+            <span
+              aria-hidden="true"
+              class="block h-0.5 w-[92px] bg-navy lg:h-[3px] lg:w-[174px]"
+            ></span>
+            <p class="mt-[9px] text-[12px] font-medium tracking-tightest lg:mt-[16px] lg:text-[24px]">
+              BAR / CUCINA / ABBIGLIAMENTO
+            </p>
+          </div>
+          <ScrollCue
+            href="#cosa-trovi"
+            label="Cosa trovi da noi"
+            class="mt-[11px] lg:absolute lg:right-[91px] lg:bottom-[24px] lg:mt-0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

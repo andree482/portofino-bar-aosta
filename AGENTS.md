@@ -29,5 +29,8 @@ Sito vetrina del bar Portofino (Aosta). Obiettivo principale: visibilità e SEO 
 - Tutti i dati del locale (nome, indirizzo, orari, contatti, social) stanno in `src/data/site.ts`; non duplicarli nei componenti.
 - Il menu sta in `src/data/menu.ts` e va renderizzato come testo HTML, mai come PDF o immagine.
 - SEO: `src/components/seo/Seo.astro` (meta, Open Graph) e `LocalBusinessSchema.astro` (JSON-LD `BarOrPub`), inclusi da `BaseLayout.astro`.
-- Design token (colori, font) in `@theme` dentro `src/styles/global.css`; il design di riferimento arriva da Figma.
+- Design token (navy, cream, gold, brown, font-serif/sans, tracking-tightest/label, utility container-site) in `@theme` dentro `src/styles/global.css`.
+- Design di riferimento: Figma file `wJvJc302BjUJObGwU5wGtj` ("PORTOFINO BAR DESIGN SITO"): Home desktop `31:3`, Home mobile `108:808`, menu mobile `155:1249`, Privacy `191:39`/`201:405`, cookie `191:164`/`201:278`. Misure: base = mobile 390px, `lg:` = desktop 1440px.
+- Struttura: sezioni della home in `src/sections/<nome>/`, header/footer/banner in `src/components/layout/`, pezzi riutilizzabili in `src/components/ui/`.
+- Ogni cartella di sezione/componente ha un `README.md` in italiano: aggiornalo quando cambi il componente. Il proprietario deve poter capire il codice da solo: commenti brevi in italiano, dati separati dai componenti.
 - Testi del sito in italiano.
