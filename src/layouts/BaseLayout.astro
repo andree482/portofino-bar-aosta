@@ -1,5 +1,7 @@
 ---
-// Struttura comune a tutte le pagine: <head> con SEO, header, contenuto, footer e banner cookie.
+// Struttura comune a tutte le pagine: <head> con SEO, header, contenuto e footer.
+// Il banner cookie (src/components/layout/cookie-banner) è disattivato: il sito non usa
+// cookie facoltativi. Per riattivarlo vedi il README di quella cartella.
 import "@fontsource-variable/inclusive-sans";
 import "@fontsource/dm-serif-display/400.css";
 import "../styles/global.css";
@@ -7,7 +9,6 @@ import Seo from "../components/seo/Seo.astro";
 import LocalBusinessSchema from "../components/seo/LocalBusinessSchema.astro";
 import Header from "../components/layout/header/Header.astro";
 import Footer from "../components/layout/footer/Footer.astro";
-import CookieBanner from "../components/layout/cookie-banner/CookieBanner.astro";
 import { site } from "../data/site";
 
 interface Props {
@@ -63,6 +64,5 @@ const {
       <slot />
     </main>
     <Footer tone={footerTone} />
-    <CookieBanner />
   </body>
 </html>

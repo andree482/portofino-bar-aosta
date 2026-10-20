@@ -48,7 +48,7 @@ src/
     orari-posizione/          orari, indirizzo e mappa
     contatti/                 telefono, email, Instagram
   components/
-    layout/                   header, footer e banner cookie (presenti in ogni pagina)
+    layout/                   header e footer (presenti in ogni pagina), banner cookie (disattivato)
     legal/                    modello delle pagine Privacy e Cookie
     seo/                      meta tag e dati strutturati per Google
     ui/                       pezzi riutilizzabili: freccia, pulsante, logo…
@@ -94,7 +94,7 @@ privacy (GDPR) e per la velocità.
 - [ ] Verificare gli orari in `src/data/site.ts` (ora sono quelli del design)
 - [ ] Inserire il menù reale in `src/data/menu.ts`
 - [ ] Sostituire `src/assets/images/mappa-segnaposto.jpg` con la mappa reale del locale
-- [ ] Scrivere i testi di Privacy e Cookie in `src/data/legal.ts`
+- [ ] Far rileggere a un consulente le informative in `src/data/legal.ts` (bozza già scritta)
 - [ ] Collegare il sito alla scheda Google Business e registrarlo su Google Search Console
 
 ## Pubblicazione

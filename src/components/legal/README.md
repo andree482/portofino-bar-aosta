@@ -11,8 +11,15 @@ La pagina Cookie non ha un design suo: usa lo stesso modello della Privacy.
 - "INFORMAZIONI", titolo grande (Privacy / Cookie) e data di aggiornamento.
 - **In questa pagina**: indice con i link alle sezioni.
 - Sezioni numerate (0.1, 0.2, …).
-- Pulsante **Preferenze e Cookie**, che riapre il banner cookie. Su desktop sta sotto l'indice,
-  su mobile in fondo alla pagina.
+- Pulsante che porta all'altra informativa: dalla Privacy alla Cookie e viceversa. Su desktop
+  sta sotto l'indice, su mobile in fondo alla pagina.
+
+> Nel design il pulsante si chiamava "Preferenze e Cookie" e apriva il banner cookie. Il banner
+> è disattivato (il sito non usa cookie facoltativi), quindi ora è un collegamento tra le due
+> informative.
+
+> Nel design il testo delle sezioni è a 37px su desktop, pensato per una riga di segnaposto. Con
+> le informative vere (testi lunghi) l'ho portato a 24px per renderlo leggibile.
 
 ## Modificare i testi
 
@@ -26,10 +33,23 @@ Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`):
 }
 ```
 
-Puoi aggiungere o togliere sezioni: numeri e indice si aggiornano da soli.
+- Puoi aggiungere o togliere sezioni: numeri e indice si aggiornano da soli.
+- Ragione sociale, indirizzo, P.IVA ed email del titolare arrivano da `src/data/site.ts`:
+  compilandoli lì compaiono anche nelle informative.
+- Quando cambi un testo, aggiorna anche `updatedAt` (la data "Aggiornata il …").
 
-> **Importante:** i testi tra parentesi quadre sono segnaposto del design. L'informativa vera va
-> scritta da un consulente o generata con un servizio apposito (es. iubenda) e poi incollata qui.
+## I testi attuali
+
+Sono scritti in base a come funziona oggi il sito: nessun modulo di contatto, nessun cookie,
+nessuna statistica, font e immagini ospitati sul sito, hosting su Cloudflare.
+
+**Vanno aggiornati se:**
+
+- cambi hosting (nome del fornitore in `hosting`, in cima a `legal.ts`);
+- aggiungi statistiche, mappe o video incorporati, un modulo di contatto o una newsletter.
+
+> Sono una buona base, ma non sostituiscono una consulenza legale: prima della pubblicazione
+> conviene farli rileggere a un consulente.
 
 ## Pagine che usano questo modello
 
