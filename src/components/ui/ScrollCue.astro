@@ -2,36 +2,69 @@
 // Indicatore "scorri giù" del design: testo sottolineato con una lunga freccia verso il basso.
 // Usato per "scopri chi siamo", "Cosa trovi da noi" e "Scopri il menù".
 //
-// Esempio:
+// Esempi:
 //   <ScrollCue href="#chi-siamo" label="scopri chi siamo" />
+//   <ScrollCue href="#chi-siamo" label="scopri chi siamo" arrowOffset={25} arrowLength={48} />
 
 interface Props {
   href: string;
   label: string;
   /** Lato su cui scende la freccia: alla fine (destra) o all'inizio (sinistra) della linea. */
   align?: "end" | "start";
+  /**
+   * Solo mobile: distanza in px della freccia dall'inizio della linea (es. 25 = sotto "scopri").
+   * Se manca, la freccia sta all'estremità indicata da `align`. Su desktop vale sempre `align`.
+   */
+  arrowOffset?: number;
+  /** Solo mobile: lunghezza della freccia in px (su desktop è sempre 147px). */
+  arrowLength?: number;
   class?: string;
 }
 
-const { href, label, align = "end", class: className } = Astro.props;
+const {
+  href,
+  label,
+  align = "end",
+  arrowOffset,
+  arrowLength = 40,
+  class: className,
+} = Astro.props;
+
+// La freccia è larga 15px: per centrarla nel punto indicato si sposta di metà larghezza.
+const style = [
+  `--arrow-length:${arrowLength}px`,
+  arrowOffset !== undefined && `--arrow-offset:${arrowOffset - 7.5}px`,
+]
+  .filter(Boolean)
+  .join(";");
+
+// Posizione della freccia sotto la linea (-7px = metà della sua larghezza, per centrarla sul bordo).
+const edge = align === "end" ? "-mr-[7px]" : "-ml-[7px]";
+const arrowPosition =
+  arrowOffset === undefined
+    ? edge // sempre all'estremità
+    : align === "end"
+      ? "self-start ml-(--arrow-offset) lg:self-end lg:ml-0 lg:-mr-[7px]" // mobile: spostata; desktop: in fondo
+      : "self-start ml-(--arrow-offset) lg:-ml-[7px]"; // mobile: spostata; desktop: all'inizio
 ---
 
 <a
   href={href}
+  style={style}
   class:list={[
     "inline-flex flex-col text-[12px] font-bold tracking-tightest lg:text-[24px]",
     align === "end" ? "items-end" : "items-start",
     className,
   ]}
 >
-  <span class="w-full border-b-2 border-current pb-[3px] lg:pb-[6px]">
+  <span class="w-full border-b-2 border-current pb-px leading-[1.2] lg:pb-[6px] lg:leading-normal">
     {label}
   </span>
-  <!-- Freccia verticale: si allunga su desktop -->
+  <!-- Freccia verticale: lunghezza da `arrowLength` su mobile, 147px su desktop -->
   <span
     class:list={[
-      "relative h-10 w-[15px] lg:h-[147px]",
-      align === "end" ? "-mr-[7px]" : "-ml-[7px]",
+      "relative h-(--arrow-length) w-[15px] lg:h-[147px]",
+      arrowPosition,
     ]}
   >
     <span class="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-current"></span>

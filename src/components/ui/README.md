@@ -28,6 +28,52 @@ Piccoli pezzi riutilizzati in più sezioni del sito. Se cambi qui, cambia ovunqu
 <Logo class="w-[124px] lg:w-[247px]" />
 ```
 
+## Opzioni utili
+
+**Arrow**
+
+| Prop          | Esempio      | A cosa serve                                         |
+| ------------- | ------------ | ---------------------------------------------------- |
+| `direction`   | `"up-right"` | Direzione: right, left, down, up, up-right           |
+| `angle`       | `{-56}`      | Inclinazione libera in gradi (sostituisce direction) |
+| `length`      | `{23}`       | Lunghezza dell'asta in px                            |
+| `strokeWidth` | `{1}`        | Spessore della linea                                 |
+| `head`        | `{3.7}`      | Lunghezza dei tratti della punta                     |
+
+**Button**
+
+| Prop                                      | A cosa serve                                                                |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| `arrow` / `arrowAngle`                    | Freccia dritta (`right`, `up-right`) o inclinata di un angolo preciso       |
+| `arrowLength`, `arrowStroke`, `arrowHead` | Misure della freccia                                                        |
+| `desktopArrow`                            | Freccia diversa da 1024px in su, es. `{ length: 43, stroke: 3, head: 9.5 }` |
+| `layout`                                  | Posizione di testo e freccia, es. `"justify-start gap-[20px] pl-[28px]"`    |
+
+Esempio (pulsante "Prenota un tavolo" del menù):
+
+```astro
+<Button
+  href={bookingUrl}
+  arrow="right"
+  arrowLength={23}
+  arrowStroke={1}
+  arrowHead={3.7}
+  desktopArrow={{ length: 43, stroke: 3, head: 9.5 }}
+  layout="justify-start gap-[20px] pl-[28px] lg:justify-center lg:gap-[0.4em] lg:pl-0"
+  class="h-[30px] w-[199px] text-[15px] lg:h-[67px] lg:w-[498px] lg:text-[30px]"
+>
+  Prenota un tavolo
+</Button>
+```
+
+**ScrollCue**
+
+| Prop          | A cosa serve                                                                 |
+| ------------- | ---------------------------------------------------------------------------- |
+| `align`       | Freccia alla fine (`end`) o all'inizio (`start`) della linea                 |
+| `arrowOffset` | Solo mobile: distanza della freccia dall'inizio della linea (es. 25 in hero) |
+| `arrowLength` | Solo mobile: lunghezza della freccia (su desktop è sempre 147px)             |
+
 ## Note
 
 - **Dimensioni e font** dei pulsanti si passano con `class`, così ogni pulsante può

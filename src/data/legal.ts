@@ -38,9 +38,8 @@ const hosting = {
 const owner = site.legalName || "[Ragione sociale]";
 const vat = site.vatNumber || "[Partita IVA]";
 const email = site.contact.email || "[Email]";
-const address = site.address.street
-  ? fullAddress
-  : `[Via e numero civico], ${fullAddress}`;
+// Finché manca la via in site.ts resta solo "11100 Aosta".
+const address = fullAddress;
 
 export const privacyPage: LegalPage = {
   title: "Privacy",

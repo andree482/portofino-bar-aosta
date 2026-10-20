@@ -12,11 +12,33 @@ interface Props {
   href: string;
   /** cream = sfondo crema e testo blu; navy = sfondo blu e testo crema. */
   variant?: "cream" | "navy";
+  /** Direzione della freccia. Per un'inclinazione libera usa `arrowAngle`. */
   arrow?: "right" | "up-right";
+  /** Inclinazione della freccia in gradi (es. -56), al posto di `arrow`. */
+  arrowAngle?: number;
   /** Lunghezza della freccia in px. */
   arrowLength?: number;
+  /** Spessore della linea della freccia in px. */
+  arrowStroke?: number;
+  /** Lunghezza dei tratti della punta in px. */
+  arrowHead?: number;
   /** Classi per la freccia, es. "lg:w-[44px] lg:h-auto" per allungarla su desktop. */
   arrowClass?: string;
+  /**
+   * Freccia diversa su desktop (da 1024px), es. { length: 43, stroke: 3, head: 9.5 }.
+   * Se c'è, la freccia "normale" si vede solo su mobile.
+   */
+  desktopArrow?: {
+    angle?: number;
+    length?: number;
+    stroke?: number;
+    head?: number;
+  };
+  /**
+   * Disposizione di testo e freccia dentro il pulsante (classi Tailwind).
+   * Di base sono centrati e distanti 0.4em; es. "justify-start gap-[21px] pl-[28px]".
+   */
+  layout?: string;
   /** Apre il link in una nuova scheda (per siti esterni, es. Google Maps). */
   external?: boolean;
   class?: string;
@@ -26,17 +48,25 @@ const {
   href,
   variant = "cream",
   arrow,
+  arrowAngle,
   arrowLength = 25,
+  arrowStroke = 2,
+  arrowHead = 6.4,
   arrowClass,
+  desktopArrow,
+  layout = "justify-center gap-[0.4em]",
   external = false,
   class: className,
 } = Astro.props;
+
+const hasArrow = arrow || arrowAngle !== undefined;
 ---
 
 <a
   href={href}
   class:list={[
-    "inline-flex items-center justify-center gap-[0.4em] rounded-full tracking-tightest whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4",
+    "inline-flex items-center rounded-full tracking-tightest whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4",
+    layout,
     variant === "cream"
       ? "bg-cream text-navy focus-visible:outline-cream"
       : "bg-navy text-cream",
@@ -45,5 +75,24 @@ const {
   {...(external && { target: "_blank", rel: "noopener" })}
 >
   <slot />
-  {arrow && <Arrow direction={arrow} length={arrowLength} class={arrowClass} />}
+  {hasArrow && (
+    <Arrow
+      direction={arrow}
+      angle={arrowAngle}
+      length={arrowLength}
+      strokeWidth={arrowStroke}
+      head={arrowHead}
+      class:list={[arrowClass, desktopArrow && "lg:hidden"]}
+    />
+  )}
+  {hasArrow && desktopArrow && (
+    <Arrow
+      direction={arrow}
+      angle={desktopArrow.angle ?? arrowAngle}
+      length={desktopArrow.length ?? arrowLength}
+      strokeWidth={desktopArrow.stroke ?? arrowStroke}
+      head={desktopArrow.head ?? arrowHead}
+      class="hidden lg:block"
+    />
+  )}
 </a>

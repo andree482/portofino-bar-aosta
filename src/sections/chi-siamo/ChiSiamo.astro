@@ -31,13 +31,21 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
           aria-hidden="true"
           class="pointer-events-none absolute -top-[45px] -right-[34px] -bottom-12 -left-[35px] hidden rounded-t-full border-[3px] border-b-0 border-navy lg:block"
         ></div>
-        <Image
-          src={photo}
-          alt="Un caffè espresso servito su un tavolo in legno del Portofino"
-          widths={[400, 700, 1000, 1300]}
-          sizes="(min-width: 1024px) 44vw, 100vw"
-          class="aspect-[350/437] w-full rounded-t-full object-cover object-[70%_center] lg:aspect-[625/879] lg:object-[51%_center]"
-        />
+        <!--
+          Riquadro ad arco che ritaglia la foto.
+          Mobile: la foto è ingrandita come nel Figma (larga 263.8% del riquadro, spostata a
+          sinistra del 60.88% e in alto del 27%), così la tazzina sta al centro.
+          Desktop: la foto riempie il riquadro (object-cover).
+        -->
+        <div class="relative aspect-[350/437] overflow-hidden rounded-t-full lg:aspect-[625/879]">
+          <Image
+            src={photo}
+            alt="Un caffè espresso servito su un tavolo in legno del Portofino"
+            widths={[700, 1000, 1300]}
+            sizes="(min-width: 1024px) 44vw, 260vw"
+            class="absolute top-[-27%] left-[-60.88%] w-[263.8%] max-w-none lg:inset-0 lg:size-full lg:object-cover lg:object-[51%_center]"
+          />
+        </div>
       </div>
 
       <!-- Testo -->
@@ -60,7 +68,8 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
           <ScrollCue
             href="#cosa-trovi"
             label="Cosa trovi da noi"
-            class="mt-[11px] lg:absolute lg:right-[91px] lg:bottom-[24px] lg:mt-0"
+            arrowLength={39}
+            class="mt-[11px] mr-[18px] lg:absolute lg:mr-0 lg:right-[91px] lg:bottom-[24px] lg:mt-0"
           />
         </div>
       </div>

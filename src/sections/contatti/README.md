@@ -23,7 +23,8 @@ social: { instagram: "https://www.instagram.com/...", instagramHandle: "@..." },
 ```
 
 Finché un campo è vuoto, la riga mostra il segnaposto del design (`[Numero]`, `[Email]`,
-`[@Profilo]`), non è cliccabile e la freccia è sbiadita.
+`[@Profilo]`) e non è cliccabile. Le frecce ↗ sono sempre bianche e stanno 10px (mobile) o
+29px (desktop) prima della fine della linea, come nel Figma.
 
 ## Come modificarla
 

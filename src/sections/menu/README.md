@@ -41,6 +41,9 @@ export const menu = [
 Il link si imposta in `src/data/site.ts` (`bookingUrl`): se c'è il telefono avvia la chiamata,
 altrimenti porta alla sezione Contatti.
 
+Su mobile, come nel Figma, il testo parte a 28px dal bordo e la freccia è sottile (1px, lunga
+23px) e staccata di 20px; su desktop testo e freccia (più spessa) sono centrati.
+
 ## Disposizione
 
 | Mobile                                     | Desktop                                            |

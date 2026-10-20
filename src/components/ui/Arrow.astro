@@ -6,9 +6,12 @@
 //   <Arrow />                              → freccia verso destra lunga 25px
 //   <Arrow direction="up-right" length={21} />
 //   <Arrow direction="down" length={147} />
+//   <Arrow angle={-56} length={13} />      → inclinazione libera, come nel Figma
 
 interface Props {
   direction?: "right" | "left" | "down" | "up" | "up-right";
+  /** Inclinazione in gradi (0 = destra, -90 = su). Se indicata sostituisce `direction`. */
+  angle?: number;
   /** Lunghezza dell'asta in px. */
   length?: number;
   /** Lunghezza dei due tratti della punta in px. */
@@ -20,6 +23,7 @@ interface Props {
 
 const {
   direction = "right",
+  angle,
   length = 25,
   head = 6.4,
   strokeWidth = 2,
@@ -27,7 +31,7 @@ const {
 } = Astro.props;
 
 const angles = { right: 0, down: 90, left: 180, up: -90, "up-right": -45 };
-const rad = (angles[direction] * Math.PI) / 180;
+const rad = ((angle ?? angles[direction]) * Math.PI) / 180;
 
 // Punti della freccia orientata verso destra, poi ruotati nella direzione scelta.
 const rotate = ([x, y]: number[]) => [

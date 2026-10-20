@@ -51,7 +51,7 @@ import mapImage from "../../assets/images/mappa-segnaposto.jpg";
           alt="Un caffè espresso sul bancone del Portofino"
           widths={[400, 800]}
           sizes="100vw"
-          class="mt-[10px] h-[109px] w-full object-cover object-bottom lg:hidden"
+          class="mt-[10px] h-[109px] w-full object-cover object-[center_82%] lg:hidden"
         />
         <Image
           src={photoDesktop}
@@ -68,9 +68,8 @@ import mapImage from "../../assets/images/mappa-segnaposto.jpg";
           Dove siamo
         </h3>
         <address class="mt-[12px] text-[18px] tracking-tightest not-italic lg:mt-0 lg:text-[40px]">
-          {site.address.street
-            ? fullAddress
-            : `[Via e numero civico], ${fullAddress}`}
+          <!-- Finché manca la via in site.ts si vede solo "11100 Aosta" -->
+          {fullAddress}
         </address>
         <a
           href={directionsUrl}
@@ -83,16 +82,19 @@ import mapImage from "../../assets/images/mappa-segnaposto.jpg";
             alt={`Mappa: come raggiungere ${site.fullName}`}
             widths={[400, 800, 1200]}
             sizes="(min-width: 1024px) 585px, 100vw"
-            class="aspect-[350/144] w-full object-cover lg:aspect-[585/395] lg:object-left"
+            class="aspect-[350/144] w-full object-cover object-[center_34%] lg:aspect-[585/395] lg:object-left"
           />
         </a>
         <div class="mt-[25px] flex justify-center lg:mt-[24px] lg:justify-start">
           <Button
             href={directionsUrl}
             variant="navy"
-            arrow="up-right"
-            arrowLength={13}
-            arrowClass="lg:h-auto lg:w-[17px]"
+            arrowAngle={-56}
+            arrowLength={12.8}
+            arrowStroke={1}
+            arrowHead={3.2}
+            desktopArrow={{ angle: -41, length: 21.3, stroke: 2, head: 6.4 }}
+            layout="justify-center gap-[4px] lg:gap-[2px]"
             external
             class="h-[26px] w-[199px] text-[18px] lg:h-[53px] lg:w-[283px] lg:text-[24px]"
           >

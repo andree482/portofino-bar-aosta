@@ -17,6 +17,7 @@ const displayDate = menuDate.split("-").reverse().join("-");
       href="#menu-del-giorno"
       label="Scopri il menù"
       align="start"
+      arrowLength={44}
       class="mb-[60px] text-cream lg:hidden"
     />
 
@@ -59,7 +60,10 @@ const displayDate = menuDate.split("-").reverse().join("-");
         href={bookingUrl}
         arrow="right"
         arrowLength={23}
-        arrowClass="lg:h-auto lg:w-[46px]"
+        arrowStroke={1}
+        arrowHead={3.7}
+        desktopArrow={{ length: 43, stroke: 3, head: 9.5 }}
+        layout="justify-start gap-[20px] pl-[28px] lg:justify-center lg:gap-[0.4em] lg:pl-0"
         class="h-[30px] w-[199px] text-[15px] font-medium lg:h-[67px] lg:w-[498px] lg:text-[30px] lg:tracking-normal"
       >
         Prenota un tavolo

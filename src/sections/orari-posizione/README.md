@@ -25,7 +25,7 @@ openingHours: [
 - `days` sono i giorni in inglese per Google.
 - Una riga senza `opens`/`closes` viene mostrata come **Chiuso**.
 
-L'indirizzo è in `address`. Finché manca la via compare il segnaposto `[Via e numero civico]`.
+L'indirizzo è in `address`. Finché manca la via si vede solo "11100 Aosta".
 
 ## Mappa e indicazioni
 
@@ -33,12 +33,17 @@ L'indirizzo è in `address`. Finché manca la via compare il segnaposto `[Via e 
   così il sito resta veloce e non servono cookie di terze parti.
 - **Attenzione:** l'immagine attuale è il segnaposto del design (c'è scritto "Mappa segnaposto").
   Va sostituita con uno screenshot della mappa reale attorno al locale.
+- Su mobile la mappa è ritagliata al 34% dell'altezza (`object-[center_34%]`), come nel Figma.
+- Il pulsante **Ottieni indicazioni ↗** ha la freccia inclinata come nel Figma: -56° su mobile,
+  -41° su desktop, attaccata al testo.
 - Mappa e pulsante aprono Google Maps (`directionsUrl` in `site.ts`): la scheda del locale se
   `mapsUrl` è compilato, altrimenti una ricerca per indirizzo.
 
 ## Foto
 
 Come nel design, su mobile si vede `orari-caffe.jpg` e su desktop `orari-aperitivo.jpg`.
+Su mobile la foto è ritagliata all'82% dell'altezza (`object-[center_82%]`), così si vede la
+tazzina sul bancone come nel Figma.
 
 ## Nota
 
