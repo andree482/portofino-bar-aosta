@@ -11,7 +11,7 @@ Prima schermata della home. File: `Hero.astro`.
 - Sottotitolo: "Colazione, pranzo, aperitivo, shopping. Benvenuto al Portofino Bar."
 - Pulsante **Scopri il menù di oggi →**, che porta alla sezione Menù.
 - Indicatore **scopri chi siamo ↓**, che porta alla sezione Chi siamo. Su mobile la freccia scende
-  sotto "scopri" (25px dall'inizio della linea, lunga 48px); su desktop alla fine della linea.
+  sotto "scopri" (25px dall'inizio della linea, lunga 51px); su desktop alla fine della linea.
 
 ## File usati
 

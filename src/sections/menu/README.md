@@ -1,24 +1,24 @@
 # Sezione Il menù
 
-Menù del giorno. File: `Menu.astro`. Ancora: `#menu` (ci portano "Scopri il menù di oggi" e il
+Il menù del locale. File: `Menu.astro`. Ancora: `#menu` (ci portano "Scopri il menù di oggi" e il
 link "Menù" del footer).
 
 **Design Figma:** gruppo `234:6` della Home desktop e quarta schermata della Home mobile (nodo `108:808`).
 
 ## Cosa mostra
 
-- "Il menù" con la data del giorno.
+- Il titolo "Il menù".
 - Le categorie (Primi, Secondi, Contorni, Dolci) con i piatti, separati da linee bianche.
 - Pulsante **Prenota un tavolo →**.
 - Solo mobile: indicatore "Scopri il menù ↓" in alto.
 
-## Aggiornare il menù (la cosa che farai più spesso)
+> Nel design accanto al titolo c'era la data (19-11-2026): è stata tolta perché il menù è fisso.
+
+## Aggiornare il menù
 
 Apri `src/data/menu.ts`:
 
 ```ts
-export const menuDate = "2026-11-19"; // anno-mese-giorno → sul sito: 19-11-2026
-
 export const menu = [
   {
     name: "Primi",
@@ -46,7 +46,7 @@ Su mobile, come nel Figma, il testo parte a 28px dal bordo e la freccia è sotti
 
 ## Disposizione
 
-| Mobile                                     | Desktop                                            |
-| ------------------------------------------ | -------------------------------------------------- |
-| Data sotto il titolo, categorie in colonna | Data a destra del titolo, categorie su due colonne |
-| Una linea sotto ogni categoria             | Linee sotto il titolo e tra un piatto e l'altro    |
+| Mobile                         | Desktop                                         |
+| ------------------------------ | ----------------------------------------------- |
+| Categorie in colonna           | Categorie su due colonne                        |
+| Una linea sotto ogni categoria | Linee sotto il titolo e tra un piatto e l'altro |

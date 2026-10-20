@@ -18,6 +18,7 @@ Genera pagine statiche, veloci e leggibili dai motori di ricerca.
 | `npm run build`   | Controlla i tipi e genera il sito in `dist/`    |
 | `npm run preview` | Mostra in locale il sito generato               |
 | `npm run format`  | Formatta il codice con Prettier                 |
+| `npm run mappa`   | Ridisegna la mappa del locale (OpenStreetMap)   |
 
 ## Pagine
 
@@ -34,6 +35,7 @@ Ogni cartella con un `README.md` spiega cosa contiene e come modificarla.
 
 ```
 public/                     file serviti così come sono (icone, robots.txt, immagine per i social)
+scripts/genera-mappa.mjs    disegna la mappa del locale (npm run mappa)
 src/
   data/                     ★ TESTI E DATI: quasi tutte le modifiche si fanno qui
     site.ts                   nome, indirizzo, orari, contatti, social, P.IVA
@@ -93,7 +95,6 @@ privacy (GDPR) e per la velocità.
 - [ ] Completare i campi `TODO` in `src/data/site.ts` (indirizzo, P.IVA, contatti, social, coordinate)
 - [ ] Verificare gli orari in `src/data/site.ts` (ora sono quelli del design)
 - [ ] Inserire il menù reale in `src/data/menu.ts`
-- [ ] Sostituire `src/assets/images/mappa-segnaposto.jpg` con la mappa reale del locale
 - [ ] Far rileggere a un consulente le informative in `src/data/legal.ts` (bozza già scritta)
 - [ ] Collegare il sito alla scheda Google Business e registrarlo su Google Search Console
 

@@ -32,18 +32,19 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
           class="pointer-events-none absolute -top-[45px] -right-[34px] -bottom-12 -left-[35px] hidden rounded-t-full border-[3px] border-b-0 border-navy lg:block"
         ></div>
         <!--
-          Riquadro ad arco che ritaglia la foto.
-          Mobile: la foto è ingrandita come nel Figma (larga 263.8% del riquadro, spostata a
-          sinistra del 60.88% e in alto del 27%), così la tazzina sta al centro.
-          Desktop: la foto riempie il riquadro (object-cover).
+          Riquadro ad arco che ritaglia la foto. Posizione e proporzioni sono quelle del Figma:
+          la foto è alta quanto l'arco e allungata in orizzontale (per questo le linee del
+          tavolo risultano più inclinate che nell'originale).
+          - Mobile: larga 263.8% dell'arco, spostata a sinistra del 60.88%.
+          - Desktop: larga 252.04% dell'arco, spostata a sinistra del 57.05%.
         -->
         <div class="relative aspect-[350/437] overflow-hidden rounded-t-full lg:aspect-[625/879]">
           <Image
             src={photo}
             alt="Un caffè espresso servito su un tavolo in legno del Portofino"
-            widths={[700, 1000, 1300]}
-            sizes="(min-width: 1024px) 44vw, 260vw"
-            class="absolute top-[-27%] left-[-60.88%] w-[263.8%] max-w-none lg:inset-0 lg:size-full lg:object-cover lg:object-[51%_center]"
+            widths={[700, 1000, 1536]}
+            sizes="(min-width: 1024px) 110vw, 240vw"
+            class="absolute top-0 left-[-60.88%] h-full w-[263.8%] max-w-none lg:top-[0.09%] lg:left-[-57.05%] lg:w-[252.04%]"
           />
         </div>
       </div>

@@ -3,11 +3,8 @@
 // I piatti si modificano in src/data/menu.ts.
 import Button from "../../components/ui/Button.astro";
 import ScrollCue from "../../components/ui/ScrollCue.astro";
-import { menu, menuDate } from "../../data/menu";
+import { menu } from "../../data/menu";
 import { bookingUrl } from "../../data/site";
-
-// "2026-11-19" → "19-11-2026"
-const displayDate = menuDate.split("-").reverse().join("-");
 ---
 
 <section id="menu" class="bg-navy text-white">
@@ -23,15 +20,9 @@ const displayDate = menuDate.split("-").reverse().join("-");
 
     <div
       id="menu-del-giorno"
-      class="flex flex-col border-b-2 border-white pb-[9px] font-serif tracking-tightest lg:flex-row lg:items-baseline lg:justify-between lg:pb-[31px]"
+      class="border-b-2 border-white pb-[9px] font-serif tracking-tightest lg:pb-[31px]"
     >
       <h2 class="text-[30px] lg:text-[80px] lg:leading-[1.375]">Il menù</h2>
-      <time
-        datetime={menuDate}
-        class="text-[25px] lg:text-[80px] lg:leading-[1.375]"
-      >
-        {displayDate}
-      </time>
     </div>
 
     <!-- Categorie: una colonna su mobile, due colonne su desktop -->

@@ -8,7 +8,7 @@ Orari di apertura, indirizzo e mappa. File: `OrariPosizione.astro`. Ancora: `#or
 
 - Intestazione "Orari e posizione", titolo "Ci vediamo al Portofino" e sottotitolo.
 - **Quando passare**: tabella degli orari, la nota "Gli orari potranno variare" e una foto.
-- **Dove siamo**: indirizzo, mappa e pulsante **Ottieni indicazioni ↗**.
+- **Dove siamo**: indirizzo (solo desktop, come nel Figma), mappa e pulsante **Ottieni indicazioni ↗**.
 
 ## Da dove prende i dati
 
@@ -16,7 +16,7 @@ Tutto da `src/data/site.ts`, così orari e indirizzo sono uguali anche nei dati 
 
 ```ts
 openingHours: [
-  { label: "Martedì - Domenica", days: ["Tuesday", /* ... */ "Sunday"], opens: "08:00", closes: "21:00" },
+  { label: "Martedì - Domenica", days: ["Tuesday", /* ... */ "Sunday"], opens: "09:00", closes: "21:00" },
   { label: "Lunedì", days: ["Monday"] }, // senza orari = "Chiuso"
 ],
 ```
@@ -25,28 +25,35 @@ openingHours: [
 - `days` sono i giorni in inglese per Google.
 - Una riga senza `opens`/`closes` viene mostrata come **Chiuso**.
 
-L'indirizzo è in `address`. Finché manca la via si vede solo "11100 Aosta".
+L'indirizzo (`address`: Via Sant'Anselmo, 8 – 11100 Aosta) e il link alla scheda Google Maps
+(`mapsUrl`) sono in `site.ts`.
 
-## Mappa e indicazioni
+## Mappa
 
-- La mappa è un'**immagine** (`mappa-segnaposto.jpg`), non una mappa Google incorporata:
+- È un'**immagine** (`src/assets/images/mappa-portofino.jpg`), non una mappa Google incorporata:
   così il sito resta veloce e non servono cookie di terze parti.
-- **Attenzione:** l'immagine attuale è il segnaposto del design (c'è scritto "Mappa segnaposto").
-  Va sostituita con uno screenshot della mappa reale attorno al locale.
-- Su mobile la mappa è ritagliata al 34% dell'altezza (`object-[center_34%]`), come nel Figma.
+- È disegnata con lo stile del design (crema, beige, azzurro, segnaposto blu) partendo dai dati
+  reali di **OpenStreetMap** attorno a Via Sant'Anselmo 8. Per questo sulla mappa c'è la scritta
+  "© OpenStreetMap", obbligatoria per la licenza dei dati: non toglierla.
+- Per rigenerarla (per esempio se il locale cambia indirizzo): aggiorna le coordinate in
+  `scripts/genera-mappa.mjs` e lancia `npm run mappa`.
+- Mappa e pulsante aprono la scheda Google Maps del locale in una nuova scheda.
 - Il pulsante **Ottieni indicazioni ↗** ha la freccia inclinata come nel Figma: -56° su mobile,
-  -41° su desktop, attaccata al testo.
-- Mappa e pulsante aprono Google Maps (`directionsUrl` in `site.ts`): la scheda del locale se
-  `mapsUrl` è compilato, altrimenti una ricerca per indirizzo.
+  -41° su desktop, a pochi pixel dal testo.
 
 ## Foto
 
 Come nel design, su mobile si vede `orari-caffe.jpg` e su desktop `orari-aperitivo.jpg`.
-Su mobile la foto è ritagliata all'82% dell'altezza (`object-[center_82%]`), così si vede la
-tazzina sul bancone come nel Figma.
+
+Ritaglio e proporzioni sono **identici al Figma**, dove la foto è leggermente deformata
+(allungata in orizzontale rispetto all'originale):
+
+- mobile: foto alta il 151.6% del riquadro, spostata in alto del 51.6%;
+- desktop: foto 105.67% × 111.6% del riquadro, spostata del 5.67% a sinistra e del 5.8% in alto.
+
+Se cambi foto, conviene tornare a un ritaglio normale: togli le classi `absolute`, `top-…`,
+`left-…`, `h-…`, `w-…` dall'immagine e usa `size-full object-cover`.
 
 ## Nota
 
-Nel design c'erano due refusi ("Domenca", "Ottieni ndicazioni"): li ho corretti. Su mobile ho
-aggiunto l'indirizzo sotto "Dove siamo" (nel design c'è solo su desktop), perché è utile a chi
-cerca il locale dal telefono.
+Nel design c'erano due refusi ("Domenca", "Ottieni ndicazioni"): li ho corretti.

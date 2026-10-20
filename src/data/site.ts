@@ -29,7 +29,7 @@ export const site = {
   },
 
   address: {
-    street: "", // TODO: via e numero civico
+    street: "Via Sant'Anselmo, 8",
     city: "Aosta",
     postalCode: "11100",
     region: "Valle d'Aosta",
@@ -37,15 +37,15 @@ export const site = {
   },
 
   geo: {
-    // TODO: coordinate esatte del locale (ora: centro di Aosta)
-    latitude: 45.7376,
-    longitude: 7.3172,
+    // Posizione del locale (dalla scheda Google Maps)
+    latitude: 45.7381007,
+    longitude: 7.3239224,
   },
 
   /** Link alla scheda Google Maps del locale. Se vuoto si usa una ricerca per indirizzo. */
-  mapsUrl: "", // TODO
+  mapsUrl: "https://maps.app.goo.gl/zMULjXvrM8VnJZxh9",
 
-  // TODO: verificare gli orari con il locale (ora: quelli del design)
+  // TODO: verificare con il locale l'orario di chiusura (ora: quello del design)
   openingHours: [
     {
       label: "Martedì - Domenica",
@@ -57,7 +57,7 @@ export const site = {
         "Saturday",
         "Sunday",
       ],
-      opens: "08:00",
+      opens: "09:00",
       closes: "21:00",
     },
     { label: "Lunedì", days: ["Monday"] },
