@@ -12,7 +12,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
 <section id="orari" class="bg-cream text-navy">
   <div class="container-site pt-[26px] pb-[23px] lg:pt-[90px] lg:pb-[89px]">
     <!-- Intestazione: a sinistra su mobile, centrata su desktop -->
-    <div class="lg:text-center">
+    <div data-reveal class="lg:text-center">
       <p class="text-[18px] font-medium text-brown lg:text-[30px]">
         Orari e posizione
       </p>
@@ -26,7 +26,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
 
     <div class="mt-[26px] grid gap-y-[20px] lg:mt-[39px] lg:grid-cols-[604fr_585fr] lg:gap-x-[51px]">
       <!-- Quando passare -->
-      <div>
+      <div data-reveal>
         <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
           Quando passare
         </h3>
@@ -51,7 +51,11 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
           - mobile: alta 151.6% del riquadro e spostata in alto del 51.6%;
           - desktop: 105.67% × 111.6% del riquadro, spostata del 5.67% a sinistra e 5.8% in alto.
         -->
-        <div class="relative mt-[10px] h-[109px] overflow-hidden lg:hidden">
+        <div
+          data-reveal="image"
+          style="--reveal-delay: 200ms"
+          class="relative mt-[10px] h-[109px] overflow-hidden lg:hidden"
+        >
           <Image
             src={photoMobile}
             alt="Un caffè espresso sul bancone del Portofino"
@@ -60,7 +64,11 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
             class="absolute top-[-51.6%] left-0 h-[151.6%] w-full max-w-none"
           />
         </div>
-        <div class="relative mt-[8px] hidden aspect-[572/256] w-full max-w-[572px] overflow-hidden lg:block">
+        <div
+          data-reveal="image"
+          style="--reveal-delay: 200ms"
+          class="relative mt-[8px] hidden aspect-[572/256] w-full max-w-[572px] overflow-hidden lg:block"
+        >
           <Image
             src={photoDesktop}
             alt="Un caffè e uno spritz sul bancone del Portofino"
@@ -72,7 +80,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
       </div>
 
       <!-- Dove siamo -->
-      <div>
+      <div data-reveal style="--reveal-delay: 150ms">
         <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
           Dove siamo
         </h3>
@@ -84,21 +92,27 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
           href={directionsUrl}
           target="_blank"
           rel="noopener"
-          class="relative mt-[20px] block lg:mt-[8px]"
+          data-reveal="image"
+          style="--reveal-delay: 300ms"
+          class="group relative mt-[20px] block overflow-hidden lg:mt-[8px]"
         >
           <Image
             src={mapImage}
             alt={`Mappa: come raggiungere ${site.fullName}`}
             widths={[400, 800, 1200]}
             sizes="(min-width: 1024px) 585px, 100vw"
-            class="aspect-[350/144] w-full object-cover lg:aspect-[585/395]"
+            class="aspect-[350/144] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:aspect-[585/395]"
           />
           <!-- Attribuzione obbligatoria: la mappa è disegnata con i dati OpenStreetMap -->
           <span class="absolute bottom-1 left-2 text-[8px] text-navy/70 lg:bottom-2 lg:left-3 lg:text-[11px]">
             © OpenStreetMap
           </span>
         </a>
-        <div class="mt-[25px] flex justify-center lg:mt-[24px] lg:justify-start">
+        <div
+          data-reveal
+          style="--reveal-delay: 400ms"
+          class="mt-[25px] flex justify-center lg:mt-[24px] lg:justify-start"
+        >
           <Button
             href={directionsUrl}
             variant="navy"

@@ -28,7 +28,10 @@ const linkButtonClass =
   </a>
 
   <!-- Intestazione -->
-  <header class="border-b border-navy pb-[34px] lg:border-b-[3px] lg:pb-[55px]">
+  <header
+    data-reveal
+    class="border-b border-navy pb-[34px] lg:border-b-[3px] lg:pb-[55px]"
+  >
     <p class="mt-[33px] text-[16px] tracking-tightest lg:mt-[62px] lg:text-[37px] lg:tracking-normal lg:opacity-65">
       INFORMAZIONI
     </p>
@@ -43,6 +46,8 @@ const linkButtonClass =
   <div class="lg:mt-[255px] lg:grid lg:grid-cols-[498fr_755fr] lg:items-start">
     <!-- Indice "In questa pagina" -->
     <nav
+      data-reveal
+      style="--reveal-delay: 150ms"
       aria-labelledby="indice"
       class="border-b border-navy py-[38px] lg:border-b-0 lg:py-0"
     >
@@ -74,6 +79,8 @@ const linkButtonClass =
     <div class="lg:-mt-[27px] lg:ml-[67px] lg:space-y-[56px] lg:border-l-[3px] lg:border-navy lg:pl-[40px]">
       {page.sections.map((section, index) => (
         <section
+          data-reveal
+          style={`--reveal-delay: ${index * 80}ms`}
           id={section.id}
           class="scroll-mt-6 border-b border-navy py-[31px] lg:border-b-0 lg:py-0"
         >

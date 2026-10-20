@@ -20,6 +20,14 @@ Barra di navigazione in cima a ogni pagina. File: `Header.astro`.
 
 Si imposta dalla pagina tramite `BaseLayout` (`headerOverlay`).
 
+## Animazioni
+
+- All'apertura della pagina la barra scende leggermente dall'alto.
+- I link desktop hanno una sottolineatura che si allunga al passaggio del mouse (`link-underline`).
+- Il menu mobile si apre allungandosi e le voci compaiono una alla volta. Da chiuso è
+  `inert`, cioè non raggiungibile con il tasto Tab. Gli stili sono in `src/styles/animazioni.css`
+  (`.menu-mobile`).
+
 ## Come modificarlo
 
 - **Voci di menu**: in `src/data/navigation.ts` (`mainNav`). Ogni voce ha il testo per il

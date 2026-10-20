@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
       <ul class="hidden gap-16 lg:flex">
         {[...footerNav, ...legalNav].map((link) => (
           <li>
-            <a href={link.href} class="hover:underline">
+            <a href={link.href} class="link-underline">
               {link.label}
             </a>
           </li>
@@ -48,20 +48,30 @@ const year = new Date().getFullYear();
         <ul class="flex justify-between border-b border-current pb-[14px]">
           {footerNav.map((link) => (
             <li>
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href} class="link-underline">
+                {link.label}
+              </a>
             </li>
           ))}
         </ul>
         <ul class="flex gap-[30px] pt-[14px]">
           {legalNav.map((link) => (
             <li>
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href} class="link-underline">
+                {link.label}
+              </a>
             </li>
           ))}
           <li class="mr-[12px] ml-auto">
-            <a href="#" class="flex items-center gap-[2px]">
+            <a href="#" class="group flex items-center gap-[2px]">
               Torna su
-              <Arrow direction="up" length={9} head={3.2} strokeWidth={1} />
+              <Arrow
+                direction="up"
+                length={9}
+                head={3.2}
+                strokeWidth={1}
+                class="transition-transform duration-300 group-hover:-translate-y-0.5"
+              />
             </a>
           </li>
         </ul>

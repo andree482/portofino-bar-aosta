@@ -76,6 +76,10 @@ Esempio (pulsante "Prenota un tavolo" del menù):
 
 ## Note
 
+- `Button` e `ScrollCue` accettano anche altri attributi, per esempio `data-reveal` per farli
+  comparire allo scroll (vedi `src/styles/README.md`).
+- Al passaggio del mouse la freccia dei pulsanti si sposta un po' nella sua direzione; la
+  freccia di `ScrollCue` si disegna dall'alto quando compare.
 - **Dimensioni e font** dei pulsanti si passano con `class`, così ogni pulsante può
   avere le misure del design senza creare varianti nuove.
 - Il **logo** è un PNG esportato da Figma. Se il grafico fornisce una versione SVG, basta

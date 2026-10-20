@@ -1,5 +1,5 @@
 ---
-// Sezione "Il menù": menù del giorno con data, diviso in categorie.
+// Sezione "Il menù": il menù del locale, diviso in categorie.
 // I piatti si modificano in src/data/menu.ts.
 import Button from "../../components/ui/Button.astro";
 import ScrollCue from "../../components/ui/ScrollCue.astro";
@@ -15,10 +15,12 @@ import { bookingUrl } from "../../data/site";
       label="Scopri il menù"
       align="start"
       arrowLength={44}
+      data-reveal
       class="mb-[60px] text-cream lg:hidden"
     />
 
     <div
+      data-reveal
       id="menu-del-giorno"
       class="border-b-2 border-white pb-[9px] font-serif tracking-tightest lg:pb-[31px]"
     >
@@ -27,8 +29,8 @@ import { bookingUrl } from "../../data/site";
 
     <!-- Categorie: una colonna su mobile, due colonne su desktop -->
     <div class="mt-[25px] grid gap-y-[44px] lg:mt-[31px] lg:grid-flow-col lg:grid-cols-[minmax(0,498px)_minmax(0,498px)] lg:grid-rows-2 lg:justify-between lg:gap-y-[59px]">
-      {menu.map((category) => (
-        <div>
+      {menu.map((category, index) => (
+        <div data-reveal style={`--reveal-delay: ${index * 120}ms`}>
           <h3 class="font-serif text-[25px] text-gold uppercase lg:text-[56px] lg:leading-[1.375]">
             {category.name}
           </h3>
@@ -46,7 +48,7 @@ import { bookingUrl } from "../../data/site";
       ))}
     </div>
 
-    <div class="mt-[77px] flex justify-center lg:mt-[75px]">
+    <div data-reveal class="mt-[77px] flex justify-center lg:mt-[75px]">
       <Button
         href={bookingUrl}
         arrow="right"

@@ -34,7 +34,7 @@ const rowClass =
 
 <section id="contatti" class="bg-navy text-white">
   <div class="container-site grid pt-[22px] pb-[54px] lg:grid-cols-[629fr_498fr] lg:items-center lg:gap-x-[133px] lg:pt-[119px] lg:pb-[117px]">
-    <div class="lg:col-start-2 lg:row-start-1">
+    <div data-reveal class="lg:col-start-2 lg:row-start-1">
       <p class="text-[22px] font-medium tracking-label lg:text-[23px]">
         info e contatti
       </p>
@@ -46,12 +46,12 @@ const rowClass =
       </p>
 
       <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest lg:mt-[25px] lg:text-[min(30px,2.09vw)] lg:tracking-label">
-        {contacts.map((contact) => (
-          <li>
+        {contacts.map((contact, index) => (
+          <li data-reveal style={`--reveal-delay: ${150 + index * 100}ms`}>
             {contact.href ? (
               <a
                 href={contact.href}
-                class:list={[rowClass, "hover:opacity-80"]}
+                class:list={[rowClass, "group"]}
                 {...(contact.label === "Instagram" && {
                   target: "_blank",
                   rel: "noopener",
@@ -62,7 +62,7 @@ const rowClass =
                 <Arrow
                   direction="up-right"
                   length={25}
-                  class="mr-[10px] h-auto w-[18px] lg:mr-[29px]"
+                  class="mr-[10px] h-auto w-[18px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 lg:mr-[29px]"
                 />
               </a>
             ) : (
@@ -82,7 +82,11 @@ const rowClass =
     </div>
 
     <!-- Logo grande: sotto i contatti su mobile, a sinistra su desktop -->
-    <div class="mt-[25px] lg:col-start-1 lg:row-start-1 lg:mt-0">
+    <div
+      data-reveal="fade"
+      style="--reveal-delay: 200ms"
+      class="mt-[25px] lg:col-start-1 lg:row-start-1 lg:mt-0"
+    >
       <Logo
         class="w-full max-w-[355px] lg:max-w-[629px]"
         widths={[360, 720, 1260]}

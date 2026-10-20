@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Animazioni e transizioni: vedi animazioni.css */
+@import "./animazioni.css";
 
 /*
  * DESIGN TOKEN — valori presi dal design Figma "PORTOFINO BAR DESIGN SITO".

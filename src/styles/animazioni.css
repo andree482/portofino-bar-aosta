@@ -1,0 +1,174 @@
+/*
+ * ANIMAZIONI E TRANSIZIONI DEL SITO
+ *
+ * Stile: movimenti lenti e morbidi, niente rimbalzi, coerenti con il tono elegante del design.
+ * Tutte le animazioni si spengono se il visitatore ha chiesto "riduci movimento" nelle
+ * impostazioni del telefono o del computer (in fondo al file).
+ *
+ * COME SI USANO (vedi src/styles/README.md):
+ *   <p data-reveal>…</p>                         compare salendo dal basso
+ *   <p data-reveal style="--reveal-delay: 200ms">  compare con un ritardo
+ *   data-reveal="fade" | "down" | "image" | "zoom" | "line" | "draw"
+ */
+
+:root {
+  /* Curva di movimento: parte decisa e rallenta dolcemente alla fine */
+  --ease-portofino: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-duration: 900ms;
+}
+
+/* ------------------------------------------------------------------ */
+/* 1. COMPARSA ALLO SCROLL                                              */
+/*    Lo script src/scripts/animazioni.ts aggiunge "is-visible" quando  */
+/*    l'elemento entra nello schermo. Gli elementi partono nascosti     */
+/*    solo se JavaScript è attivo (classe "js" su <html>): senza JS il  */
+/*    sito si vede comunque tutto.                                      */
+/* ------------------------------------------------------------------ */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--reveal-duration) var(--ease-portofino),
+    transform var(--reveal-duration) var(--ease-portofino),
+    clip-path 1.2s var(--ease-portofino);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Solo dissolvenza */
+.js [data-reveal="fade"] {
+  transform: none;
+}
+
+/* Scende leggermente dall'alto (header) */
+.js [data-reveal="down"] {
+  transform: translateY(-16px);
+}
+
+/* Foto che si "scopre" dal basso verso l'alto, come una tenda */
+.js [data-reveal="image"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0);
+}
+
+/* Foto che parte leggermente ingrandita e si assesta (serve un contenitore overflow-hidden) */
+.js [data-reveal="zoom"] {
+  opacity: 1;
+  transform: scale(1.08);
+  transition-duration: 1.8s;
+}
+
+/* Linea che si disegna da sinistra a destra */
+.js [data-reveal="line"] {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Freccia verticale che si disegna dall'alto verso il basso */
+.js [data-reveal="draw"] {
+  opacity: 1;
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition-duration: 1.1s;
+}
+
+/* Stato finale, uguale per tutti */
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0);
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. LINK CON SOTTOLINEATURA CHE SI ALLUNGA                            */
+/*    Usato nel menu in alto e nel footer: class="link-underline"       */
+/* ------------------------------------------------------------------ */
+
+.link-underline {
+  background: linear-gradient(currentColor, currentColor) left 100% / 0 1px
+    no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 450ms var(--ease-portofino);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 3. MENU MOBILE                                                       */
+/*    Il pannello si apre allungandosi; le voci compaiono una alla volta */
+/* ------------------------------------------------------------------ */
+
+.menu-mobile {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 550ms var(--ease-portofino);
+}
+
+.menu-mobile[data-open] {
+  grid-template-rows: 1fr;
+}
+
+.menu-mobile > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.menu-mobile [data-menu-item] {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 400ms var(--ease-portofino),
+    transform 400ms var(--ease-portofino);
+}
+
+.menu-mobile[data-open] [data-menu-item] {
+  opacity: 1;
+  transform: none;
+  /* --i è il numero della voce: ognuna compare 60ms dopo la precedente */
+  transition-delay: calc(150ms + var(--i, 0) * 60ms);
+}
+
+/* ------------------------------------------------------------------ */
+/* 4. CAMBIO PAGINA (home ↔ privacy ↔ cookie)                           */
+/*    Dissolvenza tra una pagina e l'altra, senza JavaScript.            */
+/*    Funziona nei browser recenti; negli altri il cambio è normale.     */
+/* ------------------------------------------------------------------ */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: var(--ease-portofino);
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. MOVIMENTO RIDOTTO                                                  */
+/*    Se il visitatore lo chiede, tutto compare subito e senza movimento */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .menu-mobile,
+  .menu-mobile [data-menu-item],
+  .link-underline {
+    transition: none !important;
+  }
+
+  @view-transition {
+    navigation: none;
+  }
+}

@@ -58,6 +58,8 @@ src/
   pages/                    una pagina per file
   assets/images/            foto e logo (Astro le ottimizza in automatico)
   styles/global.css         design token: colori, font, margini
+  styles/animazioni.css     animazioni e transizioni (vedi src/styles/README.md)
+  scripts/animazioni.ts     fa partire le animazioni allo scroll
 ```
 
 ## Modifiche frequenti

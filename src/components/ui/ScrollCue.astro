@@ -6,7 +6,10 @@
 //   <ScrollCue href="#chi-siamo" label="scopri chi siamo" />
 //   <ScrollCue href="#chi-siamo" label="scopri chi siamo" arrowOffset={25} arrowLength={48} />
 
-interface Props {
+import type { HTMLAttributes } from "astro/types";
+
+// Accetta anche gli altri attributi di un link (es. data-reveal, style).
+interface Props extends Omit<HTMLAttributes<"a">, "href" | "class"> {
   href: string;
   label: string;
   /** Lato su cui scende la freccia: alla fine (destra) o all'inizio (sinistra) della linea. */
@@ -28,12 +31,15 @@ const {
   arrowOffset,
   arrowLength = 40,
   class: className,
+  style: extraStyle,
+  ...attrs
 } = Astro.props;
 
 // La freccia è larga 15px: per centrarla nel punto indicato si sposta di metà larghezza.
 const style = [
   `--arrow-length:${arrowLength}px`,
   arrowOffset !== undefined && `--arrow-offset:${arrowOffset - 7.5}px`,
+  typeof extraStyle === "string" && extraStyle,
 ]
   .filter(Boolean)
   .join(";");
@@ -56,12 +62,18 @@ const arrowPosition =
     align === "end" ? "items-end" : "items-start",
     className,
   ]}
+  {...attrs}
 >
   <span class="w-full border-b-2 border-current pb-px leading-none lg:pb-[6px] lg:leading-normal">
     {label}
   </span>
-  <!-- Freccia verticale: lunghezza da `arrowLength` su mobile, 147px su desktop -->
+  <!--
+    Freccia verticale: lunghezza da `arrowLength` su mobile, 147px su desktop.
+    Animazione: si "disegna" dall'alto 350ms dopo la comparsa del testo.
+  -->
   <span
+    data-reveal="draw"
+    style="transition-delay: calc(var(--reveal-delay, 0ms) + 350ms)"
     class:list={[
       "relative h-(--arrow-length) w-[15px] lg:h-[147px]",
       arrowPosition,

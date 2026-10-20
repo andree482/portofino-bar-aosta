@@ -22,8 +22,12 @@ const { overlay = false } = Astro.props;
     overlay ? "absolute inset-x-0 top-0" : "relative",
   ]}
 >
-  <!-- Il riquadro blu è "absolute": aprendo il menu mobile si allunga sopra la pagina -->
+  <!--
+    Il riquadro blu è "absolute": aprendo il menu mobile si allunga sopra la pagina.
+    All'apertura della pagina scende leggermente dall'alto (data-reveal="down").
+  -->
   <div
+    data-reveal="down"
     class:list={[
       "absolute inset-x-0 top-0 rounded-b-[20px] bg-navy text-cream lg:rounded-b-[42px]",
       overlay &&
@@ -43,7 +47,7 @@ const { overlay = false } = Astro.props;
         <ul class="flex gap-8 text-[20px] tracking-tightest xl:gap-[84px] xl:text-[24px]">
           {mainNav.map((link) => (
             <li>
-              <a href={link.href} class="underline-offset-4 hover:underline">
+              <a href={link.href} class="link-underline">
                 {link.label}
               </a>
             </li>
@@ -65,45 +69,55 @@ const { overlay = false } = Astro.props;
       </button>
     </div>
 
-    <!-- Menu mobile (nascosto finché non si preme il pulsante) -->
-    <nav
-      id="menu-mobile"
-      class="container-site pb-[20px] lg:hidden"
-      aria-label="Menu"
-      hidden
-    >
-      <ul class="divide-y divide-cream/60 border-t border-cream/60 pt-[36px]">
-        {mainNav.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="flex items-center justify-between py-[11px] font-serif text-[25px] tracking-tightest"
-            >
-              {link.mobileLabel}
-              <Arrow direction="up-right" length={22} class="mr-1" />
-            </a>
-          </li>
-        ))}
-      </ul>
+    <!--
+      Menu mobile: chiuso è alto 0 e non raggiungibile (inert); aperto si allunga e le voci
+      compaiono una alla volta. L'animazione è in src/styles/animazioni.css (.menu-mobile).
+    -->
+    <nav id="menu-mobile" class="menu-mobile lg:hidden" aria-label="Menu" inert>
+      <div>
+        <div class="container-site pb-[20px]">
+          <ul class="divide-y divide-cream/60 border-t border-cream/60 pt-[36px]">
+            {mainNav.map((link, index) => (
+              <li data-menu-item style={`--i: ${index}`}>
+                <a
+                  href={link.href}
+                  class="group flex items-center justify-between py-[11px] font-serif text-[25px] tracking-tightest"
+                >
+                  {link.mobileLabel}
+                  <Arrow
+                    direction="up-right"
+                    length={22}
+                    class="mr-1 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
 
-      <div class="mt-[22px] flex flex-col items-center gap-[10px] leading-[1.2]">
-        <Button
-          href="/#menu"
-          arrow="right"
-          arrowLength={29}
-          class="h-[31px] px-4 text-[21px]"
-        >
-          Scopri il menù di oggi
-        </Button>
-        <a
-          href={bookingUrl}
-          class="text-[21px] tracking-tightest underline underline-offset-4"
-        >
-          Prenota un tavolo
-        </a>
-        <p class="text-[12px] tracking-tightest">
-          Bar - Cucina - Abbigliamento
-        </p>
+          <div
+            data-menu-item
+            style={`--i: ${mainNav.length}`}
+            class="mt-[22px] flex flex-col items-center gap-[10px] leading-[1.2]"
+          >
+            <Button
+              href="/#menu"
+              arrow="right"
+              arrowLength={29}
+              class="h-[31px] px-4 text-[21px]"
+            >
+              Scopri il menù di oggi
+            </Button>
+            <a
+              href={bookingUrl}
+              class="text-[21px] tracking-tightest underline underline-offset-4"
+            >
+              Prenota un tavolo
+            </a>
+            <p class="text-[12px] tracking-tightest">
+              Bar - Cucina - Abbigliamento
+            </p>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
@@ -119,7 +133,10 @@ const { overlay = false } = Astro.props;
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "Chiudi il menu" : "Apri il menu");
-    menu.hidden = !open;
+    // data-open fa partire l'animazione; inert impedisce di raggiungere le voci col tasto Tab
+    // quando il menu è chiuso.
+    menu.toggleAttribute("data-open", open);
+    menu.inert = !open;
   }
 
   toggle?.addEventListener("click", () => {

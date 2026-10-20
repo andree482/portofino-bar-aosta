@@ -34,4 +34,5 @@ Sito vetrina del bar Portofino (Aosta). Obiettivo principale: visibilità e SEO 
 - Struttura: sezioni della home in `src/sections/<nome>/`, header/footer/banner in `src/components/layout/`, pezzi riutilizzabili in `src/components/ui/`.
 - Ogni cartella di sezione/componente ha un `README.md` in italiano: aggiornalo quando cambi il componente. Il proprietario deve poter capire il codice da solo: commenti brevi in italiano, dati separati dai componenti.
 - Banner cookie disattivato (nessun cookie facoltativo): se si aggiungono statistiche con cookie, mappe o video incorporati, va riattivato e va aggiornata l'informativa in `src/data/legal.ts`.
+- Animazioni: attributo `data-reveal` (varianti in `src/styles/animazioni.css`, script in `src/scripts/animazioni.ts`); movimenti lenti e morbidi, sempre disattivati con `prefers-reduced-motion`. Documentazione in `src/styles/README.md`.
 - Testi del sito in italiano.

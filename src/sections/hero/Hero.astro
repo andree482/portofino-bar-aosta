@@ -8,8 +8,13 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
 ---
 
 <section class="relative isolate flex min-h-svh overflow-hidden text-cream lg:min-h-[max(100svh,720px)]">
-  <!-- Foto di sfondo (il blu a sinistra è già nella foto) -->
+  <!--
+    Foto di sfondo (il blu a sinistra è già nella foto).
+    Animazioni all'apertura: la foto si assesta lentamente (zoom), poi titolo, testo,
+    pulsante e indicatore compaiono uno dopo l'altro (vedi src/styles/animazioni.css).
+  -->
   <Image
+    data-reveal="zoom"
     src={heroImage}
     alt="La sala del Portofino con le pareti blu e la parete dei vini"
     widths={[640, 960, 1280, 1487]}
@@ -27,16 +32,26 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
   />
 
   <div class="container-site flex flex-col pt-[153px] pb-12 lg:justify-center lg:py-[144px]">
-    <h1 class="max-w-[340px] font-serif text-[35px] leading-[1.1] tracking-tightest lg:max-w-[752px] lg:text-[65px]">
+    <h1
+      data-reveal
+      style="--reveal-delay: 150ms"
+      class="max-w-[340px] font-serif text-[35px] leading-[1.1] tracking-tightest lg:max-w-[752px] lg:text-[65px]"
+    >
       Tutto in un posto. <br />
       Tutto al momento giusto.
     </h1>
-    <p class="mt-[19px] max-w-[244px] text-[21px] tracking-tightest lg:mt-[15px] lg:max-w-[667px] lg:text-[40px] leading-[1.2]">
+    <p
+      data-reveal
+      style="--reveal-delay: 300ms"
+      class="mt-[19px] max-w-[244px] text-[21px] tracking-tightest lg:mt-[15px] lg:max-w-[667px] lg:text-[40px] leading-[1.2]"
+    >
       Colazione, pranzo, aperitivo, shopping. Benvenuto al Portofino Bar.
     </p>
     <Button
       href="#menu"
       arrow="right"
+      data-reveal
+      style="--reveal-delay: 450ms"
       class="mt-[22px] h-[31px] self-start px-4 text-[21px] lg:mt-[31px] lg:h-12 lg:px-[15px] lg:text-[24px] lg:font-medium"
     >
       Scopri il menù di oggi
@@ -47,6 +62,8 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
       label="scopri chi siamo"
       arrowOffset={25.5}
       arrowLength={51}
+      data-reveal
+      style="--reveal-delay: 650ms"
       class="mt-[69px] self-start text-white lg:absolute lg:bottom-[25px] lg:left-[159px] lg:mt-0"
     />
   </div>

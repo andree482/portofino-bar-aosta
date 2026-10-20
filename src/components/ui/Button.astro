@@ -6,9 +6,11 @@
 //   <Button href="#menu" variant="cream" arrow="right" class="h-12 px-4 text-[24px]">
 //     Scopri il menù di oggi
 //   </Button>
+import type { HTMLAttributes } from "astro/types";
 import Arrow from "./Arrow.astro";
 
-interface Props {
+// Accetta anche gli altri attributi di un link (es. data-reveal, style, aria-label).
+interface Props extends Omit<HTMLAttributes<"a">, "href" | "class"> {
   href: string;
   /** cream = sfondo crema e testo blu; navy = sfondo blu e testo crema. */
   variant?: "cream" | "navy";
@@ -57,15 +59,23 @@ const {
   layout = "justify-center gap-[0.4em]",
   external = false,
   class: className,
+  ...attrs
 } = Astro.props;
 
 const hasArrow = arrow || arrowAngle !== undefined;
+
+// Al passaggio del mouse la freccia si sposta un po' nella sua direzione.
+const nudge =
+  arrow === "right" && arrowAngle === undefined
+    ? "group-hover:translate-x-1"
+    : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5";
+const arrowMotion = ["transition-transform duration-300 ease-out", nudge];
 ---
 
 <a
   href={href}
   class:list={[
-    "inline-flex items-center rounded-full tracking-tightest whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4",
+    "group inline-flex items-center rounded-full tracking-tightest whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4",
     layout,
     variant === "cream"
       ? "bg-cream text-navy focus-visible:outline-cream"
@@ -73,6 +83,7 @@ const hasArrow = arrow || arrowAngle !== undefined;
     className,
   ]}
   {...(external && { target: "_blank", rel: "noopener" })}
+  {...attrs}
 >
   <slot />
   {hasArrow && (
@@ -82,7 +93,7 @@ const hasArrow = arrow || arrowAngle !== undefined;
       length={arrowLength}
       strokeWidth={arrowStroke}
       head={arrowHead}
-      class:list={[arrowClass, desktopArrow && "lg:hidden"]}
+      class:list={[arrowClass, desktopArrow && "lg:hidden", arrowMotion]}
     />
   )}
   {hasArrow && desktopArrow && (
@@ -92,7 +103,7 @@ const hasArrow = arrow || arrowAngle !== undefined;
       length={desktopArrow.length ?? arrowLength}
       strokeWidth={desktopArrow.stroke ?? arrowStroke}
       head={desktopArrow.head ?? arrowHead}
-      class="hidden lg:block"
+      class:list={["hidden lg:block", arrowMotion]}
     />
   )}
 </a>
