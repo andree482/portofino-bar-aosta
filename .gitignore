@@ -1,7 +1,10 @@
 # build output
 dist/
-# generated types
+# generated types (Astro)
 .astro/
+
+# impostazioni locali di Claude Code (non vanno su GitHub)
+.claude/
 
 # dependencies
 node_modules/
