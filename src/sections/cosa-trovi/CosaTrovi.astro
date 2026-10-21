@@ -38,7 +38,11 @@ import photo from "../../assets/images/pranzo-pasta.jpg";
   </div>
 
   <!-- La foto si scopre dal basso e si assesta (animazioni image + zoom) -->
-  <div data-reveal="image" class="overflow-hidden">
+  <div
+    data-reveal="image"
+    style="--reveal-cover: var(--color-navy)"
+    class="relative overflow-hidden"
+  >
     <Image
       data-reveal="zoom"
       src={photo}

@@ -30,8 +30,7 @@
   transform: translateY(24px);
   transition:
     opacity var(--reveal-duration) var(--ease-portofino),
-    transform var(--reveal-duration) var(--ease-portofino),
-    clip-path 1.2s var(--ease-portofino);
+    transform var(--reveal-duration) var(--ease-portofino);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -45,11 +44,32 @@
   transform: translateY(-16px);
 }
 
-/* Foto che si "scopre" dal basso verso l'alto, come una tenda */
+/*
+ * Foto che si "scopre" dal basso verso l'alto, come una tenda.
+ * La tenda è un velo del colore dello sfondo (::after) che si ritira verso l'alto.
+ * Non si usa clip-path sul riquadro: il browser lo considererebbe invisibile e non
+ * caricherebbe la foto. Il riquadro deve avere position: relative (classe "relative").
+ * Colore del velo: crema di base; su sfondo blu si passa style="--reveal-cover: var(--color-navy)".
+ */
 .js [data-reveal="image"] {
   opacity: 1;
   transform: none;
-  clip-path: inset(100% 0 0 0);
+}
+
+.js [data-reveal="image"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--reveal-cover, var(--color-cream));
+  transform-origin: center top;
+  transition: transform 1.2s var(--ease-portofino);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal="image"].is-visible::after {
+  transform: scaleY(0);
 }
 
 /* Foto che parte leggermente ingrandita e si assesta (serve un contenitore overflow-hidden) */
@@ -78,7 +98,6 @@
 .js [data-reveal].is-visible {
   opacity: 1;
   transform: none;
-  clip-path: inset(0);
 }
 
 /* ------------------------------------------------------------------ */
@@ -158,8 +177,12 @@
   .js [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
-    clip-path: none !important;
     transition: none !important;
+  }
+
+  /* niente velo sulle foto */
+  .js [data-reveal="image"]::after {
+    display: none;
   }
 
   .menu-mobile,

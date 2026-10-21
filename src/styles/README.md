@@ -29,7 +29,7 @@ Aggiungi l'attributo `data-reveal`:
 | `data-reveal`         | Dissolvenza + sale di 24px                                 | Testi, blocchi, pulsanti        |
 | `data-reveal="fade"`  | Solo dissolvenza                                           | Etichette, cornici, logo        |
 | `data-reveal="down"`  | Dissolvenza + scende dall'alto                             | Barra dell'header               |
-| `data-reveal="image"` | La foto si scopre dal basso verso l'alto, come una tenda   | Foto ad arco, foto orari, mappa |
+| `data-reveal="image"` | Un velo del colore dello sfondo si ritira e scopre la foto | Foto ad arco, foto orari, mappa |
 | `data-reveal="zoom"`  | La foto parte un po' ingrandita e si assesta (1,8 secondi) | Foto della hero e della pasta   |
 | `data-reveal="line"`  | Linea che si disegna da sinistra                           | Linea corta in "Chi siamo"      |
 | `data-reveal="draw"`  | Freccia verticale che si disegna dall'alto                 | Frecce "scorri giù" (ScrollCue) |
