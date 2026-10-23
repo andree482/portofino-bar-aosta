@@ -50,13 +50,14 @@ Funziona anche su `Button` e `ScrollCue`, che accettano attributi extra.
 
 ## Altri effetti
 
-| Effetto                                      | Dove                                        | Come                                  |
-| -------------------------------------------- | ------------------------------------------- | ------------------------------------- |
-| Sottolineatura che si allunga                | Menu in alto, link del footer               | classe `link-underline`               |
-| Freccia che si sposta al passaggio del mouse | Pulsanti, contatti, menu mobile, "Torna su" | classi `group-hover:translate-…`      |
-| Leggero zoom della mappa                     | Mappa in "Orari e posizione"                | `group-hover:scale-[1.03]`            |
-| Menu mobile che si apre e voci in sequenza   | Header su mobile                            | `.menu-mobile` in `animazioni.css`    |
-| Dissolvenza tra le pagine                    | Home ↔ Privacy ↔ Cookie                     | `@view-transition` (senza JavaScript) |
+| Effetto                                          | Dove                                        | Come                                  |
+| ------------------------------------------------ | ------------------------------------------- | ------------------------------------- |
+| Sottolineatura che si allunga                    | Menu in alto, link del footer               | classe `link-underline`               |
+| Freccia che si sposta al passaggio del mouse     | Pulsanti, contatti, menu mobile, "Torna su" | classi `group-hover:translate-…`      |
+| Leggero zoom della mappa                         | Mappa in "Orari e posizione"                | `group-hover:scale-[1.03]`            |
+| Menu mobile che si apre e voci in sequenza       | Header su mobile                            | `.menu-mobile` in `animazioni.css`    |
+| Dissolvenza tra le pagine                        | Home ↔ Privacy ↔ Cookie                     | `@view-transition` (senza JavaScript) |
+| Passaggio automatico prima schermata ↔ Chi siamo | Home                                        | `src/scripts/passaggio-hero.ts`       |
 
 ## Movimento ridotto
 

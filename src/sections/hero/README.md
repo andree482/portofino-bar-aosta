@@ -13,6 +13,18 @@ Prima schermata della home. File: `Hero.astro`.
 - Indicatore **scopri chi siamo ↓**, che porta alla sezione Chi siamo. Su mobile la freccia scende
   sotto "scopri" (25px dall'inizio della linea, lunga 51px); su desktop alla fine della linea.
 
+## Passaggio automatico a "Chi siamo"
+
+Se chi visita scorre anche solo un po' dalla prima schermata, quando si ferma il sito completa da
+solo il movimento fino all'inizio di "Chi siamo"; se invece risale da "Chi siamo", torna in cima.
+Vale solo tra queste due sezioni: il resto della pagina scorre normalmente. Su telefono parte
+solo dopo che il dito si è staccato dallo schermo; con "riduci movimento" attivo è disattivato.
+
+- Script: `src/scripts/passaggio-hero.ts` (collegato in fondo a `Hero.astro`).
+- La sezione è riconosciuta dall'attributo `data-hero`; la destinazione è `#chi-siamo`.
+- Per renderlo più o meno reattivo cambia `PAUSA` (attesa dopo l'ultimo movimento, in ms).
+- Per toglierlo basta cancellare il blocco `<script>` in fondo a `Hero.astro`.
+
 ## File usati
 
 | File                                          | A cosa serve                                               |

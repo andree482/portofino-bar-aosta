@@ -7,7 +7,10 @@ import heroImage from "../../assets/images/hero-sala.jpg";
 import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
 ---
 
-<section class="relative isolate flex min-h-svh overflow-hidden text-cream lg:min-h-[max(100svh,720px)]">
+<section
+  data-hero
+  class="relative isolate flex min-h-svh overflow-hidden text-cream lg:min-h-[max(100svh,720px)]"
+>
   <!--
     Foto di sfondo (il blu a sinistra è già nella foto).
     Animazioni all'apertura: la foto si assesta lentamente (zoom), poi titolo, testo,
@@ -68,3 +71,8 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
     />
   </div>
 </section>
+
+<script>
+  // Passaggio automatico fluido da questa schermata a "Chi siamo" (e ritorno).
+  import "../../scripts/passaggio-hero";
+</script>

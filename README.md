@@ -60,6 +60,7 @@ src/
   styles/global.css         design token: colori, font, margini
   styles/animazioni.css     animazioni e transizioni (vedi src/styles/README.md)
   scripts/animazioni.ts     fa partire le animazioni allo scroll
+  scripts/passaggio-hero.ts passaggio automatico dalla prima schermata a "Chi siamo"
 ```
 
 ## Modifiche frequenti
