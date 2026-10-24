@@ -15,8 +15,11 @@ export type OpeningHours = {
 export const site = {
   name: "Portofino",
   fullName: "Portofino Boutique Café",
-  legalName: "", // TODO: ragione sociale
-  vatNumber: "", // TODO: partita IVA (obbligatoria nel footer)
+  // Dati della società che gestisce il locale (sede legale = indirizzo del locale, sotto)
+  // Ragione sociale completa: CHANTILLY SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA
+  legalName: "Chantilly S.r.l.s.",
+  vatNumber: "01249930072", // partita IVA, uguale al codice fiscale (obbligatoria nel footer)
+  rea: "AO-79587", // numero di iscrizione al Registro delle imprese di Aosta
   tagline: "",
   description:
     "Portofino Boutique Café ad Aosta: colazione, pranzo, aperitivo e shopping in un unico spazio. Scopri il menù del giorno, gli orari e dove trovarci.",

@@ -13,6 +13,8 @@ const schema = {
   "@type": "BarOrPub",
   "@id": `${siteUrl}#bar`,
   name: site.fullName,
+  legalName: site.legalName || undefined,
+  vatID: site.vatNumber ? `IT${site.vatNumber}` : undefined,
   description: site.description,
   url: siteUrl,
   image: new URL(site.ogImage, siteUrl).toString(),

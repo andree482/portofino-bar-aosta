@@ -96,7 +96,7 @@ privacy (GDPR) e per la velocità.
 
 - [x] Impostare il dominio definitivo in `astro.config.mjs` (`site`) e in `public/robots.txt`
 - [ ] Collegare il dominio all'hosting e reindirizzare la versione senza www (vedi sotto)
-- [ ] Completare i campi `TODO` in `src/data/site.ts` (indirizzo, P.IVA, contatti, social, coordinate)
+- [ ] Completare i campi `TODO` in `src/data/site.ts` (contatti, social)
 - [ ] Verificare gli orari in `src/data/site.ts` (ora sono quelli del design)
 - [ ] Inserire il menù reale in `src/data/menu.ts`
 - [ ] Far rileggere a un consulente le informative in `src/data/legal.ts` (bozza già scritta)

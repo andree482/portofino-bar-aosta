@@ -11,6 +11,14 @@ interface Props {
 
 const { tone = "light" } = Astro.props;
 const year = new Date().getFullYear();
+
+// Dati societari obbligatori: P.IVA sempre (segnaposto se manca), REA solo se compilato
+const companyInfo = [
+  `P.IVA ${site.vatNumber || "[Partita IVA]"}`,
+  site.rea && `REA ${site.rea}`,
+]
+  .filter(Boolean)
+  .join(" · ");
 ---
 
 <footer
@@ -27,7 +35,7 @@ const year = new Date().getFullYear();
         © {year} {site.legalName || site.name}
       </p>
       <p class="text-[15px] lg:text-[20px]">
-        P.IVA {site.vatNumber || "[Partita IVA]"}
+        {companyInfo}
       </p>
     </div>
 
