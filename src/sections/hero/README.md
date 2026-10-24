@@ -7,7 +7,7 @@ Prima schermata della home. File: `Hero.astro`.
 ## Cosa mostra
 
 - Foto della sala a tutto schermo, con l'header sopra.
-- Titolo principale della pagina (`<h1>`): "Tutto in un posto. Tutto al momento giusto."
+- Titolo principale della pagina (`<h1>`): "Un'esperienza da vivere nel cuore di Aosta." (la parola "Aosta" nel titolo aiuta la SEO locale)
 - Sottotitolo: "Colazione, pranzo, aperitivo, shopping. Benvenuto al Portofino Bar."
 - Pulsante **Scopri il menù di oggi →**, che porta alla sezione Menù.
 - Indicatore **scopri chi siamo ↓**, che porta alla sezione Chi siamo. Su mobile la freccia scende
