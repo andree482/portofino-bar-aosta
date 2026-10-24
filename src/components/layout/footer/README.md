@@ -8,9 +8,8 @@ Piè di pagina di ogni pagina. File: `Footer.astro`.
 ## Cosa mostra
 
 - © anno e nome (o ragione sociale, se compilata).
-- Dati della società, obbligatori per legge sul sito (art. 2250 del Codice civile), su una riga:
-  "P.IVA … · REA …". Se manca la partita IVA compare il segnaposto `[Partita IVA]`; il REA
-  compare solo se compilato.
+- Partita IVA: obbligatoria per legge sul sito di un'attività. Finché non è compilata
+  compare il segnaposto `[Partita IVA]`.
 - Link: Il Portofino, Menù, Orari e posizione, Privacy, Cookie.
 - Su mobile anche "Torna su ↑", che riporta in cima alla pagina.
 
@@ -25,7 +24,7 @@ Si imposta dalla pagina tramite `BaseLayout` (`footerTone`).
 
 ## Come modificarlo
 
-- **Dati della società**: `src/data/site.ts` (`legalName`, `vatNumber`, `rea`).
+- **Ragione sociale e partita IVA**: `src/data/site.ts` (`legalName`, `vatNumber`).
 - **Link**: `src/data/navigation.ts` (`footerNav` e `legalNav`).
 
 ## Nota
