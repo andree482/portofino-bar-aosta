@@ -94,7 +94,8 @@ privacy (GDPR) e per la velocità.
 
 ## Prima della pubblicazione
 
-- [ ] Impostare il dominio definitivo in `astro.config.mjs` (`site`) e in `public/robots.txt`
+- [x] Impostare il dominio definitivo in `astro.config.mjs` (`site`) e in `public/robots.txt`
+- [ ] Collegare il dominio all'hosting e reindirizzare la versione senza www (vedi sotto)
 - [ ] Completare i campi `TODO` in `src/data/site.ts` (indirizzo, P.IVA, contatti, social, coordinate)
 - [ ] Verificare gli orari in `src/data/site.ts` (ora sono quelli del design)
 - [ ] Inserire il menù reale in `src/data/menu.ts`
@@ -105,3 +106,23 @@ privacy (GDPR) e per la velocità.
 
 Il sito è statico: si può pubblicare gratis su Cloudflare Pages, Netlify o Vercel collegando questo
 repository. Impostazioni di build: comando `npm run build`, cartella di output `dist`.
+
+### Dominio
+
+L'indirizzo ufficiale è **https://www.portofinoboutiquecafe.it** (con www). Se lo cambi, aggiornalo
+in `astro.config.mjs` (`site`) e in `public/robots.txt`.
+
+Anche `portofinoboutiquecafe.it` (senza www) deve funzionare, ma con un reindirizzamento permanente
+(301) verso la versione con www: così Google vede un solo sito. Il reindirizzamento si imposta
+sull'hosting, non nel codice. Con Cloudflare:
+
+1. In Cloudflare Pages, nel progetto, aggiungi come dominio personalizzato
+   `www.portofinoboutiquecafe.it`.
+2. Nelle impostazioni DNS del dominio crea un record per `portofinoboutiquecafe.it` (senza www) con
+   proxy attivo (nuvola arancione), così le richieste passano da Cloudflare.
+3. In **Rules → Redirect Rules** crea una regola dal modello "Redirect from root to WWW": tutte le
+   richieste a `portofinoboutiquecafe.it` vanno a `https://www.portofinoboutiquecafe.it`, con codice
+   301 e mantenendo percorso e parametri.
+
+Per controllare: aprendo `portofinoboutiquecafe.it/privacy` devi finire su
+`https://www.portofinoboutiquecafe.it/privacy`.
