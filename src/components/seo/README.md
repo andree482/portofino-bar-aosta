@@ -22,7 +22,8 @@ Si passano a `BaseLayout`:
 ```
 
 Il titolo diventa "Privacy | Portofino Boutique Café – Bar ad Aosta". Senza `title` resta solo
-il nome del locale (come in home).
+il nome del locale (come in home). Lo slogan (`tagline` in `src/data/site.ts`) è facoltativo: se è
+vuoto il titolo è solo "Privacy | Portofino Boutique Café", senza trattino finale.
 
 ## Anteprima social
 

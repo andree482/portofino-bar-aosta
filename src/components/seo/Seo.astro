@@ -15,9 +15,11 @@ const {
   noindex = false,
 } = Astro.props;
 
-const fullTitle = title
-  ? `${title} | ${site.fullName} – ${site.tagline}`
-  : `${site.fullName} – ${site.tagline}`;
+// Lo slogan si aggiunge solo se c'è, così senza slogan non resta un trattino finale
+const siteTitle = site.tagline
+  ? `${site.fullName} – ${site.tagline}`
+  : site.fullName;
+const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
 ---
