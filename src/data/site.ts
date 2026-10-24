@@ -17,7 +17,7 @@ export const site = {
   fullName: "Portofino Boutique Café",
   legalName: "", // TODO: ragione sociale
   vatNumber: "", // TODO: partita IVA (obbligatoria nel footer)
-  tagline: "Bar ad Aosta",
+  tagline: "",
   description:
     "Portofino Boutique Café ad Aosta: colazione, pranzo, aperitivo e shopping in un unico spazio. Scopri il menù del giorno, gli orari e dove trovarci.",
   locale: "it_IT",
