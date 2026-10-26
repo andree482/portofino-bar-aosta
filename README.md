@@ -113,6 +113,9 @@ privacy (GDPR) e per la velocità.
 Il sito è statico: si può pubblicare gratis su Cloudflare Pages, Netlify o Vercel collegando questo
 repository. Impostazioni di build: comando `npm run build`, cartella di output `dist`.
 
+**Guida passo passo** (dominio su IONOS, sito ed email su Cloudflare, Search Console e Bing):
+[PUBBLICAZIONE.md](PUBBLICAZIONE.md).
+
 ### Dominio
 
 L'indirizzo ufficiale è **https://www.portofinoboutiquecafe.it** (con www). Se lo cambi, aggiornalo

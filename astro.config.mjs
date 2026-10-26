@@ -10,6 +10,11 @@ export default defineConfig({
   // La versione senza www va reindirizzata qui dall'hosting: vedi README, "Pubblicazione".
   site: "https://www.portofinoboutiquecafe.it",
   trailingSlash: "never",
+  // Pagine come file (privacy.html, non privacy/index.html): così Cloudflare serve /privacy
+  // senza reindirizzare a /privacy/, e l'indirizzo coincide con quello indicato a Google.
+  build: {
+    format: "file",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
