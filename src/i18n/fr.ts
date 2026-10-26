@@ -76,7 +76,7 @@ export const fr: Testi = {
 
   orari: {
     sopratitolo: "Horaires et accès",
-    titolo: "Nous vous attendons au Portofino Boutique Café.",
+    titolo: "Nous vous attendons ici !",
     testo: "Pour un déjeuner, un café ou un apéritif : voici où nous trouver.",
     quando: "Quand passer",
     chiuso: "Fermé",

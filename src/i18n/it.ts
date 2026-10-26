@@ -79,7 +79,7 @@ export const it = {
 
   orari: {
     sopratitolo: "Orari e posizione",
-    titolo: "Ti aspettiamo da Portofino Boutique Café.",
+    titolo: "Ti aspettiamo qui!",
     testo: "Per un pranzo, un caffè o un aperitivo: ecco dove trovarci.",
     quando: "Quando passare",
     chiuso: "Chiuso",
