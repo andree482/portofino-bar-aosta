@@ -35,7 +35,7 @@ export const site = {
 
   contact: {
     phone: "+39 0165 040405",
-    email: "chantillycafesrls@pec.it", // PEC della società
+    email: "info@portofinoboutiquecafe.it",
   },
 
   address: {
