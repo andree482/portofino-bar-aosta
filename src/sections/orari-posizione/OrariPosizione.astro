@@ -1,12 +1,16 @@
 ---
 // Sezione "Orari e posizione": orari di apertura, indirizzo e mappa.
-// Orari e indirizzo si modificano in src/data/site.ts.
+// Orari e indirizzo si modificano in src/data/site.ts; gli altri testi in src/i18n/ (voce orari).
 import { Image } from "astro:assets";
 import Button from "../../components/ui/Button.astro";
 import { site, fullAddress, directionsUrl } from "../../data/site";
 import photoDesktop from "../../assets/images/orari-aperitivo.jpg";
 import photoMobile from "../../assets/images/orari-caffe.jpg";
 import mapImage from "../../assets/images/mappa-portofino.jpg";
+import { linguaDa, testi, traduci } from "../../i18n/lingue";
+
+const lingua = linguaDa(Astro.url);
+const t = testi[lingua].orari;
 ---
 
 <section id="orari" class="bg-cream text-navy">
@@ -14,13 +18,13 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
     <!-- Intestazione: a sinistra su mobile, centrata su desktop -->
     <div data-reveal class="lg:text-center">
       <p class="text-[18px] font-medium text-brown lg:text-[30px]">
-        Orari e posizione
+        {t.sopratitolo}
       </p>
       <h2 class="max-w-[259px] font-serif text-[50px] leading-[0.95] tracking-tightest lg:-mt-[16px] lg:max-w-none lg:text-[80px] lg:leading-[1.375]">
-        Ti aspettiamo da Portofino Boutique Café.
+        {t.titolo}
       </h2>
       <p class="mt-[8px] max-w-[295px] text-[18px] leading-[1.2] lg:leading-normal tracking-tightest lg:mt-0 lg:max-w-none lg:text-[24px]">
-        Per un pranzo, un caffè o un aperitivo: ecco dove trovarci.
+        {t.testo}
       </p>
     </div>
 
@@ -28,22 +32,22 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
       <!-- Quando passare -->
       <div data-reveal>
         <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
-          Quando passare
+          {t.quando}
         </h3>
         <dl class="mt-[18px] divide-y divide-navy border-y border-navy text-[18px] tracking-tightest lg:mt-[16px] lg:text-[40px]">
           {site.openingHours.map((row) => (
             <div class="flex justify-between gap-4 py-[18px] lg:py-[19px]">
-              <dt>{row.label}</dt>
+              <dt>{traduci(row.label, lingua)}</dt>
               <dd class="text-right">
                 {row.opens && row.closes
                   ? `${row.opens} - ${row.closes}`
-                  : "Chiuso"}
+                  : t.chiuso}
               </dd>
             </div>
           ))}
         </dl>
         <p class="mt-[19px] text-[18px] leading-[1.2] lg:leading-normal tracking-tightest lg:mt-[26px] lg:text-[24px]">
-          Gli orari potranno variare
+          {t.variazioni}
         </p>
         <!--
           Foto diversa su mobile (solo caffè) e su desktop (caffè e aperitivo), come nel design.
@@ -58,7 +62,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
         >
           <Image
             src={photoMobile}
-            alt="Un caffè espresso sul bancone del Portofino"
+            alt={t.altCaffe}
             widths={[400, 800]}
             sizes="100vw"
             class="absolute top-[-51.6%] left-0 h-[151.6%] w-full max-w-none"
@@ -71,7 +75,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
         >
           <Image
             src={photoDesktop}
-            alt="Un caffè e uno spritz sul bancone del Portofino"
+            alt={t.altAperitivo}
             widths={[650, 1300]}
             sizes="605px"
             class="absolute top-[-5.8%] left-[-5.67%] h-[111.6%] w-[105.67%] max-w-none"
@@ -82,7 +86,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
       <!-- Dove siamo -->
       <div data-reveal style="--reveal-delay: 150ms">
         <h3 class="font-serif text-[30px] leading-[0.98] tracking-tightest lg:text-[65px] lg:leading-[1.375]">
-          Dove siamo
+          {t.dove}
         </h3>
         <!-- Indirizzo completo: solo su desktop, come nel Figma -->
         <address class="hidden text-[40px] tracking-tightest not-italic lg:block">
@@ -98,7 +102,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
         >
           <Image
             src={mapImage}
-            alt={`Mappa: come raggiungere ${site.fullName}`}
+            alt={t.altMappa}
             widths={[400, 800, 1200]}
             sizes="(min-width: 1024px) 585px, 100vw"
             class="aspect-[350/144] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:aspect-[585/395]"
@@ -125,7 +129,7 @@ import mapImage from "../../assets/images/mappa-portofino.jpg";
             external
             class="h-[26px] w-[199px] text-[18px] lg:h-[53px] lg:w-[283px] lg:text-[24px]"
           >
-            Ottieni indicazioni
+            {t.indicazioni}
           </Button>
         </div>
       </div>

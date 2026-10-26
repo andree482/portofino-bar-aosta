@@ -13,7 +13,7 @@ Introduzione alla cucina. File: `CosaTrovi.astro`. Ancora: `#cosa-trovi`.
 
 ## Come modificarla
 
-- **Testi**: direttamente in `CosaTrovi.astro`.
+- **Testi**: in `src/i18n/` (voce `cosaTrovi`), in italiano, francese e inglese.
 - **Foto**: sostituisci `pranzo-pasta.jpg`. Viene ritagliata a una striscia orizzontale; su desktop
   si vede la fascia al 56% dell'altezza (`lg:object-[center_56%]`), da regolare se il soggetto
   è più in alto o più in basso.

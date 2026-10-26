@@ -1,10 +1,14 @@
 ---
 // Prima schermata della home: foto della sala, titolo e invito a scoprire il menù.
+// I testi sono in src/i18n/ (voce hero), nelle tre lingue.
 import { Image } from "astro:assets";
 import Button from "../../components/ui/Button.astro";
 import ScrollCue from "../../components/ui/ScrollCue.astro";
 import heroImage from "../../assets/images/hero-sala.jpg";
 import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
+import { linguaDa, testi } from "../../i18n/lingue";
+
+const t = testi[linguaDa(Astro.url)].hero;
 ---
 
 <section
@@ -19,7 +23,7 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
   <Image
     data-reveal="zoom"
     src={heroImage}
-    alt="La sala del Portofino con le pareti blu e la parete dei vini"
+    alt={t.altFoto}
     widths={[640, 960, 1280, 1487]}
     sizes="100vw"
     loading="eager"
@@ -40,15 +44,15 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
       style="--reveal-delay: 150ms"
       class="max-w-[340px] font-serif text-[35px] leading-[1.1] tracking-tightest lg:max-w-[752px] lg:text-[65px]"
     >
-      Un'esperienza da vivere <br />
-      nel cuore di Aosta.
+      <!-- Ogni riga del titolo va a capo -->
+      {t.titolo.map((riga, i) => <>{i > 0 && <br />}{riga}</>)}
     </h1>
     <p
       data-reveal
       style="--reveal-delay: 300ms"
       class="mt-[19px] max-w-[244px] text-[21px] tracking-tightest lg:mt-[15px] lg:max-w-[667px] lg:text-[40px] leading-[1.2]"
     >
-      Colazione, pranzo, aperitivo, shopping. Benvenuto da Portofino Boutique Café.
+      {t.sottotitolo}
     </p>
     <Button
       href="#menu"
@@ -57,12 +61,12 @@ import mobileShade from "../../assets/images/hero-sfumatura-mobile.svg";
       style="--reveal-delay: 450ms"
       class="mt-[22px] h-[31px] self-start px-4 text-[21px] lg:mt-[31px] lg:h-12 lg:px-[15px] lg:text-[24px] lg:font-medium"
     >
-      Scopri il menù di oggi
+      {t.pulsante}
     </Button>
 
     <ScrollCue
       href="#chi-siamo"
-      label="scopri chi siamo"
+      label={t.scorri}
       arrowOffset={25.5}
       arrowLength={51}
       data-reveal

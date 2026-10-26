@@ -3,12 +3,17 @@
 // e sezioni numerate. I testi arrivano da src/data/legal.ts.
 import Arrow from "../ui/Arrow.astro";
 import type { LegalPage } from "../../data/legal";
+import { linguaDa, percorso, testi } from "../../i18n/lingue";
 
 interface Props {
   page: LegalPage;
 }
 
 const { page } = Astro.props;
+const lingua = linguaDa(Astro.url);
+const t = testi[lingua].legale;
+// Link all'altra informativa nella stessa lingua (es. /cookie → /fr/cookie)
+const altraPagina = percorso(page.link.href, lingua);
 
 // Numerazione come nel design: 0.1, 0.2, ...
 const number = (index: number) => `0.${index + 1}`;
@@ -20,11 +25,11 @@ const linkButtonClass =
 
 <article class="container-site pt-[32px] pb-[56px] text-navy lg:pt-[70px] lg:pb-[225px]">
   <a
-    href="/"
+    href={percorso("/", lingua)}
     class="inline-flex items-center gap-[9px] text-[20px] tracking-tightest underline underline-offset-4 lg:gap-3 lg:text-[30px]"
   >
     <Arrow direction="left" length={21} class="lg:h-auto lg:w-[34px]" />
-    Torna al sito
+    {t.tornaAlSito}
   </a>
 
   <!-- Intestazione -->
@@ -33,13 +38,13 @@ const linkButtonClass =
     class="border-b border-navy pb-[34px] lg:border-b-[3px] lg:pb-[55px]"
   >
     <p class="mt-[33px] text-[16px] tracking-tightest lg:mt-[62px] lg:text-[37px] lg:tracking-normal lg:opacity-65">
-      INFORMAZIONI
+      {t.informazioni}
     </p>
     <h1 class="font-serif text-[70px] leading-[1] tracking-tightest lg:text-[200px]">
       {page.title}
     </h1>
     <p class="mt-[6px] text-[16px] tracking-tightest lg:mt-[26px] lg:text-[37px]">
-      Aggiornata il {page.updatedAt}
+      {t.aggiornata} {page.updatedAt}
     </p>
   </header>
 
@@ -55,7 +60,7 @@ const linkButtonClass =
         id="indice"
         class="text-[27px] font-bold tracking-tightest lg:text-[min(60px,4.2vw)]"
       >
-        In questa pagina
+        {t.indice}
       </h2>
       <ol class="mt-[20px] text-[16px] leading-[1.683] tracking-tightest lg:mt-[54px] lg:text-[min(37px,2.57vw)] lg:leading-[1.4]">
         {page.sections.map((section) => (
@@ -68,7 +73,7 @@ const linkButtonClass =
       </ol>
       <!-- Desktop: pulsante sotto l'indice -->
       <a
-        href={page.link.href}
+        href={altraPagina}
         class:list={[linkButtonClass, "mt-[82px] hidden lg:flex"]}
       >
         {page.link.label}
@@ -99,10 +104,7 @@ const linkButtonClass =
   </div>
 
   <!-- Mobile: pulsante in fondo alla pagina -->
-  <a
-    href={page.link.href}
-    class:list={[linkButtonClass, "mt-[34px] lg:hidden"]}
-  >
+  <a href={altraPagina} class:list={[linkButtonClass, "mt-[34px] lg:hidden"]}>
     {page.link.label}
   </a>
 </article>

@@ -22,12 +22,17 @@ Genera pagine statiche, veloci e leggibili dai motori di ricerca.
 
 ## Pagine
 
-| Indirizzo  | File                      | Contenuto                                   |
-| ---------- | ------------------------- | ------------------------------------------- |
-| `/`        | `src/pages/index.astro`   | Home con tutte le sezioni                   |
-| `/privacy` | `src/pages/privacy.astro` | Informativa privacy                         |
-| `/cookie`  | `src/pages/cookie.astro`  | Informativa cookie                          |
-| 404        | `src/pages/404.astro`     | Pagina mostrata per gli indirizzi sbagliati |
+Il sito è in tre lingue: italiano (senza prefisso), francese (`/fr`) e inglese (`/en`). Ogni file in
+`src/pages/[...lingua]/` crea da solo le tre versioni. Alla prima visita il sito si apre nella lingua
+del dispositivo; il selettore IT / FR / EN nell'header permette di cambiarla. Dettagli in
+`src/i18n/README.md`.
+
+| Indirizzo                         | File                                  | Contenuto                                   |
+| --------------------------------- | ------------------------------------- | ------------------------------------------- |
+| `/`, `/fr`, `/en`                 | `src/pages/[...lingua]/index.astro`   | Home con tutte le sezioni                   |
+| `/privacy`, `/fr/privacy`, `/en/…` | `src/pages/[...lingua]/privacy.astro` | Informativa privacy                         |
+| `/cookie`, `/fr/cookie`, `/en/…`   | `src/pages/[...lingua]/cookie.astro`  | Informativa cookie                          |
+| 404                               | `src/pages/[...lingua]/404.astro`     | Pagina mostrata per gli indirizzi sbagliati |
 
 ## Struttura
 
@@ -37,11 +42,12 @@ Ogni cartella con un `README.md` spiega cosa contiene e come modificarla.
 public/                     file serviti così come sono (icone, robots.txt, immagine per i social)
 scripts/genera-mappa.mjs    disegna la mappa del locale (npm run mappa)
 src/
-  data/                     ★ TESTI E DATI: quasi tutte le modifiche si fanno qui
+  data/                     ★ DATI: quasi tutte le modifiche si fanno qui o in i18n/
     site.ts                   nome, indirizzo, orari, contatti, social, P.IVA
-    menu.ts                   menù del giorno
-    navigation.ts             voci di menu di header e footer
-    legal.ts                  testi di Privacy e Cookie
+    menu.ts                   menù del giorno (in tre lingue)
+    navigation.ts             link di header e footer
+    legal.ts                  testi di Privacy e Cookie (in tre lingue)
+  i18n/                     ★ TESTI DEL SITO: it.ts, fr.ts, en.ts + lingua automatica (vedi README)
   sections/                 sezioni della home, una cartella ciascuna (componente + README)
     hero/                     foto iniziale e titolo
     chi-siamo/                presentazione con foto ad arco
@@ -55,7 +61,7 @@ src/
     seo/                      meta tag e dati strutturati per Google
     ui/                       pezzi riutilizzabili: freccia, pulsante, logo…
   layouts/BaseLayout.astro  struttura comune a tutte le pagine
-  pages/                    una pagina per file
+  pages/[...lingua]/        una pagina per file, ognuna in tre lingue
   assets/images/            foto e logo (Astro le ottimizza in automatico)
   styles/global.css         design token: colori, font, margini
   styles/animazioni.css     animazioni e transizioni (vedi src/styles/README.md)
@@ -69,7 +75,7 @@ src/
 | --------------------------------- | --------------------------------------------------------- |
 | Il menù del giorno                | `src/data/menu.ts`                                        |
 | Orari, indirizzo, telefono, email | `src/data/site.ts`                                        |
-| Un testo della home               | il file della sezione in `src/sections/…`                 |
+| Un testo del sito                 | `src/i18n/it.ts`, e la stessa voce in `fr.ts` ed `en.ts`  |
 | Una foto                          | sostituisci il file in `src/assets/images/` (stesso nome) |
 | Un colore in tutto il sito        | `src/styles/global.css` (`@theme`)                        |
 

@@ -16,20 +16,31 @@ link "Menù" del footer).
 
 ## Aggiornare il menù
 
-Apri `src/data/menu.ts`:
+Apri `src/data/menu.ts`. Ogni nome si scrive in italiano, francese e inglese:
 
 ```ts
 export const menu = [
   {
-    name: "Primi",
+    name: { it: "Primi", fr: "Premiers plats", en: "First courses" },
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure", price: "€ 9,00" }, // il prezzo è facoltativo
+      {
+        name: {
+          it: "Risotto alle verdure",
+          fr: "Risotto aux légumes",
+          en: "Vegetable risotto",
+        },
+        price: "€ 9,00", // il prezzo è facoltativo
+      },
     ],
   },
   // ...
 ];
 ```
+
+- Se manca la traduzione (`fr` o `en`), in quella lingua si vede il nome italiano.
+- I nomi delle categorie su desktop sono molto grandi (56px, maiuscolo) in una colonna di 498px:
+  meglio parole brevi, al massimo 12-13 lettere (per questo "Contorni" in francese è "Garnitures").
+- Gli altri testi della sezione ("Il menù", "Prenota un tavolo") sono in `src/i18n/` (voce `menu`).
 
 - Puoi aggiungere o togliere piatti e categorie liberamente.
 - Su desktop le categorie si dispongono in **due colonne**: la prima metà a sinistra, la seconda a

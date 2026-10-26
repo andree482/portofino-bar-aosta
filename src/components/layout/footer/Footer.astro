@@ -2,7 +2,11 @@
 // Piè di pagina: nome, partita IVA e link alle sezioni e alle pagine legali.
 import Arrow from "../../ui/Arrow.astro";
 import { site } from "../../../data/site";
-import { footerNav, legalNav } from "../../../data/navigation";
+import {
+  footerNav as sezioni,
+  legalNav as legali,
+} from "../../../data/navigation";
+import { linguaDa, testi } from "../../../i18n/lingue";
 
 interface Props {
   /** light = sfondo crema e testo blu (home); dark = sfondo blu e testo crema (pagine legali). */
@@ -11,6 +15,10 @@ interface Props {
 
 const { tone = "light" } = Astro.props;
 const year = new Date().getFullYear();
+const lingua = linguaDa(Astro.url);
+const t = testi[lingua].layout;
+const footerNav = sezioni(lingua);
+const legalNav = legali(lingua);
 ---
 
 <footer
@@ -27,11 +35,11 @@ const year = new Date().getFullYear();
         © {year} {site.legalName || site.name}
       </p>
       <p class="text-[15px] lg:text-[20px]">
-        P.IVA {site.vatNumber || "[Partita IVA]"}
+        {t.partitaIva} {site.vatNumber || "[Partita IVA]"}
       </p>
     </div>
 
-    <nav aria-label="Link del piè di pagina">
+    <nav aria-label={t.footerNav}>
       <!-- Desktop: tutti i link su una riga -->
       <ul class="hidden gap-16 lg:flex">
         {[...footerNav, ...legalNav].map((link) => (
@@ -64,7 +72,7 @@ const year = new Date().getFullYear();
           ))}
           <li class="mr-[12px] ml-auto">
             <a href="#" class="group flex items-center gap-[2px]">
-              Torna su
+              {t.tornaSu}
               <Arrow
                 direction="up"
                 length={9}

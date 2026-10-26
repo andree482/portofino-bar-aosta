@@ -1,5 +1,13 @@
 ---
 import { site } from "../../data/site";
+import {
+  infoLingue,
+  lingue,
+  linguaDa,
+  linguaInternazionale,
+  testi,
+  versioni,
+} from "../../i18n/lingue";
 
 interface Props {
   title?: string;
@@ -8,9 +16,11 @@ interface Props {
   noindex?: boolean;
 }
 
+const lingua = linguaDa(Astro.url);
+
 const {
   title,
-  description = site.description,
+  description = testi[lingua].seo.descrizione,
   image = site.ogImage,
   noindex = false,
 } = Astro.props;
@@ -22,16 +32,38 @@ const siteTitle = site.tagline
 const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
+
+// Versioni della pagina nelle altre lingue: Google mostra a ciascuno quella giusta.
+// x-default = versione per chi parla una lingua che il sito non ha (l'inglese, come fa
+// anche la scelta automatica della lingua in BaseLayout.astro).
+const pagine = versioni(Astro.url);
+const alternate = (path: string) => new URL(path, Astro.site).toString();
 ---
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex, nofollow" />}
+{!noindex &&
+  lingue.map((l) => (
+    <link rel="alternate" hreflang={l} href={alternate(pagine[l])} />
+  ))}
+{!noindex && (
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href={alternate(pagine[linguaInternazionale])}
+  />
+)}
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={site.fullName} />
-<meta property="og:locale" content={site.locale} />
+<meta property="og:locale" content={infoLingue[lingua].locale} />
+{lingue
+  .filter((l) => l !== lingua)
+  .map((l) => (
+    <meta property="og:locale:alternate" content={infoLingue[l].locale} />
+  ))}
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

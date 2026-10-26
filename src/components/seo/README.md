@@ -13,6 +13,20 @@ Sono inclusi automaticamente in ogni pagina da `src/layouts/BaseLayout.astro`.
 Tutto arriva da `src/data/site.ts`. Compilando lì indirizzo, telefono, orari e social,
 Google li riceve automaticamente: **non serve toccare questi file**.
 
+La descrizione del sito per Google, nelle tre lingue, è in `src/i18n/` (voce `seo.descrizione`).
+
+## Tre lingue
+
+Ogni pagina esiste in italiano, francese e inglese (vedi `src/i18n/README.md`). `Seo.astro`
+aggiunge per ogni pagina:
+
+- `<link rel="alternate" hreflang="…">` verso le versioni nelle altre lingue (`it`, `fr`, `en`),
+  più `x-default` verso l'inglese per chi parla altre lingue;
+- `og:locale` della lingua della pagina e `og:locale:alternate` per le altre.
+
+La sitemap (`astro.config.mjs`) collega allo stesso modo le tre versioni di ogni pagina; le pagine
+"non trovata" sono escluse.
+
 ## Titolo e descrizione di una pagina
 
 Si passano a `BaseLayout`:

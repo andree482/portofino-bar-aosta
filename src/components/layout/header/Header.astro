@@ -1,12 +1,15 @@
 ---
 // Barra di navigazione in cima a ogni pagina.
-// - Desktop: logo e voci di menu in linea.
-// - Mobile: logo e pulsante "hamburger" che apre il menu a tendina.
+// - Desktop: logo, voci di menu in linea e selettore della lingua a destra.
+// - Mobile: logo e pulsante "hamburger" che apre il menu a tendina (con il selettore in fondo).
+// I testi arrivano da src/i18n/ nella lingua della pagina.
 import Logo from "../../ui/Logo.astro";
 import Arrow from "../../ui/Arrow.astro";
 import Button from "../../ui/Button.astro";
+import SelettoreLingua from "./SelettoreLingua.astro";
 import { mainNav } from "../../../data/navigation";
 import { bookingUrl } from "../../../data/site";
+import { linguaDa, percorso, testi } from "../../../i18n/lingue";
 
 interface Props {
   /** true = la barra sta sopra la foto della home, con sfondo sfumato su desktop. */
@@ -14,6 +17,13 @@ interface Props {
 }
 
 const { overlay = false } = Astro.props;
+const lingua = linguaDa(Astro.url);
+const t = testi[lingua].layout;
+const nav = mainNav(lingua);
+// Il link "Prenota" porta ai contatti della pagina nella stessa lingua se manca il telefono
+const prenota = bookingUrl.startsWith("/")
+  ? percorso(bookingUrl, lingua)
+  : bookingUrl;
 ---
 
 <header
@@ -35,19 +45,23 @@ const { overlay = false } = Astro.props;
     ]}
   >
     <div class="container-site flex h-[84px] items-center lg:h-[144px]">
-      <a href="/" class="shrink-0" aria-label="Portofino, torna alla home">
-        <Logo class="w-[124px] lg:w-[200px] xl:w-[247px]" />
+      <a href={percorso("/", lingua)} class="shrink-0" aria-label={t.tornaHome}>
+        <Logo class="w-[124px] lg:w-[180px] xl:w-[min(247px,16.5vw)]" />
       </a>
 
-      <!-- Menu desktop -->
+      <!--
+        Menu desktop. Con il selettore della lingua a destra lo spazio è meno che nel Figma:
+        da 1280px testo, spazi e logo si riducono un po' con la larghezza della finestra
+        (a 1440px: testo 24px, spazi 60px al posto di 84px).
+      -->
       <nav
-        class="ml-12 hidden lg:block xl:ml-[83px]"
-        aria-label="Menu principale"
+        class="mr-8 ml-8 hidden lg:block xl:ml-[min(83px,5.8vw)]"
+        aria-label={t.menuPrincipale}
       >
-        <ul class="flex gap-8 text-[20px] tracking-tightest xl:gap-[84px] xl:text-[24px]">
-          {mainNav.map((link) => (
+        <ul class="flex gap-6 text-[17px] tracking-tightest xl:gap-[min(84px,4.2vw)] xl:text-[min(24px,1.6vw)]">
+          {nav.map((link) => (
             <li>
-              <a href={link.href} class="link-underline">
+              <a href={link.href} class="link-underline whitespace-nowrap">
                 {link.label}
               </a>
             </li>
@@ -55,14 +69,19 @@ const { overlay = false } = Astro.props;
         </ul>
       </nav>
 
+      <!-- Lingua (desktop) -->
+      <SelettoreLingua class="ml-auto hidden h-[32px] text-[13px] lg:flex xl:h-[34px] xl:text-[14px]" />
+
       <!-- Pulsante menu mobile: due linee che diventano una X quando il menu è aperto -->
       <button
         type="button"
         class="group relative ml-auto size-10 -mr-2 lg:hidden"
         aria-controls="menu-mobile"
         aria-expanded="false"
-        aria-label="Apri il menu"
+        aria-label={t.apriMenu}
         data-menu-toggle
+        data-label-open={t.apriMenu}
+        data-label-close={t.chiudiMenu}
       >
         <span class="absolute top-1/2 left-1/2 h-[2px] w-[25px] -translate-x-1/2 -translate-y-[3px] rounded-full bg-cream transition-transform group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[130deg]"></span>
         <span class="absolute top-1/2 left-1/2 h-[2px] w-[25px] -translate-x-1/2 translate-y-[1px] rounded-full bg-cream transition-transform group-aria-expanded:translate-y-0 group-aria-expanded:-rotate-[130deg]"></span>
@@ -73,11 +92,16 @@ const { overlay = false } = Astro.props;
       Menu mobile: chiuso è alto 0 e non raggiungibile (inert); aperto si allunga e le voci
       compaiono una alla volta. L'animazione è in src/styles/animazioni.css (.menu-mobile).
     -->
-    <nav id="menu-mobile" class="menu-mobile lg:hidden" aria-label="Menu" inert>
+    <nav
+      id="menu-mobile"
+      class="menu-mobile lg:hidden"
+      aria-label={t.menuMobile}
+      inert
+    >
       <div>
         <div class="container-site pb-[20px]">
           <ul class="divide-y divide-cream/60 border-t border-cream/60 pt-[36px]">
-            {mainNav.map((link, index) => (
+            {nav.map((link, index) => (
               <li data-menu-item style={`--i: ${index}`}>
                 <a
                   href={link.href}
@@ -96,26 +120,33 @@ const { overlay = false } = Astro.props;
 
           <div
             data-menu-item
-            style={`--i: ${mainNav.length}`}
+            style={`--i: ${nav.length}`}
             class="mt-[22px] flex flex-col items-center gap-[10px] leading-[1.2]"
           >
             <Button
-              href="/#menu"
+              href={percorso("/#menu", lingua)}
               arrow="right"
               arrowLength={29}
               class="h-[31px] px-4 text-[21px]"
             >
-              Scopri il menù di oggi
+              {t.scopriMenu}
             </Button>
             <a
-              href={bookingUrl}
+              href={prenota}
               class="text-[21px] tracking-tightest underline underline-offset-4"
             >
-              Prenota un tavolo
+              {t.prenota}
             </a>
-            <p class="text-[12px] tracking-tightest">
-              Bar - Cucina - Abbigliamento
-            </p>
+            <p class="text-[12px] tracking-tightest">{t.attivita}</p>
+          </div>
+
+          <!-- Lingua (mobile): in fondo al menu, centrata -->
+          <div
+            data-menu-item
+            style={`--i: ${nav.length + 1}`}
+            class="mt-[18px] flex justify-center"
+          >
+            <SelettoreLingua class="h-[32px] text-[13px]" />
           </div>
         </div>
       </div>
@@ -132,7 +163,11 @@ const { overlay = false } = Astro.props;
   function setOpen(open: boolean) {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Chiudi il menu" : "Apri il menu");
+    // Testi "Apri/Chiudi il menu" nella lingua della pagina (attributi data-label-*)
+    toggle.setAttribute(
+      "aria-label",
+      (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? "",
+    );
     // data-open fa partire l'animazione; inert impedisce di raggiungere le voci col tasto Tab
     // quando il menu è chiuso.
     menu.toggleAttribute("data-open", open);
@@ -150,4 +185,19 @@ const { overlay = false } = Astro.props;
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setOpen(false);
   });
+
+  // Selettore lingua: ricorda la lingua scelta (voce "lingua" nella memoria del browser) e
+  // resta nello stesso punto della pagina (es. /#menu → /fr#menu).
+  document
+    .querySelectorAll<HTMLAnchorElement>("[data-lingua]")
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        try {
+          localStorage.setItem("lingua", link.dataset.lingua ?? "");
+        } catch {
+          // Memoria del browser non disponibile: la scelta vale solo per questa visita.
+        }
+        if (location.hash) link.hash = location.hash;
+      });
+    });
 </script>

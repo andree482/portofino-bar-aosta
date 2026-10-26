@@ -23,7 +23,8 @@ La pagina Cookie non ha un design suo: usa lo stesso modello della Privacy.
 
 ## Modificare i testi
 
-Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`):
+Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`), con una versione per lingua
+(`it`, `fr`, `en`). Il testo che fa fede è quello italiano; francese e inglese ne sono la traduzione.
 
 ```ts
 {
@@ -33,7 +34,10 @@ Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`):
 }
 ```
 
-- Puoi aggiungere o togliere sezioni: numeri e indice si aggiornano da soli.
+- Puoi aggiungere o togliere sezioni: numeri e indice si aggiornano da soli. Fallo in tutte e tre
+  le lingue, con lo stesso `id` (così i link `#…` funzionano anche cambiando lingua).
+- Le scritte fisse della pagina ("Torna al sito", "In questa pagina"…) sono in `src/i18n/`
+  (voce `legale`).
 - Ragione sociale, indirizzo, P.IVA ed email del titolare arrivano da `src/data/site.ts`:
   compilandoli lì compaiono anche nelle informative.
 - Quando cambi un testo, aggiorna anche `updatedAt` (la data "Aggiornata il …").
@@ -41,7 +45,9 @@ Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`):
 ## I testi attuali
 
 Sono scritti in base a come funziona oggi il sito: nessun modulo di contatto, nessun cookie,
-nessuna statistica, font e immagini ospitati sul sito, hosting su Cloudflare.
+nessuna statistica, font e immagini ospitati sul sito, hosting su Cloudflare. L'unico dato salvato
+nel browser è la lingua scelta con il selettore IT / FR / EN (memoria locale, voce `lingua`): è
+descritto nell'informativa cookie e non richiede consenso.
 
 **Vanno aggiornati se:**
 
@@ -53,7 +59,7 @@ nessuna statistica, font e immagini ospitati sul sito, hosting su Cloudflare.
 
 ## Pagine che usano questo modello
 
-| Pagina     | File                      |
-| ---------- | ------------------------- |
-| `/privacy` | `src/pages/privacy.astro` |
-| `/cookie`  | `src/pages/cookie.astro`  |
+| Pagina                                   | File                                 |
+| ---------------------------------------- | ------------------------------------ |
+| `/privacy`, `/fr/privacy`, `/en/privacy` | `src/pages/[...lingua]/privacy.astro` |
+| `/cookie`, `/fr/cookie`, `/en/cookie`    | `src/pages/[...lingua]/cookie.astro`  |

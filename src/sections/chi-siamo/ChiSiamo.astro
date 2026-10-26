@@ -1,8 +1,12 @@
 ---
 // Sezione "Chi siamo": foto ad arco e presentazione del locale.
+// I testi sono in src/i18n/ (voce chiSiamo), nelle tre lingue.
 import { Image } from "astro:assets";
 import ScrollCue from "../../components/ui/ScrollCue.astro";
 import photo from "../../assets/images/chi-siamo-caffe.jpg";
+import { linguaDa, testi } from "../../i18n/lingue";
+
+const t = testi[linguaDa(Astro.url)].chiSiamo;
 ---
 
 <section id="chi-siamo" class="overflow-hidden bg-cream text-navy">
@@ -19,11 +23,10 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
       <!-- Titolo (su mobile sta sopra la foto) -->
       <div data-reveal class="lg:col-start-2 lg:row-start-1 lg:pt-[90px]">
         <p class="text-[12px] font-medium tracking-tightest lg:text-[24px]">
-          IL MONDO PORTOFINO
+          {t.sopratitolo}
         </p>
         <h2 class="font-serif text-[35px] leading-[1.108] tracking-tightest lg:text-[min(65px,4.52vw)]">
-          Un posto, <br />
-          tante cose da vivere.
+          {t.titolo.map((riga, i) => <>{i > 0 && <br />}{riga}</>)}
         </h2>
       </div>
 
@@ -51,7 +54,7 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
           <Image
             data-reveal="zoom"
             src={photo}
-            alt="Un caffè espresso servito su un tavolo in legno del Portofino"
+            alt={t.altFoto}
             widths={[700, 1000, 1536]}
             sizes="(min-width: 1024px) 110vw, 240vw"
             class="absolute top-0 left-[-60.88%] h-full w-[263.8%] max-w-none lg:top-[0.09%] lg:left-[-57.05%] lg:w-[252.04%]"
@@ -66,9 +69,7 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
           style="--reveal-delay: 100ms"
           class="mt-[13px] text-[20px] tracking-tightest lg:mt-3 lg:text-[min(40px,2.78vw)] leading-[1.2] lg:font-medium"
         >
-          Un caffè per iniziare la giornata, una pausa pranzo, un capo che
-          cattura lo sguardo. Portofino Boutique Café unisce bar, cucina e shopping in uno
-          spazio dal carattere urbano, da vivere seguendo il proprio ritmo.
+          {t.testo}
         </p>
         <div class="mt-[18px] flex items-start justify-between">
           <div>
@@ -83,12 +84,12 @@ import photo from "../../assets/images/chi-siamo-caffe.jpg";
               style="--reveal-delay: 300ms"
               class="mt-[9px] text-[12px] font-medium tracking-tightest lg:mt-[16px] lg:text-[24px]"
             >
-              BAR / CUCINA / ABBIGLIAMENTO
+              {t.attivita}
             </p>
           </div>
           <ScrollCue
             href="#cosa-trovi"
-            label="Cosa trovi da noi"
+            label={t.scorri}
             arrowLength={39}
             data-reveal
             style="--reveal-delay: 400ms"

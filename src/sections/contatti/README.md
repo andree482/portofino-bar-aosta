@@ -30,7 +30,8 @@ Finché un campo è vuoto, la riga mostra il segnaposto del design (`[Numero]`, 
 
 - **Aggiungere un contatto** (es. WhatsApp): aggiungi un elemento all'elenco `contacts` in cima
   a `Contatti.astro`, con `label`, `value` e `href`.
-- **Testi**: direttamente in `Contatti.astro`.
+- **Testi**: in `src/i18n/` (voce `contatti`), in italiano, francese e inglese. Numero, email e
+  Instagram sono in `src/data/site.ts`.
 
 ## Nota
 

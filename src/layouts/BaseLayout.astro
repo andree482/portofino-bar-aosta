@@ -1,5 +1,6 @@
 ---
 // Struttura comune a tutte le pagine: <head> con SEO, header, contenuto e footer.
+// La lingua della pagina (it, fr, en) si ricava dal suo indirizzo: vedi src/i18n/.
 // Il banner cookie (src/components/layout/cookie-banner) è disattivato: il sito non usa
 // cookie facoltativi. Per riattivarlo vedi il README di quella cartella.
 import "@fontsource-variable/inclusive-sans";
@@ -9,7 +10,12 @@ import Seo from "../components/seo/Seo.astro";
 import LocalBusinessSchema from "../components/seo/LocalBusinessSchema.astro";
 import Header from "../components/layout/header/Header.astro";
 import Footer from "../components/layout/footer/Footer.astro";
-import { site } from "../data/site";
+import {
+  linguaDa,
+  linguaInternazionale,
+  testi,
+  versioni,
+} from "../i18n/lingue";
 
 interface Props {
   /** Titolo della pagina per Google (senza nome del locale, viene aggiunto da solo). */
@@ -31,12 +37,43 @@ const {
   footerTone = "light",
   ...seo
 } = Astro.props;
+
+const lingua = linguaDa(Astro.url);
+// Indirizzo di questa stessa pagina nelle tre lingue (per la scelta automatica, sotto)
+const pagine = versioni(Astro.url);
 ---
 
 <!doctype html>
-<html lang={site.lang}>
+<html lang={lingua}>
   <head>
     <meta charset="utf-8" />
+    <!--
+      Lingua automatica: apre il sito nella lingua scelta con il selettore IT / FR / EN
+      (salvata nel browser alla voce "lingua") oppure, se non è mai stata scelta, nella
+      lingua del dispositivo; per le lingue diverse da italiano e francese, in inglese.
+      Non interviene con i motori di ricerca, che devono vedere ogni versione così com'è.
+      È in cima alla pagina perché il cambio avvenga prima che la pagina compaia.
+    -->
+    <script is:inline define:vars={{ lingua, pagine, linguaInternazionale }}>
+      try {
+        const bot = /bot|crawl|spider|slurp|lighthouse|preview/i;
+        const salvata = localStorage.getItem("lingua");
+        let scelta = salvata in pagine ? salvata : null;
+        if (!scelta && !bot.test(navigator.userAgent)) {
+          const preferite = navigator.languages?.length
+            ? navigator.languages
+            : [navigator.language || ""];
+          const codici = preferite.map((l) => l.slice(0, 2).toLowerCase());
+          scelta =
+            codici.find((codice) => codice in pagine) || linguaInternazionale;
+        }
+        if (scelta && scelta !== lingua) {
+          location.replace(pagine[scelta] + location.search + location.hash);
+        }
+      } catch {
+        // Browser senza memoria locale (es. alcune navigazioni private): resta la lingua della pagina.
+      }
+    </script>
     <!-- Segnala che JavaScript è attivo: serve alle animazioni (src/styles/animazioni.css) -->
     <script is:inline>
       document.documentElement.classList.add("js");
@@ -61,7 +98,7 @@ const {
       href="#contenuto"
       class="sr-only rounded bg-cream px-4 py-2 text-navy focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
     >
-      Vai al contenuto
+      {testi[lingua].layout.vaiAlContenuto}
     </a>
     <Header overlay={headerOverlay} />
     <main id="contenuto">

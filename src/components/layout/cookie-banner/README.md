@@ -11,7 +11,9 @@ In questo caso, secondo le linee guida del Garante Privacy, il banner non è obb
 l'informativa (pagina `/cookie`). Per questo il banner è stato tolto da
 `src/layouts/BaseLayout.astro`.
 
-Il file resta nel progetto, pronto e già funzionante, per quando servirà.
+Il file resta nel progetto, pronto e già funzionante, per quando servirà. I suoi testi però sono
+solo in italiano: prima di riattivarlo vanno spostati in `src/i18n/` (it, fr, en) come quelli del
+resto del sito.
 
 ## Quando riattivarlo
 

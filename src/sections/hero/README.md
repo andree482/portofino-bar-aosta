@@ -34,7 +34,8 @@ solo dopo che il dito si è staccato dallo schermo; con "riduci movimento" attiv
 
 ## Come modificarla
 
-- **Testi**: direttamente in `Hero.astro`.
+- **Testi**: in `src/i18n/` (voce `hero`), in italiano, francese e inglese. Il titolo è un elenco
+  di righe: ogni elemento va a capo.
 - **Foto**: sostituisci `hero-sala.jpg` con una nuova foto (meglio orizzontale, almeno 1500px di
   larghezza). Su mobile si vede la parte centrale: se serve, regola `object-[52%_center]`
   (52% = posizione orizzontale del ritaglio).

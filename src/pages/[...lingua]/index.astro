@@ -1,0 +1,26 @@
+---
+// Home in tutte le lingue: / (italiano), /fr (francese) e /en (inglese).
+// Le sezioni sono nell'ordine in cui compaiono; ogni sezione ha la sua cartella in
+// src/sections e prende da sola i testi nella lingua della pagina.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../sections/hero/Hero.astro";
+import ChiSiamo from "../../sections/chi-siamo/ChiSiamo.astro";
+import CosaTrovi from "../../sections/cosa-trovi/CosaTrovi.astro";
+import Menu from "../../sections/menu/Menu.astro";
+import OrariPosizione from "../../sections/orari-posizione/OrariPosizione.astro";
+import Contatti from "../../sections/contatti/Contatti.astro";
+import { percorsiLingue } from "../../i18n/lingue";
+
+export function getStaticPaths() {
+  return percorsiLingue();
+}
+---
+
+<BaseLayout background="navy" headerOverlay footerTone="light">
+  <Hero />
+  <ChiSiamo />
+  <CosaTrovi />
+  <Menu />
+  <OrariPosizione />
+  <Contatti />
+</BaseLayout>

@@ -6,7 +6,12 @@
 // - La scelta resta salvata nel browser (localStorage, chiave "portofino-cookie-consent").
 // - Quando il visitatore sceglie, il sito lancia l'evento "cookie-consent": servirà per
 //   attivare eventuali statistiche solo se i cookie facoltativi sono accettati.
-import { legalNav } from "../../../data/navigation";
+// - Nota: i testi della finestra sono solo in italiano. Se la si riattiva, vanno spostati in
+//   src/i18n/ (it.ts, fr.ts, en.ts) come quelli del resto del sito.
+import { legalNav as legali } from "../../../data/navigation";
+import { linguaDa } from "../../../i18n/lingue";
+
+const legalNav = legali(linguaDa(Astro.url));
 
 const buttonClass =
   "h-[35px] rounded-full bg-navy px-[23px] whitespace-nowrap text-[20px] tracking-tightest text-white transition-opacity hover:opacity-85 lg:h-[39px] lg:rounded-[10px]";

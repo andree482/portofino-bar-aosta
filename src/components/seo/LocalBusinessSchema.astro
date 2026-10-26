@@ -2,8 +2,10 @@
 // Dati strutturati schema.org BarOrPub: aiutano Google a mostrare
 // indirizzo, orari e contatti nei risultati di ricerca e su Maps.
 import { site } from "../../data/site";
+import { linguaDa, testi } from "../../i18n/lingue";
 
 const siteUrl = Astro.site?.toString() ?? "";
+const lingua = linguaDa(Astro.url);
 
 const { instagram, facebook, tripadvisor } = site.social;
 const sameAs = [instagram, facebook, tripadvisor].filter(Boolean);
@@ -15,7 +17,8 @@ const schema = {
   name: site.fullName,
   legalName: site.legalName || undefined,
   vatID: site.vatNumber ? `IT${site.vatNumber}` : undefined,
-  description: site.description,
+  // Descrizione nella lingua della pagina (src/i18n/, voce seo.descrizione)
+  description: testi[lingua].seo.descrizione,
   url: siteUrl,
   image: new URL(site.ogImage, siteUrl).toString(),
   priceRange: site.priceRange,

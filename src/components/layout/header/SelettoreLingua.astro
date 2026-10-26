@@ -1,0 +1,54 @@
+---
+// Selettore della lingua (IT / FR / EN) usato nell'header, su desktop e nel menu mobile.
+// Stile coerente con i pulsanti "a pillola" del sito: bordo crema sottile, lingua attiva piena
+// (crema con testo blu), sigle con la spaziatura larga delle etichette (tracking-label;
+// il margine sinistro è un po' più largo per compensare lo spazio dopo l'ultima lettera).
+// Ogni sigla porta alla stessa pagina nell'altra lingua. Scegliendo una lingua il browser la
+// ricorda (voce "lingua"): lo script è in Header.astro, l'apertura automatica in BaseLayout.astro.
+import {
+  infoLingue,
+  lingue,
+  linguaDa,
+  testi,
+  versioni,
+} from "../../../i18n/lingue";
+
+interface Props {
+  /** Altezza e grandezza del testo, es. "h-[34px] text-[15px]". */
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const lingua = linguaDa(Astro.url);
+const pagine = versioni(Astro.url);
+---
+
+<ul
+  aria-label={testi[lingua].layout.lingua}
+  class:list={[
+    "flex items-stretch rounded-full border border-cream/70 p-[3px] font-medium tracking-label",
+    className,
+  ]}
+>
+  {lingue.map((l) => (
+    <li class="flex">
+      <a
+        href={pagine[l]}
+        hreflang={l}
+        lang={l}
+        title={infoLingue[l].nome}
+        aria-label={infoLingue[l].nome}
+        aria-current={l === lingua ? "true" : undefined}
+        data-lingua={l}
+        class:list={[
+          "flex items-center rounded-full pr-[0.7em] pl-[0.86em] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream",
+          l === lingua
+            ? "bg-cream text-navy"
+            : "text-cream/75 hover:text-cream",
+        ]}
+      >
+        {infoLingue[l].sigla}
+      </a>
+    </li>
+  ))}
+</ul>

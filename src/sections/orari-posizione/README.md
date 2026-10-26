@@ -16,14 +16,22 @@ Tutto da `src/data/site.ts`, così orari e indirizzo sono uguali anche nei dati 
 
 ```ts
 openingHours: [
-  { label: "Martedì - Domenica", days: ["Tuesday", /* ... */ "Sunday"], opens: "09:00", closes: "21:00" },
-  { label: "Lunedì", days: ["Monday"] }, // senza orari = "Chiuso"
+  {
+    label: { it: "Martedì - Domenica", fr: "Mardi - Dimanche", en: "Tuesday - Sunday" },
+    days: ["Tuesday", /* ... */ "Sunday"],
+    opens: "09:00",
+    closes: "21:00",
+  },
+  { label: { it: "Lunedì", fr: "Lundi", en: "Monday" }, days: ["Monday"] }, // senza orari = "Chiuso"
 ],
 ```
 
-- `label` è il testo mostrato sul sito.
+- `label` è il testo mostrato sul sito, nelle tre lingue.
 - `days` sono i giorni in inglese per Google.
 - Una riga senza `opens`/`closes` viene mostrata come **Chiuso**.
+
+Gli altri testi della sezione (titoli, "Gli orari potranno variare", "Ottieni indicazioni"…) sono
+in `src/i18n/` (voce `orari`), in italiano, francese e inglese.
 
 L'indirizzo (`address`: Via Sant'Anselmo, 8 – 11100 Aosta) e il link alla scheda Google Maps
 (`mapsUrl`) sono in `site.ts`.

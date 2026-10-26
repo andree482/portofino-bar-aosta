@@ -1,5 +1,7 @@
 // Voci di navigazione usate da header (desktop e mobile) e footer.
-// Gli indirizzi "/#..." portano alle sezioni della home tramite il loro id.
+// Gli indirizzi "/#..." portano alle sezioni della home tramite il loro id; per francese e
+// inglese diventano "/fr#...", "/en#..." da soli. I testi delle voci sono in src/i18n/ (nav).
+import { testi, percorso, type Lingua } from "../i18n/lingue";
 
 export type NavLink = {
   href: string;
@@ -9,28 +11,33 @@ export type NavLink = {
   mobileLabel: string;
 };
 
-export const mainNav: NavLink[] = [
-  { href: "/#chi-siamo", label: "chi siamo", mobileLabel: "Chi siamo" },
-  {
-    href: "/#cosa-trovi",
-    label: "cosa puoi trovare da noi",
-    mobileLabel: "Cosa trovi da noi",
-  },
-  {
-    href: "/#orari",
-    label: "orari e posizione",
-    mobileLabel: "Orari e posizione",
-  },
-  { href: "/#contatti", label: "info", mobileLabel: "Contatti" },
-];
+export function mainNav(lingua: Lingua): NavLink[] {
+  const nav = testi[lingua].nav;
+  return [
+    { href: "/#chi-siamo", ...nav.chiSiamo },
+    { href: "/#cosa-trovi", ...nav.cosaTrovi },
+    { href: "/#orari", ...nav.orari },
+    { href: "/#contatti", ...nav.contatti },
+  ].map(({ href, label, mobile }) => ({
+    href: percorso(href, lingua),
+    label,
+    mobileLabel: mobile,
+  }));
+}
 
-export const footerNav = [
-  { href: "/#chi-siamo", label: "Il Portofino" },
-  { href: "/#menu", label: "Menù" },
-  { href: "/#orari", label: "Orari e posizione" },
-];
+export function footerNav(lingua: Lingua) {
+  const nav = testi[lingua].nav;
+  return [
+    { href: percorso("/#chi-siamo", lingua), label: nav.ilPortofino },
+    { href: percorso("/#menu", lingua), label: nav.menu },
+    { href: percorso("/#orari", lingua), label: nav.orariFooter },
+  ];
+}
 
-export const legalNav = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/cookie", label: "Cookie" },
-];
+export function legalNav(lingua: Lingua) {
+  const nav = testi[lingua].nav;
+  return [
+    { href: percorso("/privacy", lingua), label: nav.privacy },
+    { href: percorso("/cookie", lingua), label: nav.cookie },
+  ];
+}

@@ -1,7 +1,11 @@
 ---
 // Sezione "Cosa trovi da noi": introduzione alla cucina con foto a tutta larghezza.
+// I testi sono in src/i18n/ (voce cosaTrovi), nelle tre lingue.
 import { Image } from "astro:assets";
 import photo from "../../assets/images/pranzo-pasta.jpg";
+import { linguaDa, testi } from "../../i18n/lingue";
+
+const t = testi[linguaDa(Astro.url)].cosaTrovi;
 ---
 
 <section id="cosa-trovi" class="bg-navy text-white">
@@ -10,30 +14,28 @@ import photo from "../../assets/images/pranzo-pasta.jpg";
       data-reveal="fade"
       class="text-[9px] font-medium tracking-tightest text-gold lg:text-[22px]"
     >
-      bar - cucina - abbigliamento
+      {t.attivita}
     </p>
     <p
       data-reveal
       style="--reveal-delay: 100ms"
       class="mt-[9px] text-[24px] font-medium tracking-tightest lg:mt-[17px] lg:text-[55px] lg:leading-[1.1]"
     >
-      Cosa trovi da noi
+      {t.sopratitolo}
     </p>
     <h2
       data-reveal
       style="--reveal-delay: 200ms"
       class="mx-auto mt-[22px] max-w-[233px] font-serif text-[40px] leading-[1.37] tracking-tightest lg:-mt-[5px] lg:max-w-none lg:text-[min(90px,6.15vw)]"
     >
-      A pranzo, scopri i sapori di stagione
+      {t.titolo}
     </h2>
     <p
       data-reveal
       style="--reveal-delay: 300ms"
       class="mx-auto mt-[26px] max-w-[238px] text-[24px] tracking-tightest lg:mt-[19px] lg:max-w-[1105px] lg:text-[38px] leading-[1.2]"
     >
-      Il nostro menù fisso si arricchisce ogni stagione con nuovi piatti. Dai
-      un’occhiata alle proposte e scegli come rendere più gustosa la tua pausa
-      da Portofino Boutique Café.
+      {t.testo}
     </p>
   </div>
 
@@ -46,7 +48,7 @@ import photo from "../../assets/images/pranzo-pasta.jpg";
     <Image
       data-reveal="zoom"
       src={photo}
-      alt="Un piatto di mezze maniche al pomodoro e basilico su un tavolo del Portofino"
+      alt={t.altFoto}
       widths={[640, 1024, 1536]}
       sizes="100vw"
       class="h-[160px] w-full object-cover lg:h-[461px] lg:object-[center_56%]"

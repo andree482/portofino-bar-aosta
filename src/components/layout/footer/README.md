@@ -25,7 +25,8 @@ Si imposta dalla pagina tramite `BaseLayout` (`footerTone`).
 ## Come modificarlo
 
 - **Ragione sociale e partita IVA**: `src/data/site.ts` (`legalName`, `vatNumber`).
-- **Link**: `src/data/navigation.ts` (`footerNav` e `legalNav`).
+- **Link**: `src/data/navigation.ts` (`footerNav` e `legalNav`); i testi sono in `src/i18n/`
+  (voci `nav` e `layout`), in italiano, francese e inglese.
 
 ## Nota
 

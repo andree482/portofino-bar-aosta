@@ -1,10 +1,12 @@
-// Dati del locale: unica fonte per testi, link, SEO e dati strutturati (schema.org).
+// Dati del locale: unica fonte per link, SEO e dati strutturati (schema.org).
+// I testi fissi del sito, nelle tre lingue, sono in src/i18n/.
 // I campi vuoti ("") segnati TODO vanno completati prima della pubblicazione:
 // finché sono vuoti, il sito mostra un segnaposto tra parentesi quadre (es. "[Numero]").
+import type { Tradotto } from "../i18n/lingue";
 
 export type OpeningHours = {
-  /** Testo mostrato sul sito, es. "Martedì - Domenica". */
-  label: string;
+  /** Testo mostrato sul sito nelle tre lingue, es. { it: "Lunedì", fr: "Lundi", en: "Monday" }. */
+  label: Tradotto;
   /** Giorni in inglese per Google (schema.org): Monday, Tuesday, ... */
   days: string[];
   /** Orario di apertura e chiusura, es. "08:00". Assenti se il locale è chiuso. */
@@ -20,10 +22,7 @@ export const site = {
   legalName: "Chantilly S.r.l.s.",
   vatNumber: "01249930072", // partita IVA, uguale al codice fiscale (obbligatoria nel footer)
   tagline: "",
-  description:
-    "Portofino Boutique Café ad Aosta: colazione, pranzo, aperitivo e shopping in un unico spazio. Scopri il menù del giorno, gli orari e dove trovarci.",
-  locale: "it_IT",
-  lang: "it",
+  // La descrizione per Google, in ogni lingua, è in src/i18n/ (voce seo.descrizione).
 
   contact: {
     phone: "", // TODO: es. "+39 0165 000000"
@@ -50,7 +49,11 @@ export const site = {
   // TODO: verificare con il locale l'orario di chiusura (ora: quello del design)
   openingHours: [
     {
-      label: "Martedì - Domenica",
+      label: {
+        it: "Martedì - Domenica",
+        fr: "Mardi - Dimanche",
+        en: "Tuesday - Sunday",
+      },
       days: [
         "Tuesday",
         "Wednesday",
@@ -62,7 +65,7 @@ export const site = {
       opens: "09:00",
       closes: "21:00",
     },
-    { label: "Lunedì", days: ["Monday"] },
+    { label: { it: "Lunedì", fr: "Lundi", en: "Monday" }, days: ["Monday"] },
   ] as OpeningHours[],
 
   social: {

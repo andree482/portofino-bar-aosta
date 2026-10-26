@@ -1,30 +1,33 @@
 ---
 // Sezione "Restiamo in contatto": telefono, email e Instagram, con il logo grande.
-// I contatti si modificano in src/data/site.ts.
+// I contatti si modificano in src/data/site.ts; i testi in src/i18n/ (voce contatti).
 import Arrow from "../../components/ui/Arrow.astro";
 import Logo from "../../components/ui/Logo.astro";
 import { site } from "../../data/site";
+import { linguaDa, testi } from "../../i18n/lingue";
 
+const t = testi[linguaDa(Astro.url)].contatti;
 const { phone, email } = site.contact;
 const { instagram, instagramHandle } = site.social;
 
 // Ogni riga: etichetta, valore mostrato, link. Se il valore manca si vede il segnaposto e
-// la riga non è cliccabile.
+// la riga non è cliccabile. `external` = si apre in una nuova scheda (Instagram).
 const contacts = [
   {
-    label: "Numero",
-    value: phone || "[Numero]",
+    label: t.numero,
+    value: phone || t.segnapostoNumero,
     href: phone ? `tel:${phone.replace(/\s/g, "")}` : undefined,
   },
   {
-    label: "Email",
-    value: email || "[Email]",
+    label: t.email,
+    value: email || t.segnapostoEmail,
     href: email ? `mailto:${email}` : undefined,
   },
   {
-    label: "Instagram",
-    value: instagramHandle || "[@Profilo]",
+    label: t.instagram,
+    value: instagramHandle || t.segnapostoInstagram,
     href: instagram || undefined,
+    external: true,
   },
 ];
 
@@ -36,13 +39,13 @@ const rowClass =
   <div class="container-site grid pt-[22px] pb-[54px] lg:grid-cols-[629fr_498fr] lg:items-center lg:gap-x-[133px] lg:pt-[119px] lg:pb-[117px]">
     <div data-reveal class="lg:col-start-2 lg:row-start-1">
       <p class="text-[22px] font-medium tracking-label lg:text-[23px]">
-        info e contatti
+        {t.sopratitolo}
       </p>
       <h2 class="mt-[2px] max-w-[291px] font-serif text-[60px] leading-[1.05] tracking-tightest text-cream lg:mt-[1px] lg:max-w-[457px] lg:text-[min(100px,6.95vw)] lg:leading-[1.1]">
-        Restiamo in contatto
+        {t.titolo}
       </h2>
       <p class="mt-[18px] max-w-[280px] text-[13px] leading-[1.2] lg:leading-normal font-medium tracking-label lg:mt-[30px] lg:max-w-[466px] lg:text-[23px]">
-        Per un tavolo, un'informazione o un saluto
+        {t.testo}
       </p>
 
       <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest lg:mt-[25px] lg:text-[min(30px,2.09vw)] lg:tracking-label">
@@ -52,7 +55,7 @@ const rowClass =
               <a
                 href={contact.href}
                 class:list={[rowClass, "group"]}
-                {...(contact.label === "Instagram" && {
+                {...(contact.external && {
                   target: "_blank",
                   rel: "noopener",
                 })}

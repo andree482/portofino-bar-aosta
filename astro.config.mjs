@@ -13,5 +13,15 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Le pagine "non trovata" (/404, /fr/404, /en/404) non vanno su Google
+      filter: (page) => !/\/404\/?$/.test(page),
+      // Collega le versioni italiana, francese e inglese di ogni pagina (vedi src/i18n/)
+      i18n: {
+        defaultLocale: "it",
+        locales: { it: "it", fr: "fr", en: "en" },
+      },
+    }),
+  ],
 });

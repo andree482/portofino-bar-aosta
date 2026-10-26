@@ -1,0 +1,22 @@
+---
+// Informativa privacy: /privacy, /fr/privacy, /en/privacy. I testi sono in src/data/legal.ts.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LegalPage from "../../components/legal/LegalPage.astro";
+import { privacyPage } from "../../data/legal";
+import { linguaDa, percorsiLingue } from "../../i18n/lingue";
+
+export function getStaticPaths() {
+  return percorsiLingue();
+}
+
+const page = privacyPage[linguaDa(Astro.url)];
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  background="cream"
+  footerTone="dark"
+>
+  <LegalPage page={page} />
+</BaseLayout>

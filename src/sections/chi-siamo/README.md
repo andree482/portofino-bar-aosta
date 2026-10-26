@@ -26,7 +26,7 @@ stanno nella seconda colonna.
 
 ## Come modificarla
 
-- **Testi**: direttamente in `ChiSiamo.astro`.
+- **Testi**: in `src/i18n/` (voce `chiSiamo`), in italiano, francese e inglese.
 - **Foto**: sostituisci `chi-siamo-caffe.jpg`. Meglio una foto con il soggetto al centro, perché
   l'arco taglia i lati.
   - Ritaglio e proporzioni sono **identici al Figma**: la foto è alta quanto l'arco e allungata

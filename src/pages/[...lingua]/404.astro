@@ -1,0 +1,32 @@
+---
+// Pagina "non trovata", una per lingua: /404 (italiano), /fr/404, /en/404.
+// Per un indirizzo sbagliato l'hosting mostra /404; la scelta automatica della lingua
+// (BaseLayout.astro) porta poi chi parla francese o inglese alla versione nella sua lingua.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/ui/Button.astro";
+import { linguaDa, percorsiLingue, percorso, testi } from "../../i18n/lingue";
+
+export function getStaticPaths() {
+  return percorsiLingue();
+}
+
+const lingua = linguaDa(Astro.url);
+const t = testi[lingua].errore;
+---
+
+<BaseLayout title={t.titoloPagina} noindex background="cream" footerTone="dark">
+  <section class="container-site py-24 text-navy lg:py-40">
+    <p class="text-[16px] tracking-tightest lg:text-[24px]">{t.codice}</p>
+    <h1 class="font-serif text-[50px] leading-none tracking-tightest lg:text-[100px]">
+      {t.titolo}
+    </h1>
+    <p class="mt-4 text-[18px] tracking-tightest lg:text-[30px]">{t.testo}</p>
+    <Button
+      href={percorso("/", lingua)}
+      variant="navy"
+      class="mt-8 h-12 px-6 text-[20px]"
+    >
+      {t.pulsante}
+    </Button>
+  </section>
+</BaseLayout>
