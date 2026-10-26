@@ -33,7 +33,7 @@ openingHours: [
 Gli altri testi della sezione (titoli, "Gli orari potranno variare", "Ottieni indicazioni"…) sono
 in `src/i18n/` (voce `orari`), in italiano, francese e inglese.
 
-L'indirizzo (`address`: Via Sant'Anselmo, 8 – 11100 Aosta) e il link alla scheda Google Maps
+L'indirizzo (`address`: Via Sant'Anselmo, 6/b – 11100 Aosta) e il link alla scheda Google Maps
 (`mapsUrl`) sono in `site.ts`.
 
 ## Mappa
@@ -41,7 +41,7 @@ L'indirizzo (`address`: Via Sant'Anselmo, 8 – 11100 Aosta) e il link alla sche
 - È un'**immagine** (`src/assets/images/mappa-portofino.jpg`), non una mappa Google incorporata:
   così il sito resta veloce e non servono cookie di terze parti.
 - È disegnata con lo stile del design (crema, beige, azzurro, segnaposto blu) partendo dai dati
-  reali di **OpenStreetMap** attorno a Via Sant'Anselmo 8. Per questo sulla mappa c'è la scritta
+  reali di **OpenStreetMap** attorno a Via Sant'Anselmo 6/b. Per questo sulla mappa c'è la scritta
   "© OpenStreetMap", obbligatoria per la licenza dei dati: non toglierla.
 - Per rigenerarla (per esempio se il locale cambia indirizzo): aggiorna le coordinate in
   `scripts/genera-mappa.mjs` e lancia `npm run mappa`.

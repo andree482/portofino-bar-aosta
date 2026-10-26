@@ -3,7 +3,7 @@
 // Ogni nome si scrive nelle tre lingue: { it: "…", fr: "…", en: "…" }.
 // Se manca il francese o l'inglese, in quella lingua si vede il nome italiano.
 // I nomi delle categorie su desktop sono molto grandi: meglio parole brevi (max ~12 lettere).
-// TODO: sostituire i piatti d'esempio del design con il menù reale.
+// Sono 2 piatti per categoria scelti dal menù della cucina (prezzi del menù cartaceo).
 import type { Tradotto } from "../i18n/lingue";
 
 export type MenuItem = {
@@ -25,17 +25,19 @@ export const menu: MenuCategory[] = [
     items: [
       {
         name: {
-          it: "Mezze maniche al pomodoro e basilico",
-          fr: "Mezze maniche à la tomate et au basilic",
-          en: "Mezze maniche with tomato and basil",
+          it: "Crespella alla valdostana con Fontina DOP",
+          fr: "Crêpe à la valdôtaine à la Fontina AOP",
+          en: "Aosta Valley crêpe with Fontina PDO",
         },
+        price: "€ 12,00",
       },
       {
         name: {
-          it: "Risotto alle verdure",
-          fr: "Risotto aux légumes",
-          en: "Vegetable risotto",
+          it: "Lasagnetta tradizionale alla bolognese",
+          fr: "Lasagnes traditionnelles à la bolognaise",
+          en: "Traditional lasagne Bolognese",
         },
+        price: "€ 12,00",
       },
     ],
   },
@@ -44,17 +46,19 @@ export const menu: MenuCategory[] = [
     items: [
       {
         name: {
-          it: "Mezze maniche al pomodoro e basilico",
-          fr: "Mezze maniche à la tomate et au basilic",
-          en: "Mezze maniche with tomato and basil",
+          it: "Brasato di manzo alla piemontese",
+          fr: "Bœuf braisé à la piémontaise",
+          en: "Piedmont-style braised beef",
         },
+        price: "€ 14,00",
       },
       {
         name: {
-          it: "Risotto alle verdure",
-          fr: "Risotto aux légumes",
-          en: "Vegetable risotto",
+          it: "Scaloppina di pollo al limone",
+          fr: "Escalope de poulet au citron",
+          en: "Chicken escalope with lemon",
         },
+        price: "€ 14,00",
       },
     ],
   },
@@ -63,36 +67,34 @@ export const menu: MenuCategory[] = [
     items: [
       {
         name: {
-          it: "Mezze maniche al pomodoro e basilico",
-          fr: "Mezze maniche à la tomate et au basilic",
-          en: "Mezze maniche with tomato and basil",
+          it: "Patate dorate al forno",
+          fr: "Pommes de terre rôties au four",
+          en: "Golden oven-roasted potatoes",
         },
+        price: "€ 5,00",
       },
       {
         name: {
-          it: "Risotto alle verdure",
-          fr: "Risotto aux légumes",
-          en: "Vegetable risotto",
+          it: "Insalatina verde di stagione",
+          fr: "Salade verte de saison",
+          en: "Seasonal green salad",
         },
+        price: "€ 5,00",
       },
     ],
   },
   {
     name: { it: "Dolci", fr: "Desserts", en: "Desserts" },
     items: [
+      // Nome del dolce della casa: uguale in tutte le lingue
+      { name: { it: "Portofino Noir" }, price: "€ 6,00" },
       {
         name: {
-          it: "Mezze maniche al pomodoro e basilico",
-          fr: "Mezze maniche à la tomate et au basilic",
-          en: "Mezze maniche with tomato and basil",
+          it: "Tiramisù della casa",
+          fr: "Tiramisù maison",
+          en: "House tiramisù",
         },
-      },
-      {
-        name: {
-          it: "Risotto alle verdure",
-          fr: "Risotto aux légumes",
-          en: "Vegetable risotto",
-        },
+        price: "€ 6,00",
       },
     ],
   },

@@ -25,11 +25,11 @@ export const menu = [
     items: [
       {
         name: {
-          it: "Risotto alle verdure",
-          fr: "Risotto aux légumes",
-          en: "Vegetable risotto",
+          it: "Crespella alla valdostana con Fontina DOP",
+          fr: "Crêpe à la valdôtaine à la Fontina AOP",
+          en: "Aosta Valley crêpe with Fontina PDO",
         },
-        price: "€ 9,00", // il prezzo è facoltativo
+        price: "€ 12,00", // il prezzo è facoltativo
       },
     ],
   },
@@ -41,7 +41,8 @@ export const menu = [
 - I nomi delle categorie su desktop sono molto grandi (56px, maiuscolo) in una colonna di 498px:
   meglio parole brevi, al massimo 12-13 lettere (per questo "Contorni" in francese è "Garnitures").
 - Gli altri testi della sezione ("Il menù", "Prenota un tavolo") sono in `src/i18n/` (voce `menu`).
-
+- Sul sito ci sono **2 piatti per categoria** (i più rappresentativi del menù della cucina), con il
+  prezzo del menù cartaceo: se un prezzo cambia in sala, ricordati di cambiarlo anche qui.
 - Puoi aggiungere o togliere piatti e categorie liberamente.
 - Su desktop le categorie si dispongono in **due colonne**: la prima metà a sinistra, la seconda a
   destra (con 4 categorie: Primi e Secondi a sinistra, Contorni e Dolci a destra).

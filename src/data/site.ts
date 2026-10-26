@@ -30,7 +30,7 @@ export const site = {
   },
 
   address: {
-    street: "Via Sant'Anselmo, 8",
+    street: "Via Sant'Anselmo, 6/b",
     city: "Aosta",
     postalCode: "11100",
     region: "Valle d'Aosta",
