@@ -8,7 +8,7 @@
 // La mappa usa dati OpenStreetMap: sul sito va lasciata la scritta "© OpenStreetMap".
 import sharp from "sharp";
 
-// Posizione del locale (Via Sant'Anselmo 8, Aosta)
+// Posizione del locale (Via Sant'Anselmo 6/b, Aosta)
 const LAT = 45.7381007;
 const LON = 7.3239224;
 

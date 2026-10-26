@@ -40,8 +40,8 @@ export const menu: MenuCategory[] = [
   {
     name: "Dolci",
     items: [
+      { name: "Portofino Noir", price: "€ 6,00" },
       { name: "Tiramisù della casa", price: "€ 6,00" },
-      { name: "Torte della casa", price: "€ 5,00" },
     ],
   },
 ];
