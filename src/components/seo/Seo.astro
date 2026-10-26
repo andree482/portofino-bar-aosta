@@ -5,6 +5,7 @@ import {
   lingue,
   linguaDa,
   linguaInternazionale,
+  percorsoPagina,
   testi,
   versioni,
 } from "../../i18n/lingue";
@@ -30,7 +31,7 @@ const siteTitle = site.tagline
   ? `${site.fullName} – ${site.tagline}`
   : site.fullName;
 const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(percorsoPagina(Astro.url), Astro.site);
 const imageUrl = new URL(image, Astro.site);
 
 // Versioni della pagina nelle altre lingue: Google mostra a ciascuno quella giusta.

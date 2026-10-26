@@ -40,9 +40,23 @@ export type Tradotto = { it: string; fr?: string; en?: string };
 export const traduci = (testo: Tradotto, lingua: Lingua) =>
   testo[lingua] || testo.it;
 
+/**
+ * Indirizzo della pagina come lo vede il visitatore. Le pagine sono generate come file
+ * (build.format "file" in astro.config.mjs), quindi durante la build Astro vede
+ * "/fr.html" o "/index.html": qui diventano "/fr" e "/".
+ */
+export function percorsoPagina(url: URL) {
+  return (
+    url.pathname
+      .replace(/\.html$/, "")
+      .replace(/\/index$/, "")
+      .replace(/\/$/, "") || "/"
+  );
+}
+
 /** Lingua di una pagina, ricavata dal suo indirizzo: "/fr/privacy" → "fr". */
 export function linguaDa(url: URL): Lingua {
-  const primo = url.pathname.split("/")[1];
+  const primo = percorsoPagina(url).split("/")[1];
   return (
     lingue.find((l) => l !== linguaPrincipale && l === primo) ??
     linguaPrincipale
@@ -73,7 +87,7 @@ export function percorso(path: string, lingua: Lingua) {
 
 /** Indirizzo della stessa pagina in ogni lingua, es. { it: "/privacy", fr: "/fr/privacy", … }. */
 export function versioni(url: URL): Record<Lingua, string> {
-  const base = senzaLingua(url.pathname.replace(/\/$/, "")) || "/";
+  const base = senzaLingua(percorsoPagina(url)) || "/";
   return {
     it: percorso(base, "it"),
     fr: percorso(base, "fr"),
