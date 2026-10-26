@@ -1,6 +1,6 @@
 // Menù mostrato nella sezione "Il menù" della home.
 // Per aggiornarlo: cambia i piatti qui sotto, poi pubblica il sito.
-// TODO: sostituire i piatti d'esempio del design con il menù reale.
+// Sono 2 piatti per categoria scelti dal menù della cucina (prezzi del menù cartaceo).
 
 export type MenuItem = {
   name: string;
@@ -19,29 +19,29 @@ export const menu: MenuCategory[] = [
   {
     name: "Primi",
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure" },
+      { name: "Crespella alla valdostana con Fontina DOP", price: "€ 12,00" },
+      { name: "Lasagnetta tradizionale alla bolognese", price: "€ 12,00" },
     ],
   },
   {
     name: "Secondi",
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure" },
+      { name: "Brasato di manzo alla piemontese", price: "€ 14,00" },
+      { name: "Scaloppina di pollo al limone", price: "€ 14,00" },
     ],
   },
   {
     name: "Contorni",
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure" },
+      { name: "Patate dorate al forno", price: "€ 5,00" },
+      { name: "Insalatina verde di stagione", price: "€ 5,00" },
     ],
   },
   {
     name: "Dolci",
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure" },
+      { name: "Tiramisù della casa", price: "€ 6,00" },
+      { name: "Torte della casa", price: "€ 5,00" },
     ],
   },
 ];

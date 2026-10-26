@@ -23,14 +23,16 @@ export const menu = [
   {
     name: "Primi",
     items: [
-      { name: "Mezze maniche al pomodoro e basilico" },
-      { name: "Risotto alle verdure", price: "€ 9,00" }, // il prezzo è facoltativo
+      { name: "Crespella alla valdostana con Fontina DOP", price: "€ 12,00" },
+      { name: "Lasagnetta tradizionale alla bolognese", price: "€ 12,00" }, // il prezzo è facoltativo
     ],
   },
   // ...
 ];
 ```
 
+- Sul sito ci sono **2 piatti per categoria** (i più rappresentativi del menù della cucina), con il
+  prezzo del menù cartaceo: se un prezzo cambia in sala, ricordati di cambiarlo anche qui.
 - Puoi aggiungere o togliere piatti e categorie liberamente.
 - Su desktop le categorie si dispongono in **due colonne**: la prima metà a sinistra, la seconda a
   destra (con 4 categorie: Primi e Secondi a sinistra, Contorni e Dolci a destra).

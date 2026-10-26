@@ -37,7 +37,7 @@ import { bookingUrl } from "../../data/site";
           <ul class="mt-[1px] border-b-2 border-white pb-[18px] text-[12px] leading-[1.18] font-medium tracking-tightest lg:mt-[10px] lg:divide-y-2 lg:divide-white lg:border-t-2 lg:border-b-0 lg:pb-0 lg:text-[40px] lg:leading-[1.2]">
             {category.items.map((item) => (
               <li class="flex justify-between gap-6 lg:py-[15px]">
-                <span class="lg:-mr-[17px]">{item.name}</span>
+                <span>{item.name}</span>
                 {item.price && (
                   <span class="whitespace-nowrap">{item.price}</span>
                 )}
