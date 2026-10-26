@@ -17,6 +17,15 @@ export type OpeningHours = {
 export const site = {
   name: "Portofino",
   fullName: "Portofino Boutique Café",
+  // Altri modi in cui la gente scrive o cerca il nome: Google e le AI (ChatGPT, Gemini,
+  // Claude...) li collegano tutti a questo locale. Si possono aggiungere altre varianti.
+  alternateNames: [
+    "Portofino Boutique Caffè",
+    "Portofino Boutique Cafe",
+    "Portofino Café Aosta",
+    "Portofino Aosta",
+    "Bar Portofino Aosta",
+  ],
   // Dati della società che gestisce il locale (sede legale = indirizzo del locale, sotto)
   // Ragione sociale completa: CHANTILLY SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA
   legalName: "Chantilly S.r.l.s.",
@@ -25,8 +34,8 @@ export const site = {
   // La descrizione per Google, in ogni lingua, è in src/i18n/ (voce seo.descrizione).
 
   contact: {
-    phone: "", // TODO: es. "+39 0165 000000"
-    email: "", // TODO
+    phone: "+39 0165 040405",
+    email: "chantillycafesrls@pec.it", // PEC della società
   },
 
   address: {
@@ -69,8 +78,9 @@ export const site = {
   ] as OpeningHours[],
 
   social: {
-    instagram: "", // TODO: link completo, es. "https://www.instagram.com/portofino..."
-    instagramHandle: "", // TODO: es. "@portofino.aosta"
+    // Stesso nome del dominio, tutto attaccato
+    instagram: "https://www.instagram.com/portofinoboutiquecafe",
+    instagramHandle: "@portofinoboutiquecafe",
     facebook: "",
     tripadvisor: "",
   },

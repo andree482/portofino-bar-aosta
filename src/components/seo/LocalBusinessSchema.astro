@@ -1,8 +1,12 @@
 ---
-// Dati strutturati schema.org BarOrPub: aiutano Google a mostrare
-// indirizzo, orari e contatti nei risultati di ricerca e su Maps.
+// Dati strutturati schema.org: aiutano Google, Maps e gli assistenti AI (ChatGPT, Gemini,
+// Claude, Perplexity...) a capire chi siamo, dove siamo, quando siamo aperti e come
+// contattarci, e a collegare il sito al profilo Instagram.
+// Due "schede" collegate tra loro:
+// - il locale (bar e caffetteria): nome e varianti, indirizzo, orari, telefono, menù, social;
+// - il sito (WebSite): Google lo usa per il nome del sito mostrato sopra il risultato.
 import { site } from "../../data/site";
-import { linguaDa, testi } from "../../i18n/lingue";
+import { lingue, linguaDa, testi } from "../../i18n/lingue";
 
 const siteUrl = Astro.site?.toString() ?? "";
 const lingua = linguaDa(Astro.url);
@@ -10,19 +14,23 @@ const lingua = linguaDa(Astro.url);
 const { instagram, facebook, tripadvisor } = site.social;
 const sameAs = [instagram, facebook, tripadvisor].filter(Boolean);
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "BarOrPub",
+const bar = {
+  "@type": ["BarOrPub", "CafeOrCoffeeShop"],
   "@id": `${siteUrl}#bar`,
   name: site.fullName,
+  alternateName: site.alternateNames,
   legalName: site.legalName || undefined,
   vatID: site.vatNumber ? `IT${site.vatNumber}` : undefined,
   // Descrizione nella lingua della pagina (src/i18n/, voce seo.descrizione)
   description: testi[lingua].seo.descrizione,
   url: siteUrl,
   image: new URL(site.ogImage, siteUrl).toString(),
+  logo: new URL("/icon-512.png", siteUrl).toString(),
   priceRange: site.priceRange,
   servesCuisine: site.servesCuisine,
+  hasMenu: `${siteUrl}#menu`,
+  // Si prenota telefonando
+  acceptsReservations: Boolean(site.contact.phone),
   telephone: site.contact.phone || undefined,
   email: site.contact.email || undefined,
   address: {
@@ -39,6 +47,7 @@ const schema = {
     longitude: site.geo.longitude,
   },
   hasMap: site.mapsUrl || undefined,
+  areaServed: { "@type": "City", name: site.address.city },
   // I giorni di chiusura (senza orari) non si indicano: Google li considera chiusi.
   openingHoursSpecification: site.openingHours
     .filter((h) => h.opens && h.closes)
@@ -49,6 +58,22 @@ const schema = {
       closes: h.closes,
     })),
   sameAs: sameAs.length ? sameAs : undefined,
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": `${siteUrl}#sito`,
+  name: site.fullName,
+  alternateName: site.alternateNames,
+  url: siteUrl,
+  // Lingue in cui è scritto il sito
+  inLanguage: lingue,
+  publisher: { "@id": `${siteUrl}#bar` },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [bar, website],
 };
 ---
 
