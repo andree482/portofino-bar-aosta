@@ -29,7 +29,7 @@ export const menu = [
           fr: "Crêpe à la valdôtaine à la Fontina AOP",
           en: "Aosta Valley crêpe with Fontina PDO",
         },
-        price: "€ 12,00", // il prezzo è facoltativo
+        price: "12,00", // il prezzo è facoltativo
       },
     ],
   },

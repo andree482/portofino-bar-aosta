@@ -8,7 +8,7 @@ import type { Tradotto } from "../i18n/lingue";
 
 export type MenuItem = {
   name: Tradotto;
-  /** Prezzo facoltativo, es. "€ 9,00". Se vuoto non viene mostrato. */
+  /** Prezzo facoltativo, es. "9,00" (senza simbolo €). Se vuoto non viene mostrato. */
   price?: string;
 };
 
@@ -29,7 +29,7 @@ export const menu: MenuCategory[] = [
           fr: "Crêpe à la valdôtaine à la Fontina AOP",
           en: "Aosta Valley crêpe with Fontina PDO",
         },
-        price: "€ 12,00",
+        price: "12,00",
       },
       {
         name: {
@@ -37,7 +37,7 @@ export const menu: MenuCategory[] = [
           fr: "Lasagnes traditionnelles à la bolognaise",
           en: "Traditional lasagne Bolognese",
         },
-        price: "€ 12,00",
+        price: "12,00",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const menu: MenuCategory[] = [
           fr: "Bœuf braisé à la piémontaise",
           en: "Piedmont-style braised beef",
         },
-        price: "€ 14,00",
+        price: "14,00",
       },
       {
         name: {
@@ -58,7 +58,7 @@ export const menu: MenuCategory[] = [
           fr: "Escalope de poulet au citron",
           en: "Chicken escalope with lemon",
         },
-        price: "€ 14,00",
+        price: "14,00",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const menu: MenuCategory[] = [
           fr: "Pommes de terre rôties au four",
           en: "Golden oven-roasted potatoes",
         },
-        price: "€ 5,00",
+        price: "5,00",
       },
       {
         name: {
@@ -79,7 +79,7 @@ export const menu: MenuCategory[] = [
           fr: "Salade verte de saison",
           en: "Seasonal green salad",
         },
-        price: "€ 5,00",
+        price: "5,00",
       },
     ],
   },
@@ -87,14 +87,14 @@ export const menu: MenuCategory[] = [
     name: { it: "Dolci", fr: "Desserts", en: "Desserts" },
     items: [
       // Nome del dolce della casa: uguale in tutte le lingue
-      { name: { it: "Portofino Noir" }, price: "€ 6,00" },
+      { name: { it: "Portofino Noir" }, price: "6,00" },
       {
         name: {
           it: "Tiramisù della casa",
           fr: "Tiramisù maison",
           en: "House tiramisù",
         },
-        price: "€ 6,00",
+        price: "6,00",
       },
     ],
   },

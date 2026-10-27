@@ -156,16 +156,32 @@
 /* 4. CAMBIO PAGINA (home ↔ privacy ↔ cookie)                           */
 /*    Dissolvenza tra una pagina e l'altra, senza JavaScript.            */
 /*    Funziona nei browser recenti; negli altri il cambio è normale.     */
+/*    Prima sparisce la pagina vecchia, poi compare la nuova: con la     */
+/*    dissolvenza incrociata si vedevano le due pagine sovrapposte.     */
 /* ------------------------------------------------------------------ */
 
 @view-transition {
   navigation: auto;
 }
 
-::view-transition-old(root),
+::view-transition-old(root) {
+  animation: pagina-esce 200ms var(--ease-portofino) both;
+}
+
 ::view-transition-new(root) {
-  animation-duration: 450ms;
-  animation-timing-function: var(--ease-portofino);
+  animation: pagina-entra 300ms var(--ease-portofino) 150ms both;
+}
+
+@keyframes pagina-esce {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pagina-entra {
+  from {
+    opacity: 0;
+  }
 }
 
 /* ------------------------------------------------------------------ */

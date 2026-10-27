@@ -39,12 +39,16 @@
 }
 
 @layer base {
-  html {
+  /* Scorrimento morbido verso le sezioni (#menu, #orari...). La classe la aggiunge
+     src/scripts/scorrimento-morbido.ts a pagina caricata: arrivando da un'altra pagina
+     (es. dalla privacy a /#chi-siamo) la home si apre già sulla sezione, senza scorrere
+     dall'alto. */
+  html.scorrimento-morbido {
     scroll-behavior: smooth;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
+    html.scorrimento-morbido {
       scroll-behavior: auto;
     }
   }
