@@ -105,6 +105,21 @@ export const en: Testi = {
     indice: "On this page",
   },
 
+  cookie: {
+    titolo: "Cookie Preferences",
+    testo:
+      "We use necessary cookies and, only if you agree, Google Analytics cookies for visit statistics.",
+    necessari: "Necessary",
+    sempreAttivi: "Always active",
+    facoltativi: "Optional",
+    daConfigurare: "Not set",
+    accetta: "Accept all",
+    rifiuta: "Reject optional",
+    personalizza: "Customise",
+    salva: "Save choices",
+    modifica: "Change cookie preferences",
+  },
+
   errore: {
     titoloPagina: "Page not found",
     codice: "ERROR 404",

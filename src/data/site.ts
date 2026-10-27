@@ -33,6 +33,11 @@ export const site = {
   tagline: "",
   // La descrizione per Google, in ogni lingua, è in src/i18n/ (voce seo.descrizione).
 
+  // Google Analytics (statistiche delle visite). Parte solo se il visitatore accetta i cookie
+  // facoltativi nel banner: vedi src/components/seo/GoogleAnalytics.astro.
+  // Per spegnere le statistiche lascia "" (e aggiorna l'informativa in src/data/legal.ts).
+  googleAnalyticsId: "G-RHDG5F8D3Z",
+
   contact: {
     phone: "+39 0165 040405",
     email: "info@portofinoboutiquecafe.it",

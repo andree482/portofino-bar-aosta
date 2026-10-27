@@ -56,7 +56,7 @@ src/
     orari-posizione/          orari, indirizzo e mappa
     contatti/                 telefono, email, Instagram
   components/
-    layout/                   header e footer (presenti in ogni pagina), banner cookie (disattivato)
+    layout/                   header e footer (presenti in ogni pagina), banner cookie
     legal/                    modello delle pagine Privacy e Cookie
     seo/                      meta tag e dati strutturati per Google
     ui/                       pezzi riutilizzabili: freccia, pulsante, logo…

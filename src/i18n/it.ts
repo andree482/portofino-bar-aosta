@@ -112,6 +112,23 @@ export const it = {
     indice: "In questa pagina",
   },
 
+  // Finestra "Preferenze Cookie" (src/components/layout/cookie-banner)
+  cookie: {
+    titolo: "Preferenze Cookie",
+    testo:
+      "Usiamo cookie necessari e, solo se accetti, i cookie di Google Analytics per le statistiche delle visite.",
+    necessari: "Necessari",
+    sempreAttivi: "Sempre attivi",
+    facoltativi: "Facoltativi",
+    daConfigurare: "Da configurare",
+    accetta: "Accetta tutti",
+    rifiuta: "Rifiuta Facoltativi",
+    personalizza: "Personalizza",
+    salva: "Salva le scelte",
+    // Pulsante nella pagina Cookie che riapre la finestra
+    modifica: "Modifica le preferenze cookie",
+  },
+
   errore: {
     titoloPagina: "Pagina non trovata",
     codice: "ERRORE 404",

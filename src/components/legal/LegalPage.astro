@@ -12,6 +12,7 @@ interface Props {
 const { page } = Astro.props;
 const lingua = linguaDa(Astro.url);
 const t = testi[lingua].legale;
+const tCookie = testi[lingua].cookie;
 // Link all'altra informativa nella stessa lingua (es. /cookie → /fr/cookie)
 const altraPagina = percorso(page.link.href, lingua);
 
@@ -100,6 +101,17 @@ const linkButtonClass =
           </div>
         </section>
       ))}
+
+      <!-- Solo pagina Cookie: riapre la finestra delle preferenze (CookieBanner) -->
+      {page.preferenzeCookie && (
+        <button
+          type="button"
+          data-cookie-preferences
+          class="mt-[31px] inline-flex h-[44px] items-center rounded-full border border-navy px-[23px] text-[18px] tracking-tightest transition-colors hover:bg-navy hover:text-cream lg:mt-0 lg:h-[56px] lg:border-[3px] lg:px-[32px] lg:text-[24px]"
+        >
+          {tCookie.modifica}
+        </button>
+      )}
     </div>
   </div>
 

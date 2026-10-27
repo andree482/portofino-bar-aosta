@@ -3,10 +3,11 @@
 Componenti invisibili che aiutano Google e i social a capire e mostrare il sito.
 Sono inclusi automaticamente in ogni pagina da `src/layouts/BaseLayout.astro`.
 
-| File                        | Cosa fa                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------ |
-| `Seo.astro`                 | Titolo, descrizione, indirizzo canonico e anteprima per WhatsApp, Facebook e altri social. |
+| File                        | Cosa fa                                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Seo.astro`                 | Titolo, descrizione, indirizzo canonico e anteprima per WhatsApp, Facebook e altri social.        |
 | `LocalBusinessSchema.astro` | Dati strutturati (schema.org): il locale (`BarOrPub` + `CafeOrCoffeeShop`) e il sito (`WebSite`). |
+| `GoogleAnalytics.astro`     | Statistiche delle visite con Google Analytics, solo dopo il consenso nel banner cookie.           |
 
 ## Da dove prendono i dati
 
@@ -59,6 +60,19 @@ vuoto il titolo è solo "Privacy | Portofino Boutique Café", senza trattino fin
 ## Anteprima social
 
 L'immagine è `public/og-image.jpg` (1200×630, foto della sala con il logo).
+
+## Google Analytics
+
+- **ID** (`G-…`): `googleAnalyticsId` in `src/data/site.ts`. Per spegnere le statistiche lascia
+  `""` e aggiorna le informative in `src/data/legal.ts`.
+- **Solo con consenso**: il codice di Google si carica solo se il visitatore ha scelto
+  "Accetta tutti" (o ha attivato "Facoltativi") nel banner cookie
+  (`src/components/layout/cookie-banner`). Se poi ritira il consenso, le statistiche si fermano e
+  i cookie `_ga` vengono cancellati. Lo richiede la legge (linee guida del Garante Privacy).
+- **Solo sul sito pubblicato**: in sviluppo (`astro dev`) non parte, così le prove in locale non
+  finiscono nelle statistiche.
+- Le visite di chi rifiuta i cookie non vengono contate: i numeri di Analytics saranno quindi
+  più bassi delle visite reali.
 
 ## Verificare
 

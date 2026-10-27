@@ -13,10 +13,11 @@ La pagina Cookie non ha un design suo: usa lo stesso modello della Privacy.
 - Sezioni numerate (0.1, 0.2, …).
 - Pulsante che porta all'altra informativa: dalla Privacy alla Cookie e viceversa. Su desktop
   sta sotto l'indice, su mobile in fondo alla pagina.
+- Solo pagina Cookie: pulsante **Modifica le preferenze cookie** in fondo alle sezioni, che riapre
+  il banner cookie (si attiva con `preferenzeCookie: true` in `src/data/legal.ts`).
 
-> Nel design il pulsante si chiamava "Preferenze e Cookie" e apriva il banner cookie. Il banner
-> è disattivato (il sito non usa cookie facoltativi), quindi ora è un collegamento tra le due
-> informative.
+> Nel design il pulsante si chiamava "Preferenze e Cookie" e apriva il banner cookie. Ora è un
+> collegamento tra le due informative; per riaprire il banner c'è il pulsante qui sopra.
 
 > Nel design il testo delle sezioni è a 37px su desktop, pensato per una riga di segnaposto. Con
 > le informative vere (testi lunghi) l'ho portato a 24px per renderlo leggibile.
@@ -44,10 +45,11 @@ Tutto in `src/data/legal.ts` (`privacyPage` e `cookiePage`), con una versione pe
 
 ## I testi attuali
 
-Sono scritti in base a come funziona oggi il sito: nessun modulo di contatto, nessun cookie,
-nessuna statistica, font e immagini ospitati sul sito, hosting su Cloudflare. L'unico dato salvato
-nel browser è la lingua scelta con il selettore IT / FR / EN (memoria locale, voce `lingua`): è
-descritto nell'informativa cookie e non richiede consenso.
+Sono scritti in base a come funziona oggi il sito: nessun modulo di contatto, statistiche con
+Google Analytics solo dopo il consenso nel banner cookie, font e immagini ospitati sul sito,
+hosting su Cloudflare. Nel browser restano la lingua scelta con il selettore IT / FR / EN (voce
+`lingua`) e la scelta sui cookie (voce `portofino-cookie-consent`): non richiedono consenso.
+I dati di Google sono nella costante `google`, in cima a `legal.ts`.
 
 **Vanno aggiornati se:**
 

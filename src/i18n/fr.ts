@@ -107,6 +107,21 @@ export const fr: Testi = {
     indice: "Sur cette page",
   },
 
+  cookie: {
+    titolo: "Préférences cookies",
+    testo:
+      "Nous utilisons des cookies nécessaires et, uniquement si vous acceptez, les cookies de Google Analytics pour les statistiques de visite.",
+    necessari: "Nécessaires",
+    sempreAttivi: "Toujours actifs",
+    facoltativi: "Facultatifs",
+    daConfigurare: "À configurer",
+    accetta: "Tout accepter",
+    rifiuta: "Tout refuser",
+    personalizza: "Personnaliser",
+    salva: "Enregistrer mes choix",
+    modifica: "Modifier les préférences cookies",
+  },
+
   errore: {
     titoloPagina: "Page introuvable",
     codice: "ERREUR 404",
