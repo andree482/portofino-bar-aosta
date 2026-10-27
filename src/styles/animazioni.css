@@ -8,7 +8,7 @@
  * COME SI USANO (vedi src/styles/README.md):
  *   <p data-reveal>…</p>                         compare salendo dal basso
  *   <p data-reveal style="--reveal-delay: 200ms">  compare con un ritardo
- *   data-reveal="fade" | "down" | "image" | "zoom" | "line" | "draw"
+ *   data-reveal="fade" | "down" | "image" | "zoom" | "line" | "draw" | "build"
  */
 
 :root {
@@ -92,6 +92,40 @@
   transform: scaleY(0);
   transform-origin: center top;
   transition-duration: 1.1s;
+}
+
+/*
+ * Cornice che si costruisce come una casa: due linee salgono dal basso come muri e si
+ * incontrano in cima chiudendo l'arco. Le linee le disegna src/scripts/cornici.ts
+ * (attributo data-cornice); qui ci sono solo i tempi.
+ */
+.js [data-reveal="build"] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-cornice="pronta"] {
+  /* il bordo vero si nasconde: lo sostituiscono le linee */
+  border-color: transparent;
+}
+
+.cornice-linee {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cornice-linee path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  /* Lenta all'inizio e alla fine, come un tratto disegnato a mano */
+  transition: stroke-dashoffset var(--cornice-durata, 2.2s)
+    cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.is-visible > .cornice-linee path {
+  stroke-dashoffset: 0;
 }
 
 /* Stato finale, uguale per tutti */
@@ -183,6 +217,12 @@
   /* niente velo sulle foto */
   .js [data-reveal="image"]::after {
     display: none;
+  }
+
+  /* cornici già disegnate */
+  .cornice-linee path {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
   }
 
   .menu-mobile,

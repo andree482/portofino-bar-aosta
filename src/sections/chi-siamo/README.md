@@ -36,6 +36,12 @@ stanno nella seconda colonna.
   - Se cambi foto, conviene tornare a un ritaglio normale: togli dall'immagine le classi
     `absolute`, `top-…`, `left-…`, `h-full`, `w-…` e usa `size-full object-cover`.
 - **Cornici**: sono due `<div>` con bordo blu di 3px e angoli superiori arrotondati.
+  - Quando arrivano nello schermo **si costruiscono come una casa**: due linee salgono dal basso
+    come muri e si incontrano in cima, chiudendo l'arco. Prima l'arco attorno alla foto, poi la
+    cornice larga. Lo fa `src/scripts/cornici.ts` (attributi `data-reveal="build"` e `data-cornice`).
+  - **Velocità e ordine**: nello `style` di ogni cornice, `--cornice-durata` (quanto dura il
+    disegno) e `--reveal-delay` (dopo quanto parte).
+  - Senza JavaScript, o con "riduci movimento", le cornici si vedono subito complete.
 
 ## Nota
 
