@@ -2,16 +2,18 @@
 // Finestra "Preferenze Cookie".
 // - Si apre da sola alla prima visita, finché il visitatore non sceglie.
 // - Si riapre con qualsiasi elemento che ha l'attributo data-cookie-preferences
-//   (es. il pulsante "Preferenze e Cookie" nelle pagine legali).
+//   (es. il pulsante "Modifica le preferenze cookie" nella pagina Cookie).
 // - La scelta resta salvata nel browser (localStorage, chiave "portofino-cookie-consent").
-// - Quando il visitatore sceglie, il sito lancia l'evento "cookie-consent": servirà per
-//   attivare eventuali statistiche solo se i cookie facoltativi sono accettati.
-// - Nota: i testi della finestra sono solo in italiano. Se la si riattiva, vanno spostati in
-//   src/i18n/ (it.ts, fr.ts, en.ts) come quelli del resto del sito.
+// - Quando il visitatore sceglie, il sito lancia l'evento "cookie-consent": serve ad
+//   attivare Google Analytics solo se i cookie facoltativi sono accettati
+//   (src/components/seo/GoogleAnalytics.astro).
+// - I testi sono in src/i18n/ (voce cookie), in italiano, francese e inglese.
 import { legalNav as legali } from "../../../data/navigation";
-import { linguaDa } from "../../../i18n/lingue";
+import { linguaDa, testi } from "../../../i18n/lingue";
 
-const legalNav = legali(linguaDa(Astro.url));
+const lingua = linguaDa(Astro.url);
+const legalNav = legali(lingua);
+const t = testi[lingua].cookie;
 
 const buttonClass =
   "h-[35px] rounded-full bg-navy px-[23px] whitespace-nowrap text-[20px] tracking-tightest text-white transition-opacity hover:opacity-85 lg:h-[39px] lg:rounded-[10px]";
@@ -20,6 +22,7 @@ const buttonClass =
 <dialog
   id="cookie-banner"
   aria-labelledby="cookie-banner-title"
+  aria-describedby="cookie-banner-text"
   class="m-auto w-full max-w-none rounded-t-[20px] bg-cream px-5 pt-[18px] pb-4 text-navy backdrop:bg-navy/20 max-lg:mb-0 lg:w-[752px] lg:max-w-[calc(100%-40px)] lg:rounded-[25px] lg:pt-[50px] lg:pb-[38px]"
 >
   <div class="mx-auto max-w-[498px]">
@@ -27,19 +30,22 @@ const buttonClass =
       id="cookie-banner-title"
       class="font-serif text-[25px] tracking-tightest lg:text-center lg:text-[55px] lg:leading-tight"
     >
-      Preferenze Cookie
+      {t.titolo}
     </h2>
-    <p class="text-[15px] tracking-tightest lg:mt-1 lg:text-center lg:text-[20px]">
-      Scegli quali categorie di cookie consentire
+    <p
+      id="cookie-banner-text"
+      class="text-[15px] tracking-tightest lg:mt-1 lg:text-center lg:text-[20px]"
+    >
+      {t.testo}
     </p>
 
     <ul class="mt-4 divide-y divide-navy/70 border-y border-navy/70 lg:mt-[30px] lg:divide-y-2 lg:border-y-2 lg:divide-navy lg:border-navy">
       <li class="flex items-center justify-between py-[9px] lg:py-[12px]">
         <span class="font-serif text-[25px] tracking-tightest lg:text-[33px]">
-          Necessari
+          {t.necessari}
         </span>
         <span class="text-[15px] tracking-tightest opacity-70 lg:text-[20px]">
-          Sempre attivi
+          {t.sempreAttivi}
         </span>
       </li>
       <li class="flex items-center justify-between py-[9px] lg:py-[12px]">
@@ -47,13 +53,13 @@ const buttonClass =
           for="cookie-optional"
           class="font-serif text-[25px] tracking-tightest lg:text-[33px]"
         >
-          Facoltativi
+          {t.facoltativi}
         </label>
         <span
           class="text-[15px] tracking-tightest opacity-70 lg:text-[20px]"
           data-cookie-status
         >
-          Da configurare
+          {t.daConfigurare}
         </span>
         <!-- Interruttore: compare solo dopo "Personalizza" -->
         <span
@@ -73,13 +79,13 @@ const buttonClass =
       data-cookie-actions
     >
       <button type="button" class={buttonClass} data-cookie-accept>
-        Accetta tutti
+        {t.accetta}
       </button>
       <button type="button" class={buttonClass} data-cookie-reject>
-        Rifiuta Facoltativi
+        {t.rifiuta}
       </button>
       <button type="button" class={buttonClass} data-cookie-customize>
-        Personalizza
+        {t.personalizza}
       </button>
     </div>
     <div
@@ -92,7 +98,7 @@ const buttonClass =
         class:list={[buttonClass, "w-full lg:w-auto"]}
         data-cookie-save
       >
-        Salva le scelte
+        {t.salva}
       </button>
     </div>
 

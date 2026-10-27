@@ -1,60 +1,46 @@
-# Banner cookie (disattivato)
+# Banner cookie
 
-Finestra "Preferenze Cookie". File: `CookieBanner.astro`.
+Finestra "Preferenze Cookie". File: `CookieBanner.astro`. È inclusa in ogni pagina da
+`src/layouts/BaseLayout.astro`.
 
 **Design Figma:** "Pop Up Pc" (nodo `191:164`) e "Cookie mobile" (nodo `201:278`).
 
-## Stato attuale: non viene mostrato
+## Perché c'è
 
-Il sito **non usa cookie facoltativi**: niente statistiche, mappe o video incorporati, pixel social.
-In questo caso, secondo le linee guida del Garante Privacy, il banner non è obbligatorio: basta
-l'informativa (pagina `/cookie`). Per questo il banner è stato tolto da
-`src/layouts/BaseLayout.astro`.
+Il sito usa **Google Analytics**, che installa cookie facoltativi (statistiche). Per le linee guida
+del Garante Privacy serve il consenso del visitatore **prima** di caricarlo: il banner lo chiede e
+`src/components/seo/GoogleAnalytics.astro` parte solo se il visitatore accetta.
 
-Il file resta nel progetto, pronto e già funzionante, per quando servirà. I suoi testi però sono
-solo in italiano: prima di riattivarlo vanno spostati in `src/i18n/` (it, fr, en) come quelli del
-resto del sito.
+Se un giorno si toglie Google Analytics (e non ci sono altri cookie facoltativi), il banner si può
+togliere da `BaseLayout.astro`, aggiornando le informative in `src/data/legal.ts`.
 
-## Quando riattivarlo
+## Testi
 
-Se aggiungi uno strumento che usa cookie facoltativi o traccia i visitatori, per esempio:
+In `src/i18n/` (voce `cookie`), in italiano, francese e inglese.
 
-- Google Analytics o altre statistiche con cookie;
-- una mappa Google o un video YouTube incorporati nella pagina;
-- un feed Instagram o il pixel di Facebook.
+## Riaprire la finestra
 
-> Cloudflare Web Analytics **non** usa cookie e non richiede il banner.
+Qualsiasi elemento con l'attributo `data-cookie-preferences` riapre la finestra. Oggi c'è il
+pulsante "Modifica le preferenze cookie" in fondo alla pagina Cookie (`LegalPage.astro`, attivato
+da `preferenzeCookie: true` in `src/data/legal.ts`).
 
-## Come riattivarlo
+## Aggiungere altri strumenti con cookie
 
-1. In `src/layouts/BaseLayout.astro` aggiungi l'import in alto (tra i `---`) e il componente
-   prima di `</body>`:
+Mappe o video incorporati, pixel social… vanno caricati solo con il consenso, come Google
+Analytics, e vanno descritti nell'informativa Cookie (`src/data/legal.ts`):
 
-   ```astro
-   ---
-   import CookieBanner from "../components/layout/cookie-banner/CookieBanner.astro";
-   ---
+```js
+window.addEventListener("cookie-consent", (event) => {
+  if (event.detail.optional) {
+    // carica qui lo script
+  }
+});
+```
 
-   <CookieBanner />
-   ```
+Per le visite successive si legge la scelta salvata:
+`localStorage.getItem("portofino-cookie-consent")`.
 
-2. In `src/components/legal/LegalPage.astro` il pulsante in fondo alla pagina può tornare a
-   riaprire il banner: basta un `<button type="button" data-cookie-preferences>`.
-3. Aggiorna l'informativa in `src/data/legal.ts` (pagina Cookie) con gli strumenti usati.
-4. Carica gli script facoltativi solo con il consenso:
-
-   ```js
-   window.addEventListener("cookie-consent", (event) => {
-     if (event.detail.optional) {
-       // carica qui lo script delle statistiche
-     }
-   });
-   ```
-
-   Ricordati di controllare anche le visite successive, leggendo
-   `localStorage.getItem("portofino-cookie-consent")`.
-
-## Come funziona (quando è attivo)
+## Come funziona
 
 1. Alla **prima visita** si apre da sola: finestra al centro su desktop, pannello in basso su mobile.
 2. Il visitatore sceglie:
@@ -65,4 +51,6 @@ Se aggiungi uno strumento che usa cookie facoltativi o traccia i visitatori, per
      guida del Garante Privacy.
 3. La scelta viene salvata **nel browser** (`localStorage`, chiave `portofino-cookie-consent`) e
    la finestra non si riapre più da sola.
+   Con "Accetta tutti" parte subito Google Analytics; con il rifiuto non parte, e se era già attivo
+   si ferma e i suoi cookie vengono cancellati.
 4. Si può **riaprire** con qualsiasi elemento che ha l'attributo `data-cookie-preferences`.

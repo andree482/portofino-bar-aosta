@@ -1,0 +1,72 @@
+---
+// Google Analytics (tag Google gtag.js), messo in cima al <head> da BaseLayout.astro.
+//
+// Per legge (Garante Privacy) le statistiche di Google usano cookie facoltativi: lo script di
+// Google si carica SOLO se il visitatore ha accettato i cookie facoltativi nel banner
+// (src/components/layout/cookie-banner). Senza consenso Google non riceve nulla.
+// - Consenso già dato in una visita precedente: parte subito, all'apertura della pagina.
+// - Consenso dato adesso nel banner: parte in quel momento (evento "cookie-consent").
+// - Consenso tolto dopo: le statistiche si fermano e i cookie di Google (_ga…) vengono cancellati.
+//
+// L'ID (G-…) è in src/data/site.ts. Funziona solo sul sito pubblicato (npm run build), non in
+// sviluppo, così le prove in locale non finiscono nelle statistiche.
+import { site } from "../../data/site";
+
+const id = site.googleAnalyticsId;
+const attivo = Boolean(id) && import.meta.env.PROD;
+---
+
+{attivo && <script is:inline define:vars={{ id }}>
+  (function () {
+    // Stessa chiave usata dal banner cookie per salvare la scelta
+    var CHIAVE = "portofino-cookie-consent";
+
+    function consensoSalvato() {
+      try {
+        var scelta = JSON.parse(localStorage.getItem(CHIAVE) || "null");
+        return Boolean(scelta && scelta.optional);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // Codice ufficiale del tag Google, eseguito solo dopo il consenso
+    function avvia() {
+      window["ga-disable-" + id] = false;
+      if (window.gtag) return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        dataLayer.push(arguments);
+      };
+      gtag("js", new Date());
+      gtag("config", id);
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild(script);
+    }
+
+    // Consenso tolto: ferma l'invio dei dati e cancella i cookie _ga e _ga_…
+    function ferma() {
+      window["ga-disable-" + id] = true;
+      var dominio = location.hostname.replace(/^www\./, "");
+      document.cookie.split(";").forEach(function (cookie) {
+        var nome = cookie.split("=")[0].trim();
+        if (!/^_ga/.test(nome)) return;
+        ["", "; domain=" + dominio, "; domain=." + dominio].forEach(
+          function (d) {
+            document.cookie =
+              nome + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + d;
+          },
+        );
+      });
+    }
+
+    if (consensoSalvato()) avvia();
+
+    window.addEventListener("cookie-consent", function (event) {
+      if (event.detail && event.detail.optional) avvia();
+      else ferma();
+    });
+  })();
+</script>}
