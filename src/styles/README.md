@@ -24,15 +24,16 @@ Aggiungi l'attributo `data-reveal`:
 </p>
 ```
 
-| Valore                | Effetto                                                    | Dove si usa                     |
-| --------------------- | ---------------------------------------------------------- | ------------------------------- |
-| `data-reveal`         | Dissolvenza + sale di 24px                                 | Testi, blocchi, pulsanti        |
-| `data-reveal="fade"`  | Solo dissolvenza                                           | Etichette, cornici, logo        |
-| `data-reveal="down"`  | Dissolvenza + scende dall'alto                             | Barra dell'header               |
-| `data-reveal="image"` | Un velo del colore dello sfondo si ritira e scopre la foto | Foto ad arco, foto orari, mappa |
-| `data-reveal="zoom"`  | La foto parte un po' ingrandita e si assesta (1,8 secondi) | Foto della hero e della pasta   |
-| `data-reveal="line"`  | Linea che si disegna da sinistra                           | Linea corta in "Chi siamo"      |
-| `data-reveal="draw"`  | Freccia verticale che si disegna dall'alto                 | Frecce "scorri giù" (ScrollCue) |
+| Valore                | Effetto                                                                                                                                                                                 | Dove si usa                      |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `data-reveal`         | Dissolvenza + sale di 24px                                                                                                                                                              | Testi, blocchi, pulsanti         |
+| `data-reveal="fade"`  | Solo dissolvenza                                                                                                                                                                        | Etichette, cornici, logo         |
+| `data-reveal="down"`  | Dissolvenza + scende dall'alto                                                                                                                                                          | Barra dell'header                |
+| `data-reveal="image"` | Un velo del colore dello sfondo si ritira e scopre la foto                                                                                                                              | Foto ad arco, foto orari, mappa  |
+| `data-reveal="zoom"`  | La foto parte un po' ingrandita e si assesta (1,8 secondi)                                                                                                                              | Foto della hero e della pasta    |
+| `data-reveal="line"`  | Linea che si disegna da sinistra                                                                                                                                                        | Linea corta in "Chi siamo"       |
+| `data-reveal="draw"`  | Freccia verticale che si disegna dall'alto                                                                                                                                              | Frecce "scorri giù" (ScrollCue)  |
+| `data-reveal="build"` | Cornice che si costruisce come una casa: i lati salgono dal basso e l'arco si chiude in cima (insieme a `data-cornice`, script `src/scripts/cornici.ts`; durata con `--cornice-durata`) | Cornici di "Chi siamo" (desktop) |
 
 Per più elementi in fila (es. le categorie del menù) si usa un ritardo crescente:
 `style={`--reveal-delay: ${index * 120}ms`}`.
