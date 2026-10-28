@@ -51,13 +51,13 @@ export const site = {
   },
 
   geo: {
-    // Posizione del locale (dalla scheda Google Maps)
-    latitude: 45.7381007,
-    longitude: 7.3239224,
+    // Posizione del locale (dalla scheda Google Maps del café)
+    latitude: 45.7381209,
+    longitude: 7.3238748,
   },
 
   /** Link alla scheda Google Maps del locale. Se vuoto si usa una ricerca per indirizzo. */
-  mapsUrl: "https://maps.app.goo.gl/zMULjXvrM8VnJZxh9",
+  mapsUrl: "https://maps.app.goo.gl/uvnhjWQe5rUf8Hza6",
 
   // TODO: verificare con il locale l'orario di chiusura (ora: quello del design)
   openingHours: [
