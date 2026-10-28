@@ -7,7 +7,7 @@
 ## Cosa mostra
 
 - "info e contatti", titolo "Restiamo in contatto" e sottotitolo.
-- Tre righe cliccabili con freccia ↗:
+- Tre righe cliccabili (tutta la riga è il link):
   - **Numero**: avvia la chiamata (`tel:`).
   - **Email**: apre il programma di posta (`mailto:`).
   - **Instagram**: apre il profilo in una nuova scheda.
@@ -23,8 +23,16 @@ social: { instagram: "https://www.instagram.com/...", instagramHandle: "@..." },
 ```
 
 Finché un campo è vuoto, la riga mostra il segnaposto del design (`[Numero]`, `[Email]`,
-`[@Profilo]`) e non è cliccabile. Le frecce ↗ sono sempre bianche e stanno 10px (mobile) o
-29px (desktop) prima della fine della linea, come nel Figma.
+`[@Profilo]`) e non è cliccabile.
+
+## Aspetto dei valori
+
+- Niente frecce ↗ (tolte rispetto al Figma): il valore ha una **linea sotto** per far capire che
+  è cliccabile. Al passaggio del mouse la linea diventa bianca piena e il testo più luminoso.
+- Il valore arriva fino alla fine della linea. Se è troppo lungo (succede con email e Instagram,
+  e col numero su mobile) finisce con "…": i puntini sono sempre allineati sul bordo destro, uno
+  sotto l'altro. Il link funziona comunque con il valore completo, e passandoci sopra col mouse
+  si vede intero (attributo `title`).
 
 ## Come modificarla
 

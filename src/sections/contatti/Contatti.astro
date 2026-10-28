@@ -1,7 +1,6 @@
 ---
 // Sezione "Restiamo in contatto": telefono, email e Instagram, con il logo grande.
 // I contatti si modificano in src/data/site.ts; i testi in src/i18n/ (voce contatti).
-import Arrow from "../../components/ui/Arrow.astro";
 import Logo from "../../components/ui/Logo.astro";
 import { site } from "../../data/site";
 import { linguaDa, testi } from "../../i18n/lingue";
@@ -31,8 +30,9 @@ const contacts = [
   },
 ];
 
+// Il valore arriva fino alla fine della linea: se non ci sta finisce con "…", sempre allineati a destra.
 const rowClass =
-  "grid grid-cols-[167px_1fr_auto] items-center py-[19px] lg:grid-cols-[249px_1fr_auto] lg:py-[27px]";
+  "grid grid-cols-[167px_minmax(0,1fr)] items-center py-[19px] lg:grid-cols-[249px_minmax(0,1fr)] lg:py-[27px]";
 ---
 
 <section id="contatti" class="bg-navy text-white">
@@ -61,22 +61,18 @@ const rowClass =
                 })}
               >
                 <span>{contact.label}</span>
-                <span class="truncate">{contact.value}</span>
-                <Arrow
-                  direction="up-right"
-                  length={25}
-                  class="mr-[10px] h-auto w-[18px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 lg:mr-[29px]"
-                />
+                {/* Linea sotto = cliccabile (copre anche i "…"); al passaggio del mouse diventa piena */}
+                <span
+                  title={contact.value}
+                  class="max-w-full justify-self-start truncate border-b border-white/50 text-white/90 transition-colors duration-300 group-hover:border-white group-hover:text-white group-focus-visible:border-white"
+                >
+                  {contact.value}
+                </span>
               </a>
             ) : (
               <div class={rowClass}>
                 <span>{contact.label}</span>
-                <span>{contact.value}</span>
-                <Arrow
-                  direction="up-right"
-                  length={25}
-                  class="mr-[10px] h-auto w-[18px] lg:mr-[29px]"
-                />
+                <span class="truncate">{contact.value}</span>
               </div>
             )}
           </li>
