@@ -6,8 +6,11 @@
 
 export const it = {
   seo: {
+    // Va nel titolo dopo il nome: "Portofino Boutique Café – Bar, cucina e boutique ad Aosta".
+    // Contiene le parole che la gente cerca (bar, Aosta, boutique): meglio non toglierle.
+    slogan: "Bar, cucina e boutique ad Aosta",
     descrizione:
-      "Portofino Boutique Café ad Aosta: colazione, pranzo, aperitivo e shopping in un unico spazio. Scopri il menù del giorno, gli orari e dove trovarci.",
+      "Bar, cucina e boutique di abbigliamento in via Sant'Anselmo, nel centro storico di Aosta: colazione, pranzo, aperitivo e shopping in un unico spazio. Menù, orari e dove trovarci.",
   },
 
   // Voci di header e footer

@@ -3,8 +3,9 @@ import type { Testi } from "./it";
 
 export const en: Testi = {
   seo: {
+    slogan: "Café, kitchen and boutique in Aosta",
     descrizione:
-      "Portofino Boutique Café in Aosta: breakfast, lunch, aperitivo and shopping all in one place. See today's menu, our opening hours and how to find us.",
+      "Café, kitchen and clothing boutique on Via Sant'Anselmo in Aosta's old town: breakfast, lunch, aperitivo and shopping in one place. See the menu, opening hours and how to find us.",
   },
 
   nav: {

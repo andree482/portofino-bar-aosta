@@ -26,10 +26,10 @@ const {
   noindex = false,
 } = Astro.props;
 
-// Lo slogan si aggiunge solo se c'è, così senza slogan non resta un trattino finale
-const siteTitle = site.tagline
-  ? `${site.fullName} – ${site.tagline}`
-  : site.fullName;
+// Lo slogan (src/i18n/, voce seo.slogan) si aggiunge solo se c'è, così senza slogan
+// non resta un trattino finale
+const slogan = testi[lingua].seo.slogan;
+const siteTitle = slogan ? `${site.fullName} – ${slogan}` : site.fullName;
 const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const canonical = new URL(percorsoPagina(Astro.url), Astro.site);
 const imageUrl = new URL(image, Astro.site);

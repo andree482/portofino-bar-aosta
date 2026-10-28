@@ -30,8 +30,7 @@ export const site = {
   // Ragione sociale completa: CHANTILLY SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA
   legalName: "Chantilly S.r.l.s.",
   vatNumber: "01249930072", // partita IVA, uguale al codice fiscale (obbligatoria nel footer)
-  tagline: "",
-  // La descrizione per Google, in ogni lingua, è in src/i18n/ (voce seo.descrizione).
+  // Slogan del titolo e descrizione per Google, in ogni lingua, sono in src/i18n/ (voce seo).
 
   // Google Analytics (statistiche delle visite). Parte solo se il visitatore accetta i cookie
   // facoltativi nel banner: vedi src/components/seo/GoogleAnalytics.astro.

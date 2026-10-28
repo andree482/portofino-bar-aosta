@@ -3,7 +3,8 @@
 // Claude, Perplexity...) a capire chi siamo, dove siamo, quando siamo aperti e come
 // contattarci, e a collegare il sito al profilo Instagram.
 // Due "schede" collegate tra loro:
-// - il locale (bar e caffetteria): nome e varianti, indirizzo, orari, telefono, menù, social;
+// - il locale (bar, caffetteria e negozio di abbigliamento): nome e varianti, indirizzo,
+//   orari, telefono, menù, social;
 // - il sito (WebSite): Google lo usa per il nome del sito mostrato sopra il risultato.
 import { site } from "../../data/site";
 import { lingue, linguaDa, testi } from "../../i18n/lingue";
@@ -15,10 +16,12 @@ const { instagram, facebook, tripadvisor } = site.social;
 const sameAs = [instagram, facebook, tripadvisor].filter(Boolean);
 
 const bar = {
-  "@type": ["BarOrPub", "CafeOrCoffeeShop"],
+  // Bar + caffetteria + boutique: così chi cerca "caffè e shopping ad Aosta" trova noi
+  "@type": ["BarOrPub", "CafeOrCoffeeShop", "ClothingStore"],
   "@id": `${siteUrl}#bar`,
   name: site.fullName,
   alternateName: site.alternateNames,
+  slogan: testi[lingua].seo.slogan,
   legalName: site.legalName || undefined,
   vatID: site.vatNumber ? `IT${site.vatNumber}` : undefined,
   // Descrizione nella lingua della pagina (src/i18n/, voce seo.descrizione)

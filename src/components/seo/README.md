@@ -6,7 +6,7 @@ Sono inclusi automaticamente in ogni pagina da `src/layouts/BaseLayout.astro`.
 | File                        | Cosa fa                                                                                           |
 | --------------------------- | ------------------------------------------------------------------------------------------------- |
 | `Seo.astro`                 | Titolo, descrizione, indirizzo canonico e anteprima per WhatsApp, Facebook e altri social.        |
-| `LocalBusinessSchema.astro` | Dati strutturati (schema.org): il locale (`BarOrPub` + `CafeOrCoffeeShop`) e il sito (`WebSite`). |
+| `LocalBusinessSchema.astro` | Dati strutturati (schema.org): il locale (`BarOrPub` + `CafeOrCoffeeShop` + `ClothingStore`) e il sito (`WebSite`). |
 | `GoogleAnalytics.astro`     | Statistiche delle visite con Google Analytics, solo dopo il consenso nel banner cookie.           |
 
 ## Da dove prendono i dati
@@ -14,7 +14,12 @@ Sono inclusi automaticamente in ogni pagina da `src/layouts/BaseLayout.astro`.
 Tutto arriva da `src/data/site.ts`. Compilando lì indirizzo, telefono, orari e social,
 Google li riceve automaticamente: **non serve toccare questi file**.
 
-La descrizione del sito per Google, nelle tre lingue, è in `src/i18n/` (voce `seo.descrizione`).
+Slogan del titolo e descrizione per Google, nelle tre lingue, sono in `src/i18n/` (voce `seo`).
+Contengono apposta le parole che la gente cerca ("bar", "boutique", "Aosta", "via Sant'Anselmo",
+"centro storico"): se li cambi, tienile.
+
+Nei dati strutturati il locale è insieme bar, caffetteria e negozio di abbigliamento
+(`ClothingStore`): così compare anche per ricerche tipo "caffè e shopping ad Aosta".
 
 ## Tre lingue
 
@@ -41,7 +46,8 @@ sanno che il sito e il profilo sono dello stesso bar.
 ## Assistenti AI (ChatGPT, Gemini, Claude, Perplexity…)
 
 - `src/pages/llms.txt.ts` crea la pagina `/llms.txt`: una scheda in testo semplice con chi
-  siamo, indirizzo, orari, contatti, Instagram e menù. Si aggiorna da sola con i dati di
+  siamo, per cosa siamo ideali (es. "un caffè mentre si fa shopping"), dove siamo in città,
+  orari, contatti, Instagram e menù. Si aggiorna da sola con i dati di
   `src/data/` e i testi di `src/i18n/it.ts`.
 - `public/robots.txt` nomina uno per uno i robot delle AI e li lascia leggere tutto il sito.
 
@@ -53,9 +59,9 @@ Si passano a `BaseLayout`:
 <BaseLayout title="Privacy" description="Informativa sul trattamento dei dati…">
 ```
 
-Il titolo diventa "Privacy | Portofino Boutique Café – Bar ad Aosta". Senza `title` resta solo
-il nome del locale (come in home). Lo slogan (`tagline` in `src/data/site.ts`) è facoltativo: se è
-vuoto il titolo è solo "Privacy | Portofino Boutique Café", senza trattino finale.
+Il titolo diventa "Privacy | Portofino Boutique Café – Bar, cucina e boutique ad Aosta". Senza
+`title` resta nome e slogan (come in home). Lo slogan (`seo.slogan` in `src/i18n/`) è
+facoltativo: se è vuoto il titolo è solo "Privacy | Portofino Boutique Café", senza trattino finale.
 
 ## Anteprima social
 

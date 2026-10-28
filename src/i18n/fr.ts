@@ -5,8 +5,9 @@ import type { Testi } from "./it";
 
 export const fr: Testi = {
   seo: {
+    slogan: "Bar, cuisine et boutique à Aoste",
     descrizione:
-      "Portofino Boutique Café à Aoste : petit-déjeuner, déjeuner, apéritif et shopping dans un même lieu. Découvrez le menu du jour, les horaires et où nous trouver.",
+      "Bar, cuisine et boutique de vêtements via Sant'Anselmo, dans le centre historique d'Aoste : petit-déjeuner, déjeuner, apéritif et shopping dans un même lieu. Menu, horaires et accès.",
   },
 
   nav: {
