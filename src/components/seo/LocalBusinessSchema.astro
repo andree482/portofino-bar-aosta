@@ -7,7 +7,7 @@
 //   orari, telefono, menù, social;
 // - il sito (WebSite): Google lo usa per il nome del sito mostrato sopra il risultato.
 import { site } from "../../data/site";
-import { lingue, linguaDa, testi } from "../../i18n/lingue";
+import { lingue, linguaDa, testi, traduci } from "../../i18n/lingue";
 
 const siteUrl = Astro.site?.toString() ?? "";
 const lingua = linguaDa(Astro.url);
@@ -27,7 +27,15 @@ const bar = {
   // Descrizione nella lingua della pagina (src/i18n/, voce seo.descrizione)
   description: testi[lingua].seo.descrizione,
   url: siteUrl,
-  image: new URL(site.ogImage, siteUrl).toString(),
+  // Anteprima social + foto vere del locale (site.photos), con didascalia nella lingua della pagina
+  image: [
+    new URL(site.ogImage, siteUrl).toString(),
+    ...site.photos.map((foto) => ({
+      "@type": "ImageObject",
+      contentUrl: new URL(foto.src, siteUrl).toString(),
+      caption: traduci(foto.caption, lingua),
+    })),
+  ],
   logo: new URL("/icon-512.png", siteUrl).toString(),
   priceRange: site.priceRange,
   servesCuisine: site.servesCuisine,

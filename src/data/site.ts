@@ -94,6 +94,101 @@ export const site = {
 
   /** Immagine per le anteprime social (1200x630), in /public. */
   ogImage: "/og-image.jpg",
+
+  // Foto vere del locale, in public/foto/ (lato lungo 1600px, circa 200-300 KB l'una).
+  // Non si vedono nelle pagine: vanno nei dati strutturati e in /llms.txt, così Google, Bing
+  // e le AI (ChatGPT...) mostrano le nostre foto e non quelle di altri locali.
+  // Per aggiungerne una: copia il file in public/foto/ con un nome chiaro e aggiungi una riga.
+  photos: [
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-ingresso.jpg",
+      caption: {
+        it: "Ingresso di Portofino Boutique Café in via Sant'Anselmo, Aosta",
+        fr: "Entrée du Portofino Boutique Café, via Sant'Anselmo, Aoste",
+        en: "Entrance of Portofino Boutique Café on Via Sant'Anselmo, Aosta",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-dehors-via-sant-anselmo.jpg",
+      caption: {
+        it: "Il dehors con ombrelloni in via Sant'Anselmo",
+        fr: "La terrasse avec parasols via Sant'Anselmo",
+        en: "The outdoor seating with umbrellas on Via Sant'Anselmo",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-boutique-e-dehors.jpg",
+      caption: {
+        it: "La vetrina della boutique di abbigliamento accanto ai tavoli del bar",
+        fr: "La vitrine de la boutique de vêtements à côté des tables du bar",
+        en: "The clothing boutique window next to the café tables",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-vetrina-boutique.jpg",
+      caption: {
+        it: "Vetrina della boutique di abbigliamento Portofino",
+        fr: "Vitrine de la boutique de vêtements Portofino",
+        en: "Window of the Portofino clothing boutique",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-bancone.jpg",
+      caption: {
+        it: "Il bancone con brioche e prodotti da forno",
+        fr: "Le comptoir avec viennoiseries",
+        en: "The counter with pastries",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-bar-caffe.jpg",
+      caption: {
+        it: "Il bar con la macchina del caffè",
+        fr: "Le bar avec la machine à café",
+        en: "The bar with the espresso machine",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-parete-logo.jpg",
+      caption: {
+        it: "La parete con il logo Portofino Boutique Café",
+        fr: "Le mur avec le logo Portofino Boutique Café",
+        en: "The wall with the Portofino Boutique Café logo",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-sala-parete-vini.jpg",
+      caption: {
+        it: "Tavolo davanti alla parete dei vini",
+        fr: "Table devant le mur à vins",
+        en: "Table in front of the wine wall",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-angolo-blu.jpg",
+      caption: {
+        it: "L'angolo con la parete blu e il tavolo rotondo",
+        fr: "Le coin avec le mur bleu et la table ronde",
+        en: "The corner with the blue wall and round table",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-sala.jpg",
+      caption: {
+        it: "La sala con i tavoli in legno",
+        fr: "La salle avec les tables en bois",
+        en: "The dining room with wooden tables",
+      },
+    },
+    {
+      src: "/foto/portofino-boutique-cafe-aosta-boutique-interno.jpg",
+      caption: {
+        it: "Calzature esposte nella boutique",
+        fr: "Chaussures exposées dans la boutique",
+        en: "Shoes on display in the boutique",
+      },
+    },
+  ] as { src: string; caption: Tradotto }[],
 };
 
 export type Site = typeof site;

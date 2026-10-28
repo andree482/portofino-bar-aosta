@@ -67,6 +67,17 @@ facoltativo: se è vuoto il titolo è solo "Privacy | Portofino Boutique Café",
 
 L'immagine è `public/og-image.jpg` (1200×630, foto della sala con il logo).
 
+## Foto del locale
+
+Le foto vere (ingresso, dehors, bancone, sala, boutique) sono in `public/foto/` e sono elencate in
+`photos` dentro `src/data/site.ts`, con una didascalia nelle tre lingue. Non compaiono nelle
+pagine: finiscono nei dati strutturati (`image`) e in `/llms.txt`. Servono perché Bing, Google e
+ChatGPT mostrino le nostre foto: senza, ChatGPT aveva usato la foto di un altro locale.
+
+- Nomi dei file: `portofino-boutique-cafe-aosta-<cosa>.jpg` (il nome aiuta i motori di ricerca).
+- Peso: lato lungo 1600px, qualità 80, circa 200-300 KB. Senza dati GPS del telefono.
+- Gli originali stanno in `seo-images/`, che non va su GitHub (è in `.gitignore`).
+
 ## Google Analytics
 
 - **ID** (`G-…`): `googleAnalyticsId` in `src/data/site.ts`. Per spegnere le statistiche lascia

@@ -6,6 +6,9 @@ dist/
 # impostazioni locali di Claude Code (non vanno su GitHub)
 .claude/
 
+# foto originali dal telefono (113 MB): sul sito vanno le versioni leggere in public/foto/
+seo-images/
+
 # dependencies
 node_modules/
 
