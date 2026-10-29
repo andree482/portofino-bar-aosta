@@ -26,20 +26,23 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
     <h2
       data-reveal
       style="--reveal-delay: 200ms"
-      class="mx-auto mt-[22px] max-w-[233px] font-serif text-[40px] leading-[1.37] tracking-tightest lg:-mt-[5px] lg:max-w-none lg:text-[min(90px,6.15vw)]"
+      class="mx-auto mt-[22px] max-w-[301px] font-serif text-[40px] leading-[1.37] tracking-tightest lg:-mt-[5px] lg:max-w-none lg:text-[min(90px,6.15vw)]"
     >
       {t.titolo}
     </h2>
     <p
       data-reveal
       style="--reveal-delay: 300ms"
-      class="mx-auto mt-[26px] max-w-[238px] text-[24px] tracking-tightest lg:mt-[19px] lg:max-w-[1105px] lg:text-[38px] leading-[1.2]"
+      class="mx-auto mt-[26px] max-w-[344px] text-[24px] tracking-tightest lg:mt-[19px] lg:max-w-[1105px] lg:text-[38px] leading-[1.2]"
     >
       {t.testo}
     </p>
   </div>
 
-  <!-- La foto si scopre dal basso e si assesta (animazioni image + zoom) -->
+  <!--
+    La foto si scopre dal basso e si assesta (animazioni image + zoom).
+    Su tablet è più alta nella stessa proporzione del contenitore ingrandito (vedi global.css).
+  -->
   <div
     data-reveal="image"
     style="--reveal-cover: var(--color-navy)"
@@ -51,7 +54,7 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
       alt={t.altFoto}
       widths={[640, 1024, 1536]}
       sizes="100vw"
-      class="h-[160px] w-full object-cover lg:h-[461px] lg:object-[center_56%]"
+      class="h-[160px] w-full object-cover min-[540px]:h-[200px] md:h-[240px] lg:h-[461px] lg:object-[center_56%]"
     />
   </div>
 </section>

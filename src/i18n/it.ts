@@ -82,15 +82,14 @@ export const it = {
 
   orari: {
     sopratitolo: "Orari e posizione",
-    titolo: "Ti aspettiamo qui!",
+    titolo: ["Ti aspettiamo", "qui!"],
     testo: "Per un pranzo, un caffè o un aperitivo: ecco dove trovarci.",
     quando: "Quando passare",
     chiuso: "Chiuso",
     variazioni: "Gli orari potranno variare",
     dove: "Dove siamo",
     indicazioni: "Ottieni indicazioni",
-    altCaffe: "Un caffè espresso sul bancone del Portofino",
-    altAperitivo: "Un caffè e uno spritz sul bancone del Portofino",
+    altFoto: "Un caffè, uno spritz e un piattino di olive sul bancone del Portofino",
     altMappa: "Mappa: come raggiungere Portofino Boutique Café",
   },
 

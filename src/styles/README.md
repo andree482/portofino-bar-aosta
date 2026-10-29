@@ -3,6 +3,14 @@
 | File             | Cosa contiene                                                          |
 | ---------------- | ---------------------------------------------------------------------- |
 | `global.css`     | Design token (colori, font, spaziature) e contenitore `container-site` |
+
+## Tablet
+
+Il Figma ha solo mobile (390px) e desktop (1440px). Tra 540px e 1023px `container-site` tiene la
+colonna del mobile (390px) e la ingrandisce con `zoom` (×1.25 da 540px, ×1.5 da 768px): testi,
+spazi e foto crescono insieme e le righe vanno a capo come nel Figma mobile. Gli elementi a tutta
+larghezza fuori dal contenitore (foto della pasta, altezza dell'header) hanno le stesse proporzioni
+scritte a mano con `min-[540px]:` e `md:`.
 | `animazioni.css` | Tutte le animazioni e le transizioni del sito                          |
 
 Lo script che fa partire le animazioni allo scroll è `src/scripts/animazioni.ts`.

@@ -6,7 +6,7 @@
 
 ## Cosa mostra
 
-- "info e contatti", titolo "Restiamo in contatto" e sottotitolo.
+- "info e contatti" (solo su mobile, come nel Figma), titolo "Restiamo in contatto" e sottotitolo.
 - Tre righe cliccabili (tutta la riga è il link):
   - **Numero**: avvia la chiamata (`tel:`).
   - **Email**: apre il programma di posta (`mailto:`).

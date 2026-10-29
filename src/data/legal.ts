@@ -69,7 +69,7 @@ export const privacyPage: Record<Lingua, LegalPage> = {
   it: {
     title: "Privacy",
     description: `Informativa sul trattamento dei dati personali di ${site.fullName}, Aosta.`,
-    updatedAt: "27 ottobre 2026",
+    updatedAt: "29 ottobre 2026",
     link: { label: "Informativa cookie", href: "/cookie" },
     sections: [
       {
@@ -110,6 +110,13 @@ export const privacyPage: Record<Lingua, LegalPage> = {
         ],
       },
       {
+        id: "immagini",
+        title: "Immagini del sito",
+        body: [
+          "Le fotografie e le immagini presenti sul sito hanno scopo puramente illustrativo e dimostrativo: servono a dare un'idea dell'atmosfera del locale e di ciò che proponiamo. Piatti, bevande, prodotti, ambienti e allestimenti reali possono essere diversi da quelli mostrati.",
+        ],
+      },
+      {
         id: "diritti-e-contatti",
         title: "Diritti e contatti",
         body: [
@@ -124,7 +131,7 @@ export const privacyPage: Record<Lingua, LegalPage> = {
   fr: {
     title: "Vie privée",
     description: `Politique de confidentialité du ${site.fullName}, Aoste.`,
-    updatedAt: "27 octobre 2026",
+    updatedAt: "29 octobre 2026",
     link: { label: "Politique de cookies", href: "/cookie" },
     sections: [
       {
@@ -165,6 +172,13 @@ export const privacyPage: Record<Lingua, LegalPage> = {
         ],
       },
       {
+        id: "immagini",
+        title: "Images du site",
+        body: [
+          "Les photos et images présentes sur le site sont fournies à titre purement illustratif et de démonstration : elles donnent une idée de l'ambiance du lieu et de ce que nous proposons. Les plats, boissons, produits, espaces et aménagements réels peuvent différer de ceux qui sont montrés.",
+        ],
+      },
+      {
         id: "diritti-e-contatti",
         title: "Vos droits et nous contacter",
         body: [
@@ -179,7 +193,7 @@ export const privacyPage: Record<Lingua, LegalPage> = {
   en: {
     title: "Privacy",
     description: `Privacy policy of ${site.fullName}, Aosta.`,
-    updatedAt: "27 October 2026",
+    updatedAt: "29 October 2026",
     link: { label: "Cookie policy", href: "/cookie" },
     sections: [
       {
@@ -217,6 +231,13 @@ export const privacyPage: Record<Lingua, LegalPage> = {
           `The site is hosted by ${hosting.name}, which processes browsing data on our behalf as a data processor. ${hosting.name} may transfer data to the United States: the transfer is covered by the EU-U.S. Data Privacy Framework and by the European Commission's standard contractual clauses. Provider's policy: ${hosting.privacyUrl.en}`,
           `Only with your consent, visit statistics are handled by Google Analytics, provided by ${google.name}, which processes the data on our behalf as a data processor. Google may transfer data to the United States: the transfer is covered by the EU-U.S. Data Privacy Framework, in which Google participates. Google's policy: ${google.privacyUrl}`,
           "The site contains links to external services, such as Google Maps and Instagram. If you open them, you leave our site and those services process your data according to their own policies.",
+        ],
+      },
+      {
+        id: "immagini",
+        title: "Images on this site",
+        body: [
+          "The photos and images on this site are for illustrative and demonstration purposes only: they give an idea of the atmosphere of the place and of what we offer. Actual dishes, drinks, products, spaces and furnishings may differ from those shown.",
         ],
       },
       {

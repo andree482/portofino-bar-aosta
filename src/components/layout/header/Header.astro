@@ -28,7 +28,8 @@ const prenota = bookingUrl.startsWith("/")
 
 <header
   class:list={[
-    "z-40 h-[84px] w-full lg:h-[144px]",
+    // Su tablet la barra cresce come il contenitore ingrandito (84px × 1.25 e × 1.5, vedi global.css)
+    "z-40 h-[84px] w-full min-[540px]:h-[105px] md:h-[126px] lg:h-[144px]",
     overlay ? "absolute inset-x-0 top-0" : "relative",
   ]}
 >

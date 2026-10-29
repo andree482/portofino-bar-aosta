@@ -30,7 +30,7 @@ solo dopo che il dito si è staccato dallo schermo; con "riduci movimento" attiv
 | File                                          | A cosa serve                                               |
 | --------------------------------------------- | ---------------------------------------------------------- |
 | `src/assets/images/hero-sala.jpg`             | Foto di sfondo (il blu a sinistra fa già parte della foto) |
-| `src/assets/images/hero-sfumatura-mobile.svg` | Solo mobile: alone blu dietro al testo per la leggibilità  |
+| `src/assets/images/hero-sfumatura-mobile.svg` | Solo mobile e tablet: alone blu dietro al testo per la leggibilità (sta nel contenitore, così su tablet si ingrandisce con il testo) |
 
 ## Come modificarla
 

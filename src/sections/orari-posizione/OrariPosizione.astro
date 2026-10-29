@@ -4,8 +4,7 @@
 import { Image } from "astro:assets";
 import Button from "../../components/ui/Button.astro";
 import { site, fullAddress, directionsUrl } from "../../data/site";
-import photoDesktop from "../../assets/images/orari-aperitivo.jpg";
-import photoMobile from "../../assets/images/orari-caffe.jpg";
+import photo from "../../assets/images/orari-aperitivo.jpg";
 import mapImage from "../../assets/images/mappa-portofino.jpg";
 import { linguaDa, testi, traduci } from "../../i18n/lingue";
 
@@ -20,8 +19,15 @@ const t = testi[lingua].orari;
       <p class="text-[18px] font-medium text-brown lg:text-[30px]">
         {t.sopratitolo}
       </p>
-      <h2 class="max-w-[259px] font-serif text-[50px] leading-[0.95] tracking-tightest lg:-mt-[16px] lg:max-w-none lg:text-[80px] lg:leading-[1.375]">
-        {t.titolo}
+      <h2 class="font-serif text-[50px] leading-[0.95] tracking-tightest lg:-mt-[16px] lg:text-[80px] lg:leading-[1.375]">
+        <!-- Su mobile ogni riga va a capo (come nel Figma), su desktop il titolo sta su una riga -->
+        {t.titolo.map((riga, i) => (
+          <>
+            {i > 0 && <br class="lg:hidden" />}
+            {i > 0 && " "}
+            {riga}
+          </>
+        ))}
       </h2>
       <p class="mt-[8px] max-w-[295px] text-[18px] leading-[1.2] lg:leading-normal tracking-tightest lg:mt-0 lg:max-w-none lg:text-[24px]">
         {t.testo}
@@ -50,34 +56,20 @@ const t = testi[lingua].orari;
           {t.variazioni}
         </p>
         <!--
-          Foto diversa su mobile (solo caffè) e su desktop (caffè e aperitivo), come nel design.
-          Ritaglio e proporzioni sono quelli del Figma (la foto è leggermente deformata):
-          - mobile: alta 151.6% del riquadro e spostata in alto del 51.6%;
-          - desktop: 105.67% × 111.6% del riquadro, spostata del 5.67% a sinistra e 5.8% in alto.
+          Foto del bancone con caffè, spritz e olive: la stessa su mobile e desktop, così si vede
+          tutta la scena. Proporzioni (572 × 256) e ritaglio sono quelli del Figma desktop
+          (105.67% × 111.6% del riquadro, spostata del 5.67% a sinistra e 5.8% in alto).
         -->
         <div
           data-reveal="image"
           style="--reveal-delay: 200ms"
-          class="relative mt-[10px] h-[109px] overflow-hidden lg:hidden"
+          class="relative mt-[10px] aspect-[572/256] w-full max-w-[572px] overflow-hidden lg:mt-[8px]"
         >
           <Image
-            src={photoMobile}
-            alt={t.altCaffe}
-            widths={[400, 800]}
-            sizes="100vw"
-            class="absolute top-[-51.6%] left-0 h-[151.6%] w-full max-w-none"
-          />
-        </div>
-        <div
-          data-reveal="image"
-          style="--reveal-delay: 200ms"
-          class="relative mt-[8px] hidden aspect-[572/256] w-full max-w-[572px] overflow-hidden lg:block"
-        >
-          <Image
-            src={photoDesktop}
-            alt={t.altAperitivo}
-            widths={[650, 1300]}
-            sizes="605px"
+            src={photo}
+            alt={t.altFoto}
+            widths={[400, 650, 900, 1300]}
+            sizes="(min-width: 1024px) 605px, (min-width: 540px) 585px, 100vw"
             class="absolute top-[-5.8%] left-[-5.67%] h-[111.6%] w-[105.67%] max-w-none"
           />
         </div>

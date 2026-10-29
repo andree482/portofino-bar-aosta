@@ -30,15 +30,18 @@ const t = testi[linguaDa(Astro.url)].hero;
     fetchpriority="high"
     class="absolute inset-0 -z-10 size-full object-cover object-[52%_center]"
   />
-  <!-- Solo mobile: sfumatura blu dietro al testo per renderlo leggibile -->
-  <img
-    src={mobileShade.src}
-    alt=""
-    aria-hidden="true"
-    class="absolute top-[-140px] left-[-216px] -z-10 h-[768px] w-[820px] max-w-none lg:hidden"
-  />
+  <div class="container-site relative flex flex-col pt-[153px] pb-12 lg:justify-center lg:py-[144px]">
+    <!--
+      Solo mobile e tablet: sfumatura blu dietro al testo per renderlo leggibile.
+      Sta dentro il contenitore così su tablet si ingrandisce e segue il testo.
+    -->
+    <img
+      src={mobileShade.src}
+      alt=""
+      aria-hidden="true"
+      class="absolute top-[-140px] left-[-216px] -z-10 h-[768px] w-[820px] max-w-none lg:hidden"
+    />
 
-  <div class="container-site flex flex-col pt-[153px] pb-12 lg:justify-center lg:py-[144px]">
     <h1
       data-reveal
       style="--reveal-delay: 150ms"

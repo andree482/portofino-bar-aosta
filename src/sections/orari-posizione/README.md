@@ -51,16 +51,21 @@ L'indirizzo (`address`: Via Sant'Anselmo, 6/b – 11100 Aosta) e il link alla sc
 
 ## Foto
 
-Come nel design, su mobile si vede `orari-caffe.jpg` e su desktop `orari-aperitivo.jpg`.
+Su mobile e su desktop c'è la stessa foto: `orari-aperitivo.jpg` (bancone con caffè, spritz e
+olive), più completa di quella con il solo caffè prevista dal Figma mobile.
 
-Ritaglio e proporzioni sono **identici al Figma**, dove la foto è leggermente deformata
-(allungata in orizzontale rispetto all'originale):
-
-- mobile: foto alta il 151.6% del riquadro, spostata in alto del 51.6%;
-- desktop: foto 105.67% × 111.6% del riquadro, spostata del 5.67% a sinistra e del 5.8% in alto.
+Il riquadro ha le proporzioni del Figma desktop (572 × 256) anche su mobile, così la scena si
+vede tutta. Il ritaglio è **identico al Figma**, dove la foto è leggermente deformata (allungata
+in orizzontale rispetto all'originale): 105.67% × 111.6% del riquadro, spostata del 5.67% a
+sinistra e del 5.8% in alto.
 
 Se cambi foto, conviene tornare a un ritaglio normale: togli le classi `absolute`, `top-…`,
 `left-…`, `h-…`, `w-…` dall'immagine e usa `size-full object-cover`.
+
+## Titolo
+
+Il titolo ("Ti aspettiamo qui!") in `src/i18n/` è un elenco di righe: su mobile e tablet ogni
+riga va a capo come nel Figma ("Ti aspettiamo / qui!"), su desktop sta tutto su una riga.
 
 ## Nota
 
