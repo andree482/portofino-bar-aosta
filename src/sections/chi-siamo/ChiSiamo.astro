@@ -12,7 +12,7 @@ const t = testi[linguaDa(Astro.url)].chiSiamo;
 <section id="chi-siamo" class="overflow-hidden bg-cream text-navy">
   <div class="container-site relative pt-[50px] lg:pt-[145px] lg:pr-[30px] lg:pl-[90px]">
     <!--
-      Solo desktop: cornice decorativa larga, dal bordo della foto fino al lato destro.
+      Solo desktop: cornice decorativa larga, dal bordo della foto fino al lato destro (a filo a 1440px come nel Figma, sotto 1440px un po' più dentro per non uscire dallo schermo).
       Si costruisce come una casa (data-cornice, vedi src/scripts/cornici.ts), dopo l'arco della foto.
     -->
     <div
@@ -20,7 +20,7 @@ const t = testi[linguaDa(Astro.url)].chiSiamo;
       data-cornice
       style="--reveal-delay: 900ms; --cornice-durata: 2.6s"
       aria-hidden="true"
-      class="pointer-events-none absolute top-[99px] right-0 -bottom-12 left-[55px] hidden rounded-t-[347px] border-[3px] border-b-0 border-navy lg:block"
+      class="pointer-events-none absolute top-[99px] right-0 -bottom-12 left-[55px] hidden rounded-t-[347px] border-[3px] border-b-0 border-navy lg:block lg:max-[1439px]:right-[14px]"
     ></div>
 
     <div class="grid lg:grid-cols-[625fr_614fr] lg:grid-rows-[auto_1fr] lg:gap-x-[65px]">
