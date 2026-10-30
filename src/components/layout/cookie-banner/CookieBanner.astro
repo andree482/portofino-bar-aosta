@@ -61,16 +61,21 @@ const buttonClass =
         >
           {t.daConfigurare}
         </span>
-        <!-- Interruttore: compare solo dopo "Personalizza" -->
-        <span
-          class="relative inline-flex items-center"
+        <!--
+          Interruttore: compare solo dopo "Personalizza".
+          È un'etichetta della casella, così si attiva toccandolo in qualsiasi punto;
+          before: allarga un po' la zona da toccare col dito.
+        -->
+        <label
+          for="cookie-optional"
+          class="relative inline-flex cursor-pointer items-center before:absolute before:-inset-2"
           data-cookie-switch
           hidden
         >
           <input id="cookie-optional" type="checkbox" class="peer sr-only" />
           <span class="h-6 w-11 rounded-full bg-navy/30 transition-colors peer-checked:bg-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"></span>
           <span class="pointer-events-none absolute left-1 size-4 rounded-full bg-cream transition-transform peer-checked:translate-x-5"></span>
-        </span>
+        </label>
       </li>
     </ul>
 
