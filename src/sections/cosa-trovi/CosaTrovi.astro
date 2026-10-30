@@ -42,7 +42,7 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
   <!--
     La foto si scopre dal basso e si assesta (animazioni image + zoom).
     Telefono e tablet in verticale: stesse proporzioni del Figma mobile (390 × 160), così non si schiaccia.
-    Da 1024px: l'altezza del Figma desktop cambia con la scala del contenitore (--scala, vedi global.css).
+    Da 1024px: altezza del Figma desktop.
   -->
   <div
     data-reveal="image"
@@ -55,7 +55,7 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
       alt={t.altFoto}
       widths={[640, 1024, 1536]}
       sizes="100vw"
-      class="aspect-[390/160] w-full object-cover lg:aspect-auto lg:h-[calc(461px*var(--scala))] lg:object-[center_56%]"
+      class="aspect-[390/160] w-full object-cover lg:aspect-auto lg:h-[461px] lg:object-[center_56%]"
     />
   </div>
 </section>

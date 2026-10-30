@@ -37,8 +37,8 @@ const {
 
 // La freccia è larga 15px: per centrarla nel punto indicato si sposta di metà larghezza.
 const style = [
-  `--arrow-length:${arrowLength}px`,
-  arrowOffset !== undefined && `--arrow-offset:${arrowOffset - 7.5}px`,
+  `--arrow-length:${arrowLength / 16}rem`,
+  arrowOffset !== undefined && `--arrow-offset:${(arrowOffset - 7.5) / 16}rem`,
   typeof extraStyle === "string" && extraStyle,
 ]
   .filter(Boolean)
@@ -82,8 +82,7 @@ const arrowPosition =
     <span class="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-current"></span>
     <svg
       class="absolute bottom-0 left-0"
-      width="15"
-      height="9"
+      style="width:0.9375rem;height:0.5625rem"
       viewBox="0 0 15 9"
       fill="none"
       aria-hidden="true"

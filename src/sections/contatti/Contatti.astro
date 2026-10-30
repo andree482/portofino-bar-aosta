@@ -31,9 +31,8 @@ const contacts = [
 ];
 
 // Il valore arriva fino alla fine della linea: se non ci sta finisce con "…", sempre allineati a destra.
-// Da 540px (tablet e desktop) etichetta più stretta e testo più piccolo: numero ed email si leggono per intero.
 const rowClass =
-  "grid grid-cols-[167px_minmax(0,1fr)] items-center py-[19px] min-[540px]:grid-cols-[95px_minmax(0,1fr)] lg:grid-cols-[150px_minmax(0,1fr)] lg:py-[27px]";
+  "grid grid-cols-[167px_minmax(0,1fr)] items-center py-[19px] lg:grid-cols-[249px_minmax(0,1fr)] lg:py-[27px]";
 ---
 
 <section id="contatti" class="bg-navy text-white">
@@ -50,7 +49,7 @@ const rowClass =
         {t.testo}
       </p>
 
-      <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest min-[540px]:text-[18px] lg:mt-[25px] lg:text-[26px]">
+      <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest lg:mt-[25px] lg:text-[30px] lg:tracking-label">
         {contacts.map((contact, index) => (
           <li data-reveal style={`--reveal-delay: ${150 + index * 100}ms`}>
             {contact.href ? (

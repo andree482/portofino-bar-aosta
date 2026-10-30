@@ -57,8 +57,7 @@ const d = `M${r(tail[0])} ${r(tail[1])}L${r(tip[0])} ${r(tip[1])}M${r(headA[0])}
 
 <svg
   class:list={["shrink-0", className]}
-  width={r(width)}
-  height={r(height)}
+  style={`width:${r(width) / 16}rem;height:${r(height) / 16}rem`}
   viewBox={`${r(minX)} ${r(minY)} ${r(width)} ${r(height)}`}
   fill="none"
   aria-hidden="true"

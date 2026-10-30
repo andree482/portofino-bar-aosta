@@ -7,20 +7,18 @@
 ## Tablet
 
 Il Figma ha solo mobile (390px) e desktop (1440px): le misure intermedie mostrano una delle due
-tavole in scala. `container-site` applica `zoom: var(--scala)`; i valori di `--scala` sono in
-`global.css`.
+tavole in proporzione. Nei file si scrivono le misure del Figma in px; `postcss.config.mjs` le
+trasforma in rem e `global.css` ("Scala del sito") cambia la grandezza di base della pagina.
 
-- **Tablet in verticale (540-1023px):** colonna del mobile (390px) ingrandita, ×1.25 da 540px e ×1.5
-  da 768px.
-- **Tablet in orizzontale e PC piccoli (1024-1439px):** tavola desktop (1440px) rimpicciolita a
-  scatti, da ×0.71 a ×0.95, in modo che ci stia sempre tutta.
-- **Da 1440px:** tavola desktop a grandezza reale.
+- **Tablet in verticale (540-1023px):** tavola mobile, ×1.5 a 820px (iPad Air).
+- **Tablet in orizzontale e PC piccoli (1024-1439px):** tavola desktop, ×0.82 a 1180px (iPad Air).
+- **Sotto 540px e da 1440px:** grandezza reale.
 
-Testi, spazi e foto cambiano insieme e le righe vanno a capo come nel Figma. Regole per chi modifica:
+Regole per chi modifica:
 
-- dentro `container-site` si scrivono le misure del Figma in px, senza `vw` (lo zoom le ridurrebbe due volte);
-- fuori dal contenitore (altezza dell'header, foto della pasta) si usa la scala a mano:
-  `h-[calc(461px*var(--scala))]`.
+- non usare `vw` per testi e spazi: la scala è già proporzionale alla larghezza;
+- non usare `zoom`: Safari su iPad non lo applica ai testi;
+- misure scritte nell'HTML (attributi `width`, `style`) vanno in rem: i px lì non vengono trasformati.
 | `animazioni.css` | Tutte le animazioni e le transizioni del sito                          |
 
 Lo script che fa partire le animazioni allo scroll è `src/scripts/animazioni.ts`.

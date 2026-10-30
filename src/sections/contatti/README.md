@@ -27,7 +27,6 @@ Finché un campo è vuoto, la riga mostra il segnaposto del design (`[Numero]`, 
 
 ## Aspetto dei valori
 
-- Da 540px (tablet e desktop) l'etichetta è più stretta e il testo più piccolo del Figma, così numero ed email si leggono per intero.
 - Niente frecce ↗ (tolte rispetto al Figma): il valore ha una **linea sotto** per far capire che
   è cliccabile. Al passaggio del mouse la linea diventa bianca piena e il testo più luminoso.
 - Il valore arriva fino alla fine della linea. Se è troppo lungo (succede con email e Instagram,

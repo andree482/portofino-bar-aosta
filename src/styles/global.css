@@ -27,18 +27,14 @@
  * Contenitore delle sezioni: largo al massimo 1440px come la tavola Figma,
  * con margini di 20px su mobile e 90px su desktop.
  *
- * Il Figma ha solo mobile (390px) e desktop (1440px): tutte le misure intermedie mostrano una
- * di queste due tavole in scala, con `zoom` (valore in --scala, vedi sotto). Testi, spazi e
- * foto cambiano insieme e le righe vanno a capo come nel Figma.
- * Gli elementi a tutta larghezza fuori dal contenitore (es. la foto della pasta) usano la
- * stessa scala: h-[calc(461px*var(--scala))].
+ * Da 540px a 1023px resta la colonna del mobile: si ingrandisce con tutto il sito (vedi "Scala
+ * del sito" più sotto), così le righe vanno a capo come nel Figma mobile.
  */
 @utility container-site {
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
   padding-inline: 20px;
-  zoom: var(--scala);
 
   @media (width >= 33.75rem) and (width < 64rem) {
     max-width: 390px;
@@ -51,26 +47,24 @@
 
 @layer base {
   /*
-   * Scala della tavola Figma, in base alla larghezza dello schermo:
-   * - telefono: tavola mobile a grandezza reale (1);
-   * - tablet in verticale, da 540px: tavola mobile ingrandita;
-   * - tablet in orizzontale e PC piccoli, da 1024px: tavola desktop (1440px) rimpicciolita, a
-   *   scatti, in modo che ci stia sempre tutta;
-   * - da 1440px: tavola desktop a grandezza reale (1).
+   * Scala del sito. Il Figma ha solo mobile (390px) e desktop (1440px): le misure in mezzo
+   * mostrano una delle due tavole in proporzione. Tutte le misure sono in rem (vedi
+   * postcss.config.mjs), quindi basta cambiare la grandezza di base della pagina.
+   * - sotto 540px e da 1440px: grandezza reale;
+   * - da 540px a 1023px (tablet in verticale): tavola mobile, ×1.5 a 820px (iPad Air);
+   * - da 1024px a 1439px (tablet in orizzontale): tavola desktop, ×0.82 a 1180px (iPad Air).
+   * Niente CSS zoom: Safari su iPad non lo applica ai testi.
    */
-  :root {
-    --scala: 1;
+  @media (width >= 540px) and (width < 1024px) {
+    html {
+      font-size: 2.925vw; /* 16px a 547px di larghezza */
+    }
   }
-  @media (width >= 540px) { :root { --scala: 1.25; } }
-  @media (width >= 768px) { :root { --scala: 1.5; } }
-  @media (width >= 1024px) { :root { --scala: 0.71; } }
-  @media (width >= 1080px) { :root { --scala: 0.75; } }
-  @media (width >= 1152px) { :root { --scala: 0.8; } }
-  @media (width >= 1180px) { :root { --scala: 0.82; } }
-  @media (width >= 1240px) { :root { --scala: 0.86; } }
-  @media (width >= 1296px) { :root { --scala: 0.9; } }
-  @media (width >= 1368px) { :root { --scala: 0.95; } }
-  @media (width >= 1440px) { :root { --scala: 1; } }
+  @media (width >= 1024px) and (width < 1440px) {
+    html {
+      font-size: 1.1111vw; /* 16px a 1440px di larghezza */
+    }
+  }
 
   /* Scorrimento morbido verso le sezioni (#menu, #orari...). La classe la aggiunge
      src/scripts/scorrimento-morbido.ts a pagina caricata: arrivando da un'altra pagina
