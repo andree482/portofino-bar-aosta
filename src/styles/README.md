@@ -6,11 +6,21 @@
 
 ## Tablet
 
-Il Figma ha solo mobile (390px) e desktop (1440px). Tra 540px e 1023px `container-site` tiene la
-colonna del mobile (390px) e la ingrandisce con `zoom` (×1.25 da 540px, ×1.5 da 768px): testi,
-spazi e foto crescono insieme e le righe vanno a capo come nel Figma mobile. Gli elementi a tutta
-larghezza fuori dal contenitore (foto della pasta, altezza dell'header) hanno le stesse proporzioni
-scritte a mano con `min-[540px]:` e `md:`.
+Il Figma ha solo mobile (390px) e desktop (1440px): le misure intermedie mostrano una delle due
+tavole in scala. `container-site` applica `zoom: var(--scala)`; i valori di `--scala` sono in
+`global.css`.
+
+- **Tablet in verticale (540-1023px):** colonna del mobile (390px) ingrandita, ×1.25 da 540px e ×1.5
+  da 768px.
+- **Tablet in orizzontale e PC piccoli (1024-1439px):** tavola desktop (1440px) rimpicciolita a
+  scatti, da ×0.71 a ×0.95, in modo che ci stia sempre tutta.
+- **Da 1440px:** tavola desktop a grandezza reale.
+
+Testi, spazi e foto cambiano insieme e le righe vanno a capo come nel Figma. Regole per chi modifica:
+
+- dentro `container-site` si scrivono le misure del Figma in px, senza `vw` (lo zoom le ridurrebbe due volte);
+- fuori dal contenitore (altezza dell'header, foto della pasta) si usa la scala a mano:
+  `h-[calc(461px*var(--scala))]`.
 | `animazioni.css` | Tutte le animazioni e le transizioni del sito                          |
 
 Lo script che fa partire le animazioni allo scroll è `src/scripts/animazioni.ts`.

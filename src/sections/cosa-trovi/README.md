@@ -9,7 +9,7 @@ Introduzione alla cucina. File: `CosaTrovi.astro`. Ancora: `#cosa-trovi`.
 - Etichetta oro "bar - cucina - abbigliamento".
 - "Cosa trovi da noi" e titolo grande "A pranzo, scopri i sapori di stagione".
 - Testo sul menù stagionale.
-- Foto a tutta larghezza (`src/assets/images/pranzo-pasta.jpg`): alta 160px su mobile e 461px su desktop.
+- Foto a tutta larghezza (`src/assets/images/pranzo-pasta.jpg`): su telefono e tablet in verticale mantiene le proporzioni del Figma mobile (390 × 160), da 1024px è alta 461px in scala (`--scala`).
 
 ## Come modificarla
 

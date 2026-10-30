@@ -27,28 +27,21 @@
  * Contenitore delle sezioni: largo al massimo 1440px come la tavola Figma,
  * con margini di 20px su mobile e 90px su desktop.
  *
- * Tablet (da 540px a 1023px): il Figma ha solo mobile (390px) e desktop (1440px). Invece di
- * allargare il layout mobile (righe lunghissime e testi piccoli), si tiene la colonna del
- * mobile larga 390px e la si ingrandisce tutta insieme con `zoom`: testi, spazi e foto
- * crescono nella stessa proporzione e le righe vanno a capo esattamente come nel Figma mobile.
- * - da 540px: ×1.25 (colonna di circa 490px);
- * - da 768px: ×1.5 (colonna di circa 585px).
- * Gli elementi a tutta larghezza fuori dal contenitore (es. la foto della pasta) vanno
- * ingranditi a mano con le stesse proporzioni.
+ * Il Figma ha solo mobile (390px) e desktop (1440px): tutte le misure intermedie mostrano una
+ * di queste due tavole in scala, con `zoom` (valore in --scala, vedi sotto). Testi, spazi e
+ * foto cambiano insieme e le righe vanno a capo come nel Figma.
+ * Gli elementi a tutta larghezza fuori dal contenitore (es. la foto della pasta) usano la
+ * stessa scala: h-[calc(461px*var(--scala))].
  */
 @utility container-site {
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
   padding-inline: 20px;
+  zoom: var(--scala);
 
   @media (width >= 33.75rem) and (width < 64rem) {
     max-width: 390px;
-    zoom: 1.25;
-  }
-
-  @media (width >= 48rem) and (width < 64rem) {
-    zoom: 1.5;
   }
 
   @media (width >= 64rem) {
@@ -57,6 +50,28 @@
 }
 
 @layer base {
+  /*
+   * Scala della tavola Figma, in base alla larghezza dello schermo:
+   * - telefono: tavola mobile a grandezza reale (1);
+   * - tablet in verticale, da 540px: tavola mobile ingrandita;
+   * - tablet in orizzontale e PC piccoli, da 1024px: tavola desktop (1440px) rimpicciolita, a
+   *   scatti, in modo che ci stia sempre tutta;
+   * - da 1440px: tavola desktop a grandezza reale (1).
+   */
+  :root {
+    --scala: 1;
+  }
+  @media (width >= 540px) { :root { --scala: 1.25; } }
+  @media (width >= 768px) { :root { --scala: 1.5; } }
+  @media (width >= 1024px) { :root { --scala: 0.71; } }
+  @media (width >= 1080px) { :root { --scala: 0.75; } }
+  @media (width >= 1152px) { :root { --scala: 0.8; } }
+  @media (width >= 1180px) { :root { --scala: 0.82; } }
+  @media (width >= 1240px) { :root { --scala: 0.86; } }
+  @media (width >= 1296px) { :root { --scala: 0.9; } }
+  @media (width >= 1368px) { :root { --scala: 0.95; } }
+  @media (width >= 1440px) { :root { --scala: 1; } }
+
   /* Scorrimento morbido verso le sezioni (#menu, #orari...). La classe la aggiunge
      src/scripts/scorrimento-morbido.ts a pagina caricata: arrivando da un'altra pagina
      (es. dalla privacy a /#chi-siamo) la home si apre già sulla sezione, senza scorrere

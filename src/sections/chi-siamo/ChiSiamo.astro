@@ -20,7 +20,7 @@ const t = testi[linguaDa(Astro.url)].chiSiamo;
       data-cornice
       style="--reveal-delay: 900ms; --cornice-durata: 2.6s"
       aria-hidden="true"
-      class="pointer-events-none absolute top-[99px] right-0 -bottom-12 left-[55px] hidden rounded-t-[min(347px,24vw)] border-[3px] border-b-0 border-navy lg:block"
+      class="pointer-events-none absolute top-[99px] right-0 -bottom-12 left-[55px] hidden rounded-t-[347px] border-[3px] border-b-0 border-navy lg:block"
     ></div>
 
     <div class="grid lg:grid-cols-[625fr_614fr] lg:grid-rows-[auto_1fr] lg:gap-x-[65px]">
@@ -29,7 +29,7 @@ const t = testi[linguaDa(Astro.url)].chiSiamo;
         <p class="text-[12px] font-medium tracking-tightest lg:text-[24px]">
           {t.sopratitolo}
         </p>
-        <h2 class="font-serif text-[35px] leading-[1.108] tracking-tightest lg:text-[min(65px,4.52vw)]">
+        <h2 class="font-serif text-[35px] leading-[1.108] tracking-tightest lg:text-[65px]">
           {t.titolo.map((riga, i) => (
             <>
               {i > 0 && <br />}
@@ -78,7 +78,7 @@ const t = testi[linguaDa(Astro.url)].chiSiamo;
         <p
           data-reveal
           style="--reveal-delay: 100ms"
-          class="mt-[13px] text-[20px] tracking-tightest lg:mt-3 lg:text-[min(40px,2.78vw)] leading-[1.2] lg:font-medium"
+          class="mt-[13px] text-[20px] tracking-tightest lg:mt-3 lg:text-[40px] leading-[1.2] lg:font-medium"
         >
           {t.testo}
         </p>

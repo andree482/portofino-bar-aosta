@@ -59,11 +59,11 @@ const linkButtonClass =
     >
       <h2
         id="indice"
-        class="text-[27px] font-bold tracking-tightest lg:text-[min(60px,4.2vw)]"
+        class="text-[27px] font-bold tracking-tightest lg:text-[60px]"
       >
         {t.indice}
       </h2>
-      <ol class="mt-[20px] text-[16px] leading-[1.683] tracking-tightest lg:mt-[54px] lg:text-[min(37px,2.57vw)] lg:leading-[1.4]">
+      <ol class="mt-[20px] text-[16px] leading-[1.683] tracking-tightest lg:mt-[54px] lg:text-[37px] lg:leading-[1.4]">
         {page.sections.map((section) => (
           <li>
             <a href={`#${section.id}`} class="underline underline-offset-4">
@@ -90,7 +90,7 @@ const linkButtonClass =
           id={section.id}
           class="scroll-mt-6 border-b border-navy py-[31px] lg:border-b-0 lg:py-0"
         >
-          <h2 class="flex items-baseline gap-[20px] text-[27px] tracking-tightest lg:gap-[24px] lg:text-[min(50px,3.3vw)] lg:tracking-normal">
+          <h2 class="flex items-baseline gap-[20px] text-[27px] tracking-tightest lg:gap-[24px] lg:text-[50px] lg:tracking-normal">
             <span class="font-bold lg:font-normal">{number(index)}</span>
             <span class="font-serif lg:tracking-tightest">{section.title}</span>
           </h2>

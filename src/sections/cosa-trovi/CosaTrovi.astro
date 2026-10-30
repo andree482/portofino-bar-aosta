@@ -26,7 +26,7 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
     <h2
       data-reveal
       style="--reveal-delay: 200ms"
-      class="mx-auto mt-[22px] max-w-[301px] font-serif text-[40px] leading-[1.37] tracking-tightest lg:-mt-[5px] lg:max-w-none lg:text-[min(90px,6.15vw)]"
+      class="mx-auto mt-[22px] max-w-[301px] font-serif text-[40px] leading-[1.37] tracking-tightest lg:-mt-[5px] lg:max-w-none lg:text-[90px]"
     >
       {t.titolo}
     </h2>
@@ -41,7 +41,8 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
 
   <!--
     La foto si scopre dal basso e si assesta (animazioni image + zoom).
-    Su tablet è più alta nella stessa proporzione del contenitore ingrandito (vedi global.css).
+    Telefono e tablet in verticale: stesse proporzioni del Figma mobile (390 × 160), così non si schiaccia.
+    Da 1024px: l'altezza del Figma desktop cambia con la scala del contenitore (--scala, vedi global.css).
   -->
   <div
     data-reveal="image"
@@ -54,7 +55,7 @@ const t = testi[linguaDa(Astro.url)].cosaTrovi;
       alt={t.altFoto}
       widths={[640, 1024, 1536]}
       sizes="100vw"
-      class="h-[160px] w-full object-cover min-[540px]:h-[200px] md:h-[240px] lg:h-[461px] lg:object-[center_56%]"
+      class="aspect-[390/160] w-full object-cover lg:aspect-auto lg:h-[calc(461px*var(--scala))] lg:object-[center_56%]"
     />
   </div>
 </section>

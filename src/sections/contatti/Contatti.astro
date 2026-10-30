@@ -31,8 +31,9 @@ const contacts = [
 ];
 
 // Il valore arriva fino alla fine della linea: se non ci sta finisce con "…", sempre allineati a destra.
+// Da 540px (tablet e desktop) etichetta più stretta e testo più piccolo: numero ed email si leggono per intero.
 const rowClass =
-  "grid grid-cols-[167px_minmax(0,1fr)] items-center py-[19px] lg:grid-cols-[249px_minmax(0,1fr)] lg:py-[27px]";
+  "grid grid-cols-[167px_minmax(0,1fr)] items-center py-[19px] min-[540px]:grid-cols-[95px_minmax(0,1fr)] lg:grid-cols-[150px_minmax(0,1fr)] lg:py-[27px]";
 ---
 
 <section id="contatti" class="bg-navy text-white">
@@ -42,14 +43,14 @@ const rowClass =
       <p class="text-[18px] font-medium lg:hidden">
         {t.sopratitolo}
       </p>
-      <h2 class="mt-[2px] max-w-[291px] font-serif text-[60px] leading-[1.05] tracking-tightest text-cream lg:mt-0 lg:max-w-[457px] lg:text-[min(100px,6.95vw)] lg:leading-[1.1]">
+      <h2 class="mt-[2px] max-w-[291px] font-serif text-[60px] leading-[1.05] tracking-tightest text-cream lg:mt-0 lg:max-w-[457px] lg:text-[100px] lg:leading-[1.1]">
         {t.titolo}
       </h2>
       <p class="mt-[18px] max-w-[280px] text-[13px] leading-[1.2] lg:leading-normal font-medium tracking-label lg:mt-[30px] lg:max-w-[466px] lg:text-[23px]">
         {t.testo}
       </p>
 
-      <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest lg:mt-[25px] lg:text-[min(30px,2.09vw)] lg:tracking-label">
+      <ul class="mt-[30px] divide-y-2 divide-white border-t-2 border-white text-[30px] leading-[1.1] tracking-tightest min-[540px]:text-[18px] lg:mt-[25px] lg:text-[26px]">
         {contacts.map((contact, index) => (
           <li data-reveal style={`--reveal-delay: ${150 + index * 100}ms`}>
             {contact.href ? (

@@ -13,12 +13,13 @@ const t = testi[linguaDa(Astro.url)].hero;
 
 <section
   data-hero
-  class="relative isolate flex min-h-svh overflow-hidden text-cream lg:min-h-[max(100svh,720px)]"
+  class="relative isolate flex min-h-svh overflow-hidden text-cream lg:min-h-[max(100svh,calc(720px*var(--scala)))]"
 >
   <!--
     Foto di sfondo (il blu a sinistra è già nella foto).
     Animazioni all'apertura: la foto si assesta lentamente (zoom), poi titolo, testo,
     pulsante e indicatore compaiono uno dopo l'altro (vedi src/styles/animazioni.css).
+    Tablet in orizzontale: la foto sale un po', così la lampada non finisce dietro al titolo.
   -->
   <Image
     data-reveal="zoom"
@@ -28,7 +29,7 @@ const t = testi[linguaDa(Astro.url)].hero;
     sizes="100vw"
     loading="eager"
     fetchpriority="high"
-    class="absolute inset-0 -z-10 size-full object-cover object-[52%_center]"
+    class="absolute inset-0 -z-10 size-full object-cover object-[52%_center] max-[1439px]:landscape:object-[52%_80%]"
   />
   <div class="container-site relative flex flex-col pt-[153px] pb-12 lg:justify-center lg:py-[144px]">
     <!--
