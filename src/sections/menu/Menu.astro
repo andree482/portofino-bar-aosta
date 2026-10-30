@@ -42,7 +42,7 @@ const prenota = bookingUrl.startsWith("/")
           <h3 class="font-serif text-[25px] text-gold uppercase lg:text-[56px] lg:leading-[1.375]">
             {traduci(category.name, lingua)}
           </h3>
-          <ul class="mt-[1px] border-b-2 border-white pb-[18px] text-[12px] leading-[1.18] font-medium tracking-tightest lg:mt-[10px] lg:divide-y-2 lg:divide-white lg:border-t-2 lg:border-b-0 lg:pb-0 lg:text-[40px] lg:leading-[1.2]">
+          <ul class="mt-[1px] border-b-2 border-white pb-[18px] text-[12px] leading-[1.18] font-medium tracking-tightest min-[540px]:text-[15px] lg:mt-[10px] lg:divide-y-2 lg:divide-white lg:border-t-2 lg:border-b-0 lg:pb-0 lg:text-[40px] lg:leading-[1.2]">
             {category.items.map((item) => (
               <li class="flex justify-between gap-6 lg:py-[15px]">
                 <span>{traduci(item.name, lingua)}</span>

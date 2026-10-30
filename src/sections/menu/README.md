@@ -11,6 +11,7 @@ link "Menù" del footer).
 - Le categorie (Primi, Secondi, Contorni, Dolci) con i piatti, separati da linee bianche.
 - Pulsante **Prenota un tavolo →**.
 - Solo mobile: indicatore "Scopri il menù ↓" in alto.
+- Tablet in verticale: i piatti sono a 15px invece dei 12px del Figma mobile, per leggerli meglio.
 
 > Nel design accanto al titolo c'era la data (19-11-2026): è stata tolta perché il menù è fisso.
 
