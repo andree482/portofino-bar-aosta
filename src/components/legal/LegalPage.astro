@@ -81,7 +81,7 @@ const linkButtonClass =
       </a>
     </nav>
 
-    <!-- Sezioni numerate; su desktop separate dall'indice da una linea verticale -->
+    <!-- Sezioni numerate; su desktop separate dall'indice da una linea verticale. wrap-anywhere: gli indirizzi web lunghi vanno a capo invece di sporgere -->
     <div class="lg:-mt-[27px] lg:ml-[67px] lg:space-y-[56px] lg:border-l-[3px] lg:border-navy lg:pl-[40px]">
       {page.sections.map((section, index) => (
         <section
@@ -94,7 +94,7 @@ const linkButtonClass =
             <span class="font-bold lg:font-normal">{number(index)}</span>
             <span class="font-serif lg:tracking-tightest">{section.title}</span>
           </h2>
-          <div class="mt-[4px] space-y-3 text-[16px] leading-[1.683] lg:mt-[12px] lg:space-y-4 lg:text-[24px] lg:leading-[1.6]">
+          <div class="mt-[4px] space-y-3 text-[16px] leading-[1.683] wrap-anywhere lg:mt-[12px] lg:space-y-4 lg:text-[24px] lg:leading-[1.6]">
             {section.body.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
